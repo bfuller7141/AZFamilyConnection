@@ -28,21 +28,38 @@ const {
 
 // Get current pathname and swap language
 const currentPath = Astro.url.pathname;
-const cleanPath = currentPath.replace(/^\/es/, '').replace(/^\/$/, '/') || '/';
+
+// Normalize path: remove /es or /en prefix, remove trailing slashes
+const cleanPath = currentPath
+  .replace(/^\/es\/?/, '')
+  .replace(/^\/en\/?/, '')
+  .replace(/\/$/, '')
+  .toLowerCase() || '/';
+
+// Build language paths
 const spanishPath = `/es${cleanPath === '/' ? '' : cleanPath}`;
-const englishPath = cleanPath;
+const englishPath = cleanPath === '/' ? '/' : cleanPath;
 
 // Determine if on home page
-const isHomePage = cleanPath === '/';
+const isHomePage = cleanPath === '/' || cleanPath === '';
 
 // Set logo based on page
 const currentLogoUrl = isHomePage ? logoUrl : '/images/logo-dark.svg';
 
 // Determine active menu item
 const getIsActive = (url: string) => {
-  const pathToCompare = cleanPath === '/' ? '/' : cleanPath.toLowerCase();
-  const urlToCompare = url === '/' ? '/' : url.toLowerCase();
-  return pathToCompare === urlToCompare;
+  const normalizedUrl = url
+    .replace(/\/$/, '')
+    .toLowerCase() || '/';
+  
+  const normalizedCleanPath = cleanPath === '' ? '/' : cleanPath;
+  
+  // Handle homepage
+  if (normalizedUrl === '' || normalizedUrl === '/') {
+    return normalizedCleanPath === '/' || normalizedCleanPath === '';
+  }
+  
+  return normalizedCleanPath === normalizedUrl;
 };
 ---
 

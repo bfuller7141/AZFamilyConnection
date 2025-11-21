@@ -14,37 +14,35 @@
 </style>
 
 <script is:inline>
-  // Handle accordion logic - only one open at a time
   document.addEventListener("click", (e) => {
-    const target = e.target;
-    const button = target.closest(".accordion-trigger");
-
+    const button = e.target?.closest(".accordion-trigger");
     if (!button) return;
 
     const accordion = button.closest(".accordion");
     if (!accordion) return;
 
-    // Get all items in this accordion
     const allItems = accordion.querySelectorAll(".accordion-item");
 
-    allItems.forEach((item) => {
-      const itemButton = item.querySelector(".accordion-trigger");
+    allItems.forEach((el) => {
+      const itemButton = el.querySelector(".accordion-trigger");
       const isClicked = itemButton === button;
 
       if (isClicked) {
-        // Toggle the clicked item
-        item.classList.toggle("open");
+        el.classList.toggle("open");
+        itemButton.setAttribute(
+          "aria-expanded",
+          String(el.classList.contains("open"))
+        );
       } else {
-        // Close all others
-        item.classList.remove("open");
+        el.classList.remove("open");
+        itemButton.setAttribute("aria-expanded", "false");
       }
     });
   });
 
-  // Handle keyboard navigation (Enter/Space to toggle, Arrow keys to navigate)
   document.addEventListener("keydown", (e) => {
     const button = e.target;
-    if (!button.classList.contains("accordion-trigger")) return;
+    if (!button?.classList.contains("accordion-trigger")) return;
 
     const accordion = button.closest(".accordion");
     if (!accordion) return;
@@ -62,17 +60,12 @@
       case "ArrowDown":
         e.preventDefault();
         const nextIndex = (currentIndex + 1) % allItems.length;
-        allItems[nextIndex].querySelector(
-          ".accordion-trigger"
-        )?.focus();
+        allItems[nextIndex]?.querySelector(".accordion-trigger")?.focus();
         break;
       case "ArrowUp":
         e.preventDefault();
-        const prevIndex =
-          (currentIndex - 1 + allItems.length) % allItems.length;
-        allItems[prevIndex].querySelector(
-          ".accordion-trigger"
-        )?.focus();
+        const prevIndex = (currentIndex - 1 + allItems.length) % allItems.length;
+        allItems[prevIndex]?.querySelector(".accordion-trigger")?.focus();
         break;
     }
   });

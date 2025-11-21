@@ -1,0 +1,278 @@
+---
+interface Card {
+  title: string;
+  price: string;
+  subtitle: string;
+  features: string[];
+  buttonText: string;
+}
+
+interface Props {
+  title: string;
+  cards: Card[];
+  ctaButtons?: Array<{ text: string; variant: "primary" | "text" }>;
+  decorationLeft?: string;
+  decorationRight?: string;
+}
+
+const { title, cards, ctaButtons, decorationLeft, decorationRight } =
+  Astro.props;
+---
+
+<section class="pricing-section">
+  {decorationLeft && (
+    <div class="decoration decoration-left">
+      <img src={decorationLeft} alt="" />
+    </div>
+  )}
+  {decorationRight && (
+    <div class="decoration decoration-right">
+      <img src={decorationRight} alt="" />
+    </div>
+  )}
+
+  <div class="pricing-container">
+    <h2 class="pricing-title">{title}</h2>
+
+    <div class="pricing-cards">
+      {cards.map((card, index) => (
+        <div class={`pricing-card card-${index}`}>
+          <h3 class="card-title">{card.title}</h3>
+          <div class="card-price">
+            <span class="price-amount">{card.price}</span>
+            <span class="price-label">{card.subtitle}</span>
+          </div>
+
+          <ul class="card-features">
+            {card.features.map((feature) => (
+              <li>{feature}</li>
+            ))}
+          </ul>
+
+          <button class="card-button">{card.buttonText}</button>
+        </div>
+      ))}
+    </div>
+
+    {ctaButtons && ctaButtons.length > 0 && (
+      <div class="pricing-cta">
+        {ctaButtons.map((btn) => (
+          <button class={`btn btn-${btn.variant}`}>
+            {btn.text}
+          </button>
+        ))}
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .pricing-section {
+    position: relative;
+    padding: var(--space-9) 0;
+    background: #f8faff;
+    overflow: hidden;
+  }
+
+  .decoration {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .decoration img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .decoration-left {
+    left: 9%;
+    top: 80px;
+    transform: rotate(-20deg);
+    width: 250px;
+    height: auto;
+  }
+
+  .decoration-right {
+    right: 0%;
+    bottom: 200px;
+    transform: rotate(-10deg);
+    width: 550px;
+    height: auto;
+  }
+
+  .pricing-container {
+    position: relative;
+    z-index: 1;
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: 0 var(--pad-component-lg);
+  }
+
+  .pricing-title {
+    text-align: center;
+    margin-bottom: var(--space-8);
+  }
+
+  .pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-7);
+    margin-bottom: var(--space-9);
+    align-items: flex-start;
+  }
+
+  .pricing-card {
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    transition: all var(--duration-std) var(--ease-standard);
+  }
+
+  /* Card 0 - Secondary (Hot Pink) */
+  .card-0 {
+    background: var(--brand-secondary-50);
+    border: 2px solid var(--brand-secondary-500);
+  }
+
+  .card-0 .card-title {
+    color: var(--brand-secondary-500);
+  }
+
+  .card-0 .price-amount {
+    color: var(--brand-secondary-500);
+  }
+
+  .card-0 .card-button {
+    background: var(--brand-secondary-500);
+  }
+
+  .card-0 .card-button:hover {
+    background: var(--brand-secondary-600);
+  }
+
+  /* Card 1 - Primary (Cyan) */
+  .card-1 {
+    background: var(--brand-primary-50);
+    border: 2px solid var(--brand-primary-500);
+    transform: scale(1.08);
+  }
+
+  .card-1 .card-title {
+    color: var(--brand-primary-500);
+  }
+
+  .card-1 .price-amount {
+    color: var(--brand-primary-500);
+  }
+
+  .card-1 .card-button {
+    background: var(--brand-primary-500);
+  }
+
+  .card-1 .card-button:hover {
+    background: var(--brand-primary-600);
+  }
+
+  /* Card 2 - Tertiary (Lime Green) */
+  .card-2 {
+    background: var(--brand-tertiary-50);
+    border: 2px solid var(--brand-tertiary-500);
+  }
+
+  .card-2 .card-title {
+    color: var(--brand-tertiary-500);
+  }
+
+  .card-2 .price-amount {
+    color: var(--brand-tertiary-500);
+  }
+
+  .card-2 .card-button {
+    background: var(--brand-tertiary-500);
+  }
+
+  .card-2 .card-button:hover {
+    background: var(--brand-tertiary-600);
+  }
+
+  .card-title {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    margin-bottom: var(--space-1);
+  }
+
+  .card-price {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    margin-bottom: var(--space-5);
+  }
+
+  .price-amount {
+    font-size: var(--text-h3);
+    font-weight: 700;
+  }
+
+  .price-label {
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+    font-weight: var(--weight-medium);
+  }
+
+  .card-features {
+    list-style: none;
+    margin: 0 0 var(--space-5) 0;
+    padding: 0;
+    flex-grow: 1;
+  }
+
+  .card-features li {
+    padding: var(--space-2) 0;
+    color: var(--color-text);
+    line-height: var(--line-normal);
+  }
+
+  .card-button {
+    padding: var(--space-3) var(--space-5);
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all var(--duration-std) var(--ease-standard);
+    font-family: var(--font-heading);
+  }
+
+  .card-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .pricing-cta {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 767px) {
+    .decoration-left,
+    .decoration-right {
+      display: none;
+    }
+    
+    .pricing-cards {
+      grid-template-columns: 1fr;
+    }
+
+    .card-1 {
+      transform: scale(1);
+    }
+
+    .pricing-cta {
+      flex-direction: column;
+    }
+  }
+</style>

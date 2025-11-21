@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SubpageHero from '../components/SubpageHero.astro';
+import ResourceSection from '../components/ResourceSection.astro';
+import FAQSection from '../components/FAQSection.astro';
+import MainCTA from '../components/MainCTA.astro';
+import ColorDivider from '../components/ColorDivider.astro';
+
+import '../styles/base.css';
+import '../styles/theme.root.css';
+---
+
+<BaseLayout
+  title="Resources - Arizona Family Connections"
+  description="Documents, forms, and resources for families"
+  language="en"
+  canonical="/resources"
+>
+  <SubpageHero
+    subtitle="Resources"
+    title="Documents & Resources"
+  />
+
+  <ColorDivider />
+
+  <ResourceSection
+    title="External Resources"
+    filter="external"
+    showDivider
+    headerPadding="sm"
+  />
+
+  <ResourceSection
+    title="Documents"
+    filter="documents"
+    showDivider
+    headerPadding="sm"
+  />
+
+  <ResourceSection
+    title="Forms"
+    filter="forms"
+    showDivider
+    headerPadding="sm"
+  />
+  <FAQSection
+    title="Frequently Asked Questions"
+    faqs={[
+      {
+        id: "1",
+        title: "What services do you offer?",
+        content: "We offer comprehensive family support services including counseling, education programs, and resource coordination.",
+      },
+      {
+        id: "2",
+        title: "How do I enroll?",
+        content: "You can enroll by visiting our office or filling out the online enrollment form on our website.",
+      },
+      {
+        id: "3",
+        title: "What is the cost?",
+        content: "Our services are free for eligible families. Contact us to learn about eligibility requirements.",
+      },
+      {
+        id: "4",
+        title: "Do you offer services in Spanish?",
+        content: "Yes, we offer bilingual services in both English and Spanish.",
+      },
+    ]}
+  />
+  <MainCTA
+    title="Ready to Take the Next Step Together?"
+    primaryCta={{
+      text: "Schedule a Visit",
+      url: "/contact",
+    }}
+    secondaryCta={{
+      text: "Learn More",
+      url: "/about",
+    }}
+    decorationLeft="images/rainbow-watermark.svg"
+    decorationRight="images/starFilled-watermark.svg"
+  />
+</BaseLayout>

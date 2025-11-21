@@ -1,0 +1,158 @@
+---
+interface Props {
+  backgroundImage: string;
+  backgroundImageMobile?: string;
+  heading: string;
+  description: string;
+  primaryCta?: {
+    text: string;
+    url: string;
+  };
+  secondaryCta?: {
+    text: string;
+    url: string;
+  };
+}
+
+const {
+  backgroundImage,
+  backgroundImageMobile = backgroundImage,
+  heading,
+  description,
+  primaryCta = { text: 'Schedule a Visit', url: '#' },
+  secondaryCta = { text: 'About Our Services', url: '#' },
+} = Astro.props;
+---
+
+<svg width="0" height="0">
+  <defs>
+    <clipPath id="waveClip" clipPathUnits="objectBoundingBox" preserveAspectRatio="none">
+      <path d="M0,0 L0,1 Q0.25,0.93 0.5,0.98 T1,0.93 L1,0 Z" />
+    </clipPath>
+    <clipPath id="waveClipMobile" clipPathUnits="objectBoundingBox" preserveAspectRatio="none">
+      <path d="M0,0 L0,1 Q0.25,0.97 0.5,1 T1,0.97 L1,0 Z" />
+    </clipPath>
+  </defs>
+</svg>
+
+<section class="hero" style={`--bg-image: url(${backgroundImage}); --bg-image-mobile: url(${backgroundImageMobile})`}>
+  <!-- Background Image -->
+  <div class="hero-background"></div>
+
+  <!-- Content -->
+  <div class="hero-container">
+    <div class="hero-content">
+      <h1 class="hero-heading">{heading}</h1>
+      <p class="hero-description">{description}</p>
+
+      <div class="hero-ctas">
+        <a href={primaryCta.url} class="btn btn-secondary">
+          {primaryCta.text}
+        </a>
+        {
+          secondaryCta && (
+            <a href={secondaryCta.url} class="btn btn-text-inverse">
+              {secondaryCta.text}
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    background: white;
+  }
+
+  .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-image: var(--bg-image);
+    z-index: 1;
+    clip-path: url(#waveClip);
+  }
+
+  .hero-container {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: var(--pad-section-lg) var(--pad-component) var(--pad-section-lg) var(--pad-component);
+  }
+
+  .hero-content {
+    max-width: 600px;
+  }
+
+  .hero-heading {
+    margin: 0 0 var(--space-4);
+    font-size: var(--text-h1);
+    color: var(--color-text-inverse);
+    font-weight: 500;
+    line-height: 1.05;
+  }
+
+  .hero-description {
+    margin: 0 0 var(--space-5);
+    font-size: var(--text-base);
+    color: var(--color-text-inverse);
+    line-height: 1.6;
+  }
+
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    align-items: center;
+  }
+
+  @media (max-width: 767px) {
+    .hero {
+      min-height: 500px;
+    }
+
+    .hero-background {
+      background-position: center center;
+      background-image: var(--bg-image-mobile);
+      clip-path: url(#waveClipMobile);
+    }
+
+    .hero-heading {
+      font-size: var(--text-h2);
+    }
+
+    .hero-description {
+      font-size: var(--text-base);
+    }
+
+    .hero-ctas {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .hero-ctas .btn {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-ctas .btn {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,44 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "resources"
+    label: "Documents & Resources"
+    folder: "src/content/resources"
+    create: true
+    fields:
+      - { name: "id", widget: "string", label: "ID" }
+      - { name: "title", widget: "string", label: "Title" }
+      - { name: "description", widget: "text", label: "Description", required: false }
+      - {
+          name: "category",
+          widget: "select",
+          label: "Category",
+          options: ["documents", "forms", "external"],
+        }
+      - {
+          name: "language",
+          widget: "select",
+          label: "Language",
+          options: ["en", "es", "both"],
+          required: false,
+        }
+      - {
+          name: "links",
+          widget: "list",
+          label: "Links",
+          fields:
+            - { name: "label", widget: "string", label: "Link Label" }
+            - { name: "url", widget: "string", label: "URL" }
+            - {
+                name: "language",
+                widget: "select",
+                label: "Language",
+                options: ["en", "es"],
+                required: false,
+              }
+      - { name: "icon", widget: "image", label: "Icon", required: false }

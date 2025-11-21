@@ -1,0 +1,233 @@
+---
+interface ValueItem {
+  icon: string;
+  iconAlt: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  values: ValueItem[];
+  decorationLeft?: string;
+  decorationRight?: string;
+}
+
+const {
+  title,
+  description,
+  values,
+  decorationLeft,
+  decorationRight,
+} = Astro.props;
+---
+
+<section class="mission-values">
+  {
+    decorationLeft && (
+      <div class="decoration decoration-left">
+        <img src={decorationLeft} alt="" aria-hidden="true" />
+      </div>
+    )
+  }
+
+  {
+    decorationRight && (
+      <div class="decoration decoration-right">
+        <img src={decorationRight} alt="" aria-hidden="true" />
+      </div>
+    )
+  }
+
+  <div class="mission-values-container">
+    <div class="mission-values-header">
+      <h2 class="mission-values-title">{title}</h2>
+      <p class="mission-values-description">{description}</p>
+    </div>
+
+    <div class="values-grid">
+      {
+        values.map((value) => (
+          <div class="value-item">
+            <div class="value-icon">
+              <img src={value.icon} alt={value.iconAlt} />
+            </div>
+            <h3 class="value-title">{value.title}</h3>
+            <p class="value-description">{value.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .mission-values {
+    position: relative;
+    padding: var(--space-9) 0;
+    overflow: hidden;
+  }
+
+  .decoration {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .decoration img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .decoration-left {
+    left: 0;
+    top: 80px;
+    transform: rotate(10deg);
+    width: 500px;
+    height: auto;
+  }
+
+  .decoration-right {
+    right: -7%;
+    top: 0;
+    transform: rotate(-10deg);
+    width: 550px;
+    height: auto;
+  }
+
+  .mission-values-container {
+    position: relative;
+    z-index: 1;
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: 0 var(--pad-component-lg);
+  }
+
+  .mission-values-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+    max-width: var(--container-lg);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .mission-values-title {
+    margin: 0 0 var(--space-4);
+  }
+
+  .mission-values-description {
+    margin: 0;
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--line-normal);
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+  }
+
+  .value-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-4);
+  }
+
+  .value-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--duration-std) var(--ease-standard);
+  }
+
+  .value-item:hover .value-icon {
+    transform: translateY(-4px);
+  }
+
+  .value-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .value-title {
+    margin: 0;
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+  }
+
+  .value-description {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-normal);
+  }
+
+  @media (max-width: 1023px) {
+    .decoration-left,
+    .decoration-right {
+      width: 200px;
+      height: 200px;
+    }
+
+    .values-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-5);
+    }
+
+    .mission-values-container {
+      padding: 0 var(--pad-component);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .decoration-left,
+    .decoration-right {
+      display: none;
+    }
+
+    .mission-values {
+      padding: var(--space-6) 0;
+    }
+
+    .mission-values-header {
+      margin-bottom: var(--space-6);
+    }
+
+    .mission-values-description {
+      font-size: var(--text-base);
+    }
+
+    .values-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+
+    .value-icon {
+      width: 60px;
+      height: 60px;
+    }
+
+    .value-title {
+      font-size: var(--text-base);
+    }
+
+    .value-description {
+      font-size: var(--text-xs);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .value-item:hover .value-icon {
+      transform: none;
+    }
+  }
+</style>

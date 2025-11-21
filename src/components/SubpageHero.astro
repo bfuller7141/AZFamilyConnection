@@ -1,0 +1,121 @@
+---
+interface Props {
+  subtitle: string;
+  title: string;
+  description?: string;
+  ctaText?: string;
+  ctaUrl?: string;
+  decorationLeft?: string;
+  decorationRight?: string;
+}
+
+const {
+  subtitle,
+  title,
+  description,
+  ctaText,
+  ctaUrl = "#",
+  decorationLeft,
+  decorationRight,
+} = Astro.props;
+---
+
+<section class="page-hero">
+  {
+    decorationLeft && (
+      <div class="decoration decoration-left">
+        <img src={decorationLeft} alt="" aria-hidden="true" />
+      </div>
+    )
+  }
+
+  {
+    decorationRight && (
+      <div class="decoration decoration-right">
+        <img src={decorationRight} alt="" aria-hidden="true" />
+      </div>
+    )
+  }
+
+  <div class="page-hero-content">
+    <p class="page-hero-subtitle">{subtitle}</p>
+    <h1 class="page-hero-title">{title}</h1>
+    
+    {description && (
+      <p class="page-hero-description">{description}</p>
+    )}
+
+    {ctaText && (
+      <a href={ctaUrl} class="btn btn-primary">
+        {ctaText}
+      </a>
+    )}
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-10) var(--pad-component-lg);
+    min-height: auto;
+    overflow: hidden;
+  }
+
+  .decoration {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .decoration img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .decoration-left {
+    left: -10%;
+    top: 50px;
+    transform: rotate(10deg);
+    width: 800px;
+    height: auto;
+  }
+
+  .decoration-right {
+    right: -7%;
+    top: 0;
+    transform: rotate(-10deg);
+    width: 550px;
+    height: auto;
+  }
+
+  .page-hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    max-width: var(--container-lg);
+    text-align: center;
+  }
+
+  .page-hero-subtitle {
+    margin: 0;
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    color: var(--brand-secondary-500);
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 1023px) {
+    .decoration-left,
+    .decoration-right {
+      display: none;
+    }
+  }
+</style>

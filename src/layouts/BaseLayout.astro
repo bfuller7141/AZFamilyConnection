@@ -1,0 +1,74 @@
+---
+import NavMain from '../components/NavMain.astro';
+import FootMain from '../components/FootMain.astro';
+import BaseHead from '../components/BaseHead.astro';
+import type { Language } from '../i18n/types';
+import { getI18n, getLanguageFromUrl } from '../i18n/utils';
+import PageBreakCloud from '../components/PageBreakCloud.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  language?: Language;
+  canonical?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+}
+
+const {
+  title,
+  description,
+  language,
+  canonical,
+  ogImage,
+  ogImageAlt,
+} = Astro.props;
+
+// Detect language from URL if not explicitly passed
+const currentLanguage: Language = language || getLanguageFromUrl(Astro.url);
+const i18n = getI18n(currentLanguage);
+---
+
+<!doctype html>
+<html lang={currentLanguage}>
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      canonical={canonical}
+      ogImage={ogImage}
+      ogImageAlt={ogImageAlt}
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <NavMain
+      logoUrl="/images/logo.svg"
+      logoAlt={i18n.logoAlt}
+      ctaText={i18n.cta}
+      ctaUrl={currentLanguage === 'en' ? '/en/contact' : '/es/contacto'}
+      menuItems={i18n.menuItems}
+      currentLanguage={currentLanguage}
+    />
+
+    <!-- Main Content -->
+    <main>
+      <slot />
+    </main>
+    <PageBreakCloud />
+    <!-- Footer -->
+    <FootMain language={currentLanguage} canonical={canonical} />
+  </body>
+</html>
+
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  main {
+    flex: 1;
+  }
+</style>

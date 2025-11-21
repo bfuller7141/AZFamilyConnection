@@ -1,0 +1,79 @@
+---
+---
+
+<div class="accordion" role="region" aria-label="Accordion menu">
+  <slot />
+</div>
+
+<style>
+  .accordion {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+</style>
+
+<script>
+  // Handle accordion logic - only one open at a time
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const button = target.closest(".accordion-trigger");
+
+    if (!button) return;
+
+    const accordion = button.closest(".accordion");
+    if (!accordion) return;
+
+    // Get all items in this accordion
+    const allItems = accordion.querySelectorAll(".accordion-item");
+
+    allItems.forEach((item) => {
+      const itemButton = item.querySelector(".accordion-trigger");
+      const isClicked = itemButton === button;
+
+      if (isClicked) {
+        // Toggle the clicked item
+        item.classList.toggle("open");
+      } else {
+        // Close all others
+        item.classList.remove("open");
+      }
+    });
+  });
+
+  // Handle keyboard navigation (Enter/Space to toggle, Arrow keys to navigate)
+  document.addEventListener("keydown", (e) => {
+    const button = e.target as HTMLElement;
+    if (!button.classList.contains("accordion-trigger")) return;
+
+    const accordion = button.closest(".accordion");
+    if (!accordion) return;
+
+    const allItems = accordion.querySelectorAll(".accordion-item");
+    const currentItem = button.closest(".accordion-item");
+    const currentIndex = Array.from(allItems).indexOf(currentItem as Element);
+
+    switch (e.key) {
+      case "Enter":
+      case " ":
+        e.preventDefault();
+        button.click();
+        break;
+      case "ArrowDown":
+        e.preventDefault();
+        const nextIndex = (currentIndex + 1) % allItems.length;
+        (allItems[nextIndex].querySelector(
+          ".accordion-trigger"
+        ) as HTMLElement)?.focus();
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        const prevIndex =
+          (currentIndex - 1 + allItems.length) % allItems.length;
+        (allItems[prevIndex].querySelector(
+          ".accordion-trigger"
+        ) as HTMLElement)?.focus();
+        break;
+    }
+  });
+</script>

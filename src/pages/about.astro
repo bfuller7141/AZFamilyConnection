@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AboutHero from '../components/AboutHero.astro';
+import MissionValuesSection from '../components/MissionValuesSection.astro';
+import ColumnSection from '../components/ColumnSection.astro';
+import ColorDivider from '../components/ColorDivider.astro';
+import FAQSection from '../components/FAQSection.astro';
+import MainCTA from '../components/MainCTA.astro';
+
+import '../styles/base.css';
+import '../styles/theme.root.css';
+---
+
+<BaseLayout
+  title="About - Arizona Family Connections"
+  description="Trusted support for stronger connections"
+  language="en"
+  canonical="/about"
+>
+  <AboutHero
+    subtitle="About Arizona Family Connections"
+    title="Dedicated to Helping Families Reconnect Safely"
+    ctaText="Learn More"
+    ctaUrl="/services"
+    images={[
+      {
+        src: "/images/child-chalk.webp",
+        alt: "Family connection",
+      },
+      {
+        src: "/images/child-blocks.webp",
+        alt: "Supervised visitation",
+      },
+      {
+        src: "/images/child-paints.webp",
+        alt: "Safe environment",
+      },
+    ]}
+    decorationLeft="/images/rainbow-watermark.svg"
+    decorationRight="/images/cactus-watermark.svg"
+  />
+  <ColorDivider />
+  <MissionValuesSection
+    title="Our Mission & Values"
+    description="At Arizona Family Connections, our mission is to create safe, supportive spaces where families can reconnect, rebuild trust, and grow stronger through compassion and understanding."
+    values={[
+      {
+        icon: "/images/heart-icon.svg",
+        iconAlt: "Compassion icon",
+        title: "Compassion",
+        description: "We listen with empathy and treat every family with genuine care.",
+      },
+      {
+        icon: "/images/star-icon.svg",
+        iconAlt: "Integrity icon",
+        title: "Integrity",
+        description: "We stay transparent and fair in every interaction we have.",
+      },
+      {
+        icon: "/images/shield-icon.svg",
+        iconAlt: "Safety icon",
+        title: "Safety",
+        description: "We make each visit secure for both children and parents.",
+      },
+      {
+        icon: "/images/puzzle-icon.svg",
+        iconAlt: "Collaboration icon",
+        title: "Collaboration",
+        description: "We work as a team to support families with respect and unity.",
+      },
+    ]}
+    decorationLeft="/images/greenHand-watermark.svg"
+    decorationRight=""
+  />
+  <ColumnSection
+    image="/images/father-daughter_home.webp"
+    imageAlt="Ejemplo de servicio"
+    title="A Team of Passionate Professionals"
+    description="Our supervisors are unbiased and transparent, helping families feel supported and respected during every visit. With more than 14 years of combined experience working with families, legal teams, and the Arizona court system, we understand how to guide each reunification process with care and professionalism. Whether your needs are short‑term or ongoing, our team is here to ensure every visit is safe, consistent, and centered on connection."
+    ctaText="Schedule a Visit"
+    ctaUrl="/services"
+    buttonVariant="primary"
+    imagePosition="left"
+    decorationLeft="images/pinkDots-watermark.svg"
+    decorationRight="images/sun-watermark.svg"
+  />
+  <FAQSection
+    title="Frequently Asked Questions"
+    faqs={[
+      {
+        id: "1",
+        title: "What services do you offer?",
+        content: "We offer comprehensive family support services including counseling, education programs, and resource coordination.",
+      },
+      {
+        id: "2",
+        title: "How do I enroll?",
+        content: "You can enroll by visiting our office or filling out the online enrollment form on our website.",
+      },
+      {
+        id: "3",
+        title: "What is the cost?",
+        content: "Our services are free for eligible families. Contact us to learn about eligibility requirements.",
+      },
+      {
+        id: "4",
+        title: "Do you offer services in Spanish?",
+        content: "Yes, we offer bilingual services in both English and Spanish.",
+      },
+    ]}
+  />
+  <MainCTA
+    title="Ready to Take the Next Step Together?"
+    primaryCta={{
+      text: "Schedule a Visit",
+      url: "/contact",
+    }}
+    secondaryCta={{
+      text: "Learn More",
+      url: "/about",
+    }}
+    decorationLeft="images/rainbow-watermark.svg"
+    decorationRight="images/starFilled-watermark.svg"
+  />
+</BaseLayout>

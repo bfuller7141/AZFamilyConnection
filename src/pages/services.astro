@@ -1,0 +1,175 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SubpageHero from '../components/SubpageHero.astro';
+import ColumnSection from '../components/ColumnSection.astro';
+import ColorDivider from '../components/ColorDivider.astro';
+import FAQSection from '../components/FAQSection.astro';
+import MainCTA from '../components/MainCTA.astro';
+import PricingSection from '../components/PricingSection.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import PageBreakCloud from '../components/PageBreakCloud.astro';
+
+import '../styles/base.css';
+import '../styles/theme.root.css';
+---
+
+<BaseLayout
+  title="About - Arizona Family Connections"
+  description="Trusted support for stronger connections"
+  language="en"
+  canonical="/about"
+>
+  <SubpageHero
+    subtitle="About Arizona Family Connections"
+    title="Dedicated to Helping Families Reconnect Safely"
+    ctaText="Learn More"
+    ctaUrl="/services"
+    decorationLeft="/images/rainbow-watermark.svg"
+    decorationRight="/images/cactus-watermark.svg"
+  />
+  <ColorDivider />
+  <PricingSection
+    title="Select A Plan That Fits You Exact Needs"
+    decorationLeft="images/star-watermark-dark.svg"
+    decorationRight="images/wave-watermark-dark.svg"
+    cards={[
+      {
+        title: "One Child",
+        price: "$450",
+        subtitle: "Per Child",
+        features: [
+          "Feature & Benefit Number 1",
+          "Feature & Benefit Number 2",
+          "Feature & Benefit Number 3",
+          "Feature & Benefit Number 4",
+        ],
+        buttonText: "Schedule a Visit",
+      },
+      {
+        title: "One Child",
+        price: "$450",
+        subtitle: "Per Child",
+        features: [
+          "Feature & Benefit Number 1",
+          "Feature & Benefit Number 2",
+          "Feature & Benefit Number 3",
+          "Feature & Benefit Number 4",
+        ],
+        buttonText: "Schedule a Visit",
+      },
+      {
+        title: "One Child",
+        price: "$450",
+        subtitle: "Per Child",
+        features: [
+          "Feature & Benefit Number 1",
+          "Feature & Benefit Number 2",
+          "Feature & Benefit Number 3",
+          "Feature & Benefit Number 4",
+        ],
+        buttonText: "Schedule a Visit",
+      },
+    ]}
+    ctaButtons={[
+      { text: "Primary Button", variant: "primary" },
+      { text: "Secondary Button", variant: "text" },
+    ]}
+  />
+  <PageBreakCloud bgColor="#f8faff" flip={true} />
+  <ServicesGrid
+    title="Our Services"
+    description="Comprehensive support tailored to your family's needs."
+    services={[
+      {
+        icon: "/images/offsite-visitation-icon.svg",
+        title: "Off-Site Supervised Visitation",
+        description: "Safe, monitored visits in our neutral office setting designed to support positive parent-child connections.",
+      },
+      {
+        icon: "/images/supervised-exchange-icon.svg",
+        title: "Supervised Exchange",
+        description: "Monitored exchanges between parents in a safe, neutral environment.",
+      },
+      {
+        icon: "/images/virtual-visitation-icon.svg",
+        title: "Virtual Supervised Visitation",
+        description: "Secure video calls between parents and children under professional supervision.",
+      },
+      {
+        icon: "/images/court-testimony-icon.svg",
+        title: "Court Testimony",
+        description: "Professional documentation and expert testimony regarding supervised visits.",
+      },
+      {
+        icon: "/images/objective-reports-icon.svg",
+        title: "Objective Reports",
+        description: "Detailed, impartial reports documenting visitation observations and interactions.",
+      },
+      {
+        icon: "/images/east-valley-icon.svg",
+        title: "Supervised Visitation (East Valley)",
+        description: "Convenient supervised visitation services at our East Valley location.",
+      },
+      {
+        icon: "/images/therapeutic-visitation-icon.svg",
+        title: "Therapeutic Visitation",
+        description: "Specialized supervised visits with therapeutic support to promote healing and connection.",
+      },
+      {
+        icon: "/images/video-telephonic-icon.svg",
+        title: "Supervised Video/Telephonic Visitation",
+        description: "Monitored phone and video calls to maintain parent-child relationships.",
+      },
+      {
+        icon: "/images/safe-exchange-icon.svg",
+        title: "Safe Exchange",
+        description: "Secure, neutral location exchanges to ensure child safety during transitions.",
+      },
+      {
+        icon: "/images/rule-81-icon.svg",
+        title: "Rule 81 Compliance",
+        description: "Services meeting Arizona Rule 81 standards for court-ordered visitation supervision.",
+      },
+    ]}
+    decorationLeft="/images/rainbow-watermark.svg"
+    decorationRight="/images/cactus-watermark.svg"
+  />
+  <FAQSection
+    title="Frequently Asked Questions"
+    faqs={[
+      {
+        id: "1",
+        title: "What services do you offer?",
+        content: "We offer comprehensive family support services including counseling, education programs, and resource coordination.",
+      },
+      {
+        id: "2",
+        title: "How do I enroll?",
+        content: "You can enroll by visiting our office or filling out the online enrollment form on our website.",
+      },
+      {
+        id: "3",
+        title: "What is the cost?",
+        content: "Our services are free for eligible families. Contact us to learn about eligibility requirements.",
+      },
+      {
+        id: "4",
+        title: "Do you offer services in Spanish?",
+        content: "Yes, we offer bilingual services in both English and Spanish.",
+      },
+    ]}
+  />
+  <MainCTA
+    title="Ready to Take the Next Step Together?"
+    primaryCta={{
+      text: "Schedule a Visit",
+      url: "/contact",
+    }}
+    secondaryCta={{
+      text: "Learn More",
+      url: "/about",
+    }}
+    decorationLeft="images/rainbow-watermark.svg"
+    decorationRight="images/starFilled-watermark.svg"
+  />
+</BaseLayout>

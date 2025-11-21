@@ -1,0 +1,162 @@
+---
+interface Props {
+  title: string;
+  content: string;
+}
+
+const { title, content } = Astro.props;
+---
+
+<div class="accordion-item">
+  <button
+    class="accordion-trigger"
+    type="button"
+    aria-expanded="false"
+    aria-controls={`panel-${Math.random().toString(36).substr(2, 9)}`}
+  >
+    <span class="accordion-title">{title}</span>
+    <span class="accordion-icon">
+      <svg
+        class="icon-plus"
+        viewBox="0 0 85 85"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M82.45,52.06h-29.61v30.39h-20.68v-30.39H2.55v-19.11h29.61V2.55h20.68v30.39h29.61v19.11Z"
+          fill="currentColor"
+        />
+      </svg>
+      <svg
+        class="icon-minus"
+        viewBox="0 0 85 85"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M82.45,33.26v18.48H2.55v-18.48h79.89Z"
+          fill="currentColor"
+        />
+      </svg>
+    </span>
+  </button>
+
+  <div class="accordion-content" role="region">
+    <div class="accordion-body">
+      {content}
+    </div>
+  </div>
+</div>
+
+<style>
+  .accordion-item {
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color var(--duration-std) var(--ease-standard);
+  }
+
+  .accordion-item.open {
+    border-color: var(--color-primary);
+  }
+
+  .accordion-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-surface);
+    border: 0;
+    font-family: inherit;
+    font-size: var(--text-base);
+    font-weight: var(--weight-bold);
+    color: var(--color-primary);
+    cursor: pointer;
+    transition:
+      background-color var(--duration-std) var(--ease-standard),
+      color var(--duration-std) var(--ease-standard);
+  }
+
+  .accordion-trigger:hover {
+    background: var(--color-primary-subtle);
+  }
+
+  .accordion-item.open .accordion-trigger {
+    background: var(--color-primary-subtle);
+    color: var(--color-primary);
+  }
+
+  .accordion-trigger:focus-visible {
+    outline: 0;
+    box-shadow: var(--focus-ring);
+  }
+
+  .accordion-title {
+    text-align: left;
+  }
+
+  .accordion-icon {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--duration-std) var(--ease-standard);
+  }
+
+  .icon-minus {
+    display: none;
+  }
+
+  .accordion-item.open .icon-plus {
+    display: none;
+  }
+
+  .accordion-item.open .icon-minus {
+    display: block;
+  }
+
+  .accordion-content {
+    max-height: 0;
+    background-color: var(--color-surface);
+    overflow: hidden;
+    transition: max-height var(--duration-std) var(--ease-standard);
+  }
+
+  .accordion-item.open .accordion-content {
+    max-height: 500px;
+  }
+
+  .accordion-body {
+    margin-top: var(--space-3);
+    padding: var(--space-4);
+    padding-top: 0;
+    color: var(--color-text-secondary);
+    line-height: var(--line-normal);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .accordion-trigger,
+    .accordion-content,
+    .accordion-icon,
+    .accordion-item {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const item = document.currentScript?.closest(".accordion-item");
+  const trigger = item?.querySelector(".accordion-trigger");
+
+  trigger?.addEventListener("click", () => {
+    item?.classList.toggle("open");
+    trigger.setAttribute(
+      "aria-expanded",
+      String(item?.classList.contains("open"))
+    );
+  });
+</script>

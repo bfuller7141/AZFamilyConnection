@@ -1,0 +1,308 @@
+---
+interface Feature {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  ctaText?: string;
+  ctaUrl?: string;
+  features: Feature[];
+  decorationLeft?: string;
+  decorationRight?: string;
+}
+
+const {
+  title,
+  description,
+  ctaText = 'Learn More',
+  ctaUrl = '#',
+  features,
+  decorationLeft,
+  decorationRight,
+} = Astro.props;
+---
+
+<section class="feature-section">
+  <!-- Background decorations -->
+  <div class="feature-bg-decoration">
+    <slot name="bg-decoration" />
+  </div>
+
+  {
+    decorationLeft && (
+      <div class="decoration decoration-left">
+        <img src={decorationLeft} alt="" aria-hidden="true" />
+      </div>
+    )
+  }
+
+  {
+    decorationRight && (
+      <div class="decoration decoration-right">
+        <img src={decorationRight} alt="" aria-hidden="true" />
+      </div>
+    )
+  }
+
+  <div class="feature-container">
+    <!-- Left Column -->
+    <div class="feature-left">
+      <h2>{title}</h2>
+      <p class="feature-description">{description}</p>
+      <a href={ctaUrl} class="btn btn-primary">
+        {ctaText}
+      </a>
+    </div>
+
+    <!-- Right Column -->
+    <div class="feature-right">
+      {
+        features.map((feature, index) => (
+          <div
+            class={`feature-item ${index === 1 ? 'feature-item-offset' : ''}`}
+          >
+            <div class="feature-icon">
+              <img src={feature.icon} alt={feature.title} />
+            </div>
+            <div class="feature-content">
+              <h3 class="feature-item-title">{feature.title}</h3>
+              <p class="feature-item-description">{feature.description}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* =========================================
+   * FEATURE SECTION
+   * ========================================= */
+
+  .feature-section {
+    position: relative;
+    padding: var(--space-9) 0;
+    overflow: hidden;
+  }
+
+  .feature-bg-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* =========================================
+   * DECORATIONS
+   * ========================================= */
+
+  .decoration {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .decoration img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .decoration-left {
+    left: -10%;
+    top: -40px;
+    transform: rotate(10deg);
+    width: 800px;
+    height: auto;
+  }
+
+  .decoration-right {
+    right: -7%;
+    top: 0;
+    transform: rotate(-10deg);
+    width: 550px;
+    height: auto;
+  }
+
+  .feature-container {
+    position: relative;
+    z-index: 1;
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: 0 var(--pad-component-lg);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7rem;
+    align-items: center;
+  }
+
+  /* =========================================
+   * LEFT COLUMN
+   * ========================================= */
+
+  .feature-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .feature-left h2 {
+    margin: 0;
+    font-size: var(--text-h2);
+  }
+
+  .feature-left .btn {
+    align-self: flex-start;
+  }
+
+  /* =========================================
+   * RIGHT COLUMN - FEATURES
+   * ========================================= */
+
+  .feature-right {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .feature-item {
+    display: flex;
+    gap: var(--space-4);
+    align-items: stretch;
+    transition: transform var(--duration-std) var(--ease-standard);
+  }
+
+  .feature-item:hover {
+    transform: translateX(8px);
+  }
+
+  .feature-item-offset {
+    transform: translateX(-40px);
+  }
+
+  .feature-item-offset:hover {
+    transform: translateX(-32px);
+  }
+
+  /* =========================================
+   * FEATURE ICON
+   * ========================================= */
+
+  .feature-icon {
+    flex-shrink: 0;
+    height: 100%;
+    width: 100px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-surface-2);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .feature-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* =========================================
+   * FEATURE CONTENT
+   * ========================================= */
+
+  .feature-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-1);
+  }
+
+  .feature-item-title {
+    margin: 0;
+    font-size: var(--text-md);
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+    line-height: 1.3;
+  }
+
+  .feature-item-description {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  /* =========================================
+   * RESPONSIVE
+   * ========================================= */
+
+  @media (max-width: 1023px) {
+    .feature-item {
+      transform: none;
+    }
+
+    .feature-item-offset {
+      transform: none;
+    }
+
+    .feature-item:hover {
+      transform: none;
+    }
+
+    .feature-item-offset:hover {
+      transform: none;
+    }
+
+    .decoration-left,
+    .decoration-right {
+      display: none;
+    }
+
+    .feature-container {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+    }
+
+    .feature-item-title {
+      font-size: var(--text-base);
+    }
+
+    .feature-item-description {
+      font-size: var(--text-xs);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .feature-item {
+      transition: none;
+    }
+
+    .feature-item:hover {
+      transform: none;
+    }
+
+    .feature-item-offset {
+      transform: none;
+    }
+
+    .feature-item-offset:hover {
+      transform: none;
+    }
+  }
+</style>

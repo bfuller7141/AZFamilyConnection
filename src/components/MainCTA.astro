@@ -1,0 +1,156 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  primaryCta?: {
+    text: string;
+    url: string;
+  };
+  secondaryCta?: {
+    text: string;
+    url: string;
+  };
+  decorationLeft?: string;
+  decorationRight?: string;
+}
+
+const {
+  title,
+  description,
+  primaryCta = { text: "Get Started", url: "#" },
+  secondaryCta = { text: "Learn More", url: "#" },
+  decorationLeft,
+  decorationRight,
+} = Astro.props;
+---
+
+<section class="cta-section">
+  {
+    decorationLeft && (
+      <div class="decoration decoration-left">
+        <img src={decorationLeft} alt="" aria-hidden="true" />
+      </div>
+    )
+  }
+
+  {
+    decorationRight && (
+      <div class="decoration decoration-right">
+        <img src={decorationRight} alt="" aria-hidden="true" />
+      </div>
+    )
+  }
+
+  <div class="cta-container">
+    <h1 class="cta-title">{title}</h1>
+
+    {description && <p class="cta-description">{description}</p>}
+
+    <div class="cta-buttons">
+      <a href={primaryCta.url} class="btn btn-primary">
+        {primaryCta.text}
+      </a>
+      <a href={secondaryCta.url} class="btn btn-text">
+        {secondaryCta.text}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    position: relative;
+    padding: var(--space-9) 0;
+    overflow: hidden;
+  }
+
+  .decoration {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .decoration img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .decoration-left {
+    left: -10%;
+    top: 5%;
+    transform: rotate(10deg);
+    width: 600px;
+    height: auto;
+  }
+
+  .decoration-right {
+    right: -7%;
+    top: 5%;
+    transform: rotate(-10deg);
+    width: 400px;
+    height: auto;
+  }
+
+  .cta-container {
+    position: relative;
+    z-index: 1;
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: 0 var(--pad-component-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+    text-align: center;
+  }
+
+  .cta-title {
+    margin: 0;
+    font-size: var(--text-h1);
+    font-weight: 500;
+    color: var(--color-accent);
+    line-height: 1.1;
+    max-width: 900px;
+  }
+
+  .cta-description {
+    margin: 0;
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--line-normal);
+    max-width: 700px;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: var(--space-4);
+  }
+
+  @media (max-width: 1023px) {
+    .decoration-left,
+    .decoration-right {
+      display: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .cta-buttons {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .cta-buttons .btn {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-buttons .btn {
+      transition: none;
+    }
+  }
+</style>

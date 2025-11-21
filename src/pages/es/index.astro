@@ -1,0 +1,204 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HomeHero from '../../components/HomeHero.astro';
+import FeatureSection from '../../components/FeatureSection.astro';
+import AccordionSection from '../../components/AccordionSection.astro';
+import Accordion from '../../components/Accordion.astro';
+import AccordionItem from '../../components/AccordionItem.astro';
+import PricingSection from '../../components/PricingSection.astro';
+import ColumnSection from '../../components/ColumnSection.astro';
+import DocumentsResourcesSection from '../../components/ResourceSection.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import MainCTA from '../../components/MainCTA.astro';
+
+import ColorDivider from '../../components/ColorDivider.astro';
+import PageBreakCloud from '../../components/PageBreakCloud.astro';
+
+import '../../styles/base.css';
+import '../../styles/theme.root.css';
+---
+
+<BaseLayout
+  title="Inicio - Arizona Family Connections"
+  description="Apoyo de confianza para conexiones más fuertes"
+  language="es"
+  canonical="/es/"
+>
+  <HomeHero
+    backgroundImage="/images/home-hero_desktop.webp"
+    backgroundImageMobile="/images/home-hero_mobile.webp"
+    heading="Apoyo de Confianza para Conexiones Más Fuertes"
+    description="Ofrecemos servicios de visitas supervisadas seguros y compasivos que ayudan a las familias a reconectarse y crecer juntas."
+    primaryCta={{
+      text: 'Agendar una Visita',
+      url: '/es/contact',
+    }}
+    secondaryCta={{
+      text: 'Sobre Nuestros Servicios',
+      url: '/es/services',
+    }}
+  />
+  <FeatureSection
+    title="Creando Espacios Seguros para la Conexión Familiar"
+    description="En Arizona Family Connections, entendemos que cada situación familiar es única. Nuestros servicios de visitas supervisadas proporcionan un ambiente seguro y neutral donde los niños y padres pueden pasar tiempo significativo juntos. Cada visita es guiada por supervisores capacitados y compasivos que aseguran que cada interacción apoye el bienestar del niño y fomente relaciones positivas y saludables."
+    ctaText="Agendar una Visita"
+    ctaUrl="/es/contact"
+    decorationLeft="/images/rainbow-watermark.svg"
+    decorationRight="/images/cactus-watermark.svg"
+    features={[
+      {
+        icon: '/images/heart-icon.svg',
+        title: 'Seguridad Primero',
+        description: 'Cada visita ocurre en un ambiente seguro diseñado para apoyar al niño.',
+      },
+      {
+        icon: '/images/scale-icon.svg',
+        title: 'Justo y Neutral',
+        description: 'Los supervisores se mantienen imparciales para ayudar a que cada padre se sienta respetado.',
+      },
+      {
+        icon: '/images/family-icon.svg',
+        title: 'Crecimiento Positivo',
+        description: 'Las visitas se centran en construir comodidad, confianza y comunicación saludable.',
+      },
+    ]}
+  >
+    <div slot="bg-decoration">
+      <img
+        src="/images/bg-decoration.svg"
+        alt=""
+        class="decoration-image"
+      />
+    </div>
+  </FeatureSection>
+  <ColorDivider />
+  <AccordionSection
+    title="Opciones de Visitas que Se Adaptan a las Necesidades de Cada Familia"
+    description="Ofrecemos opciones de visitas flexibles que hacen que cada encuentro sea seguro, cómodo y significativo para todos los involucrados."
+    image="/images/mother-daughter_home.webp"
+    imageAlt="Preguntas Frecuentes"
+    decorationLeft="/images/yellowHand-watermark.svg"
+  >
+    <Accordion>
+      <AccordionItem
+        title="Visitas en la Oficina"
+        content="Nuestra oficina proporciona un ambiente tranquilo y monitoreado diseñado para la comodidad y seguridad. Los supervisores están presentes durante cada visita para apoyar interacciones positivas y sin estrés."
+      />
+      <AccordionItem
+        title="Visitas en el Hogar"
+        content="Cuando es apropiado, las visitas pueden realizarse en el hogar familiar. Esta opción apoya a los niños que se sienten más cómodos en sus alrededores familiares, siempre bajo cuidado supervisado."
+      />
+      <AccordionItem
+        title="Visitas en la Comunidad"
+        content="Las familias pueden reunirse en espacios comunitarios como parques o museos para experiencias naturales y atractivas. Los supervisores aseguran que cada visita siga siendo segura y apropiada para todos los involucrados."
+      />
+    </Accordion>
+  </AccordionSection>
+  <PageBreakCloud bgColor="#f8faff" />
+  <PricingSection
+    title="Selecciona un Plan Que Se Ajuste a Tus Necesidades Exactas"
+    decorationLeft="images/star-watermark-dark.svg"
+    decorationRight="images/wave-watermark-dark.svg"
+    cards={[
+      {
+        title: "Un Niño",
+        price: "$450",
+        subtitle: "Por Niño",
+        features: [
+          "Característica y Beneficio Número 1",
+          "Característica y Beneficio Número 2",
+          "Característica y Beneficio Número 3",
+          "Característica y Beneficio Número 4",
+        ],
+        buttonText: "Agendar una Visita",
+      },
+      {
+        title: "Un Niño",
+        price: "$450",
+        subtitle: "Por Niño",
+        features: [
+          "Característica y Beneficio Número 1",
+          "Característica y Beneficio Número 2",
+          "Característica y Beneficio Número 3",
+          "Característica y Beneficio Número 4",
+        ],
+        buttonText: "Agendar una Visita",
+      },
+      {
+        title: "Un Niño",
+        price: "$450",
+        subtitle: "Por Niño",
+        features: [
+          "Característica y Beneficio Número 1",
+          "Característica y Beneficio Número 2",
+          "Característica y Beneficio Número 3",
+          "Característica y Beneficio Número 4",
+        ],
+        buttonText: "Agendar una Visita",
+      },
+    ]}
+    ctaButtons={[
+      { text: "Botón Principal", variant: "primary" },
+      { text: "Botón Secundario", variant: "text" },
+    ]}
+  />
+  <PageBreakCloud bgColor="#f8faff" flip={true} />
+  <ColumnSection
+    image="/images/father-daughter_home.webp"
+    imageAlt="Ejemplo de servicio"
+    title="Aquí para las Familias, en Cada Paso del Camino"
+    description="La reunificación es un viaje, y ninguna familia debe caminarla sola. Estamos aquí para proporcionar orientación constante, espacios seguros y cuidado genuino que ayuden a que las relaciones sanen y crezcan más fuertes con cada visita. A través de la paciencia, la comprensión y el apoyo consistente, ayudamos a las familias a encontrar estabilidad y confianza renovada, una conexión a la vez."
+    ctaText="Comenzar"
+    ctaUrl="/es/services"
+    buttonVariant="primary"
+    imagePosition="left"
+    decorationLeft="images/pinkDots-watermark.svg"
+    decorationRight="images/sun-watermark.svg"
+  />
+  <DocumentsResourcesSection
+    title="Documentos y Recursos"
+    limit={4}
+    decorationRight="images/greenHand-watermark.svg"
+    allResourcesUrl="/es/resources"
+    allResourcesText="Ver Todos los Recursos"
+  />
+  <ColorDivider />
+  <FAQSection
+    title="Preguntas Frecuentes"
+    faqs={[
+      {
+        id: "1",
+        title: "¿Qué servicios ofrecen?",
+        content: "Ofrecemos servicios integrales de apoyo familiar que incluyen asesoramiento, programas educativos y coordinación de recursos.",
+      },
+      {
+        id: "2",
+        title: "¿Cómo me inscribo?",
+        content: "Puede inscribirse visitando nuestra oficina o completando el formulario de inscripción en línea en nuestro sitio web.",
+      },
+      {
+        id: "3",
+        title: "¿Cuál es el costo?",
+        content: "Nuestros servicios son gratuitos para las familias elegibles. Comuníquese con nosotros para obtener más información sobre los requisitos de elegibilidad.",
+      },
+      {
+        id: "4",
+        title: "¿Ofrecen servicios en español?",
+        content: "Sí, ofrecemos servicios bilingües en inglés y español.",
+      },
+    ]}
+  />
+  <MainCTA
+    title="¿Listo para Dar el Siguiente Paso Juntos?"
+    primaryCta={{
+      text: "Agendar una Visita",
+      url: "/es/contact",
+    }}
+    secondaryCta={{
+      text: "Más Información",
+      url: "/es/about",
+    }}
+    decorationLeft="images/rainbow-watermark.svg"
+    decorationRight="images/starFilled-watermark.svg"
+  />
+</BaseLayout>

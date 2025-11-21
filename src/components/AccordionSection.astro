@@ -146,3 +146,61 @@ const { title, description, image, imageAlt, decorationLeft } =
     }
   }
 </style>
+
+<script is:inline>
+  document.addEventListener("click", (e) => {
+    const button = e.target?.closest(".accordion-trigger");
+    if (!button) return;
+
+    const accordion = button.closest(".accordion");
+    if (!accordion) return;
+
+    const allItems = accordion.querySelectorAll(".accordion-item");
+
+    allItems.forEach((el) => {
+      const itemButton = el.querySelector(".accordion-trigger");
+      const isClicked = itemButton === button;
+
+      if (isClicked) {
+        el.classList.toggle("open");
+        itemButton.setAttribute(
+          "aria-expanded",
+          String(el.classList.contains("open"))
+        );
+      } else {
+        el.classList.remove("open");
+        itemButton.setAttribute("aria-expanded", "false");
+      }
+    });
+  });
+
+  document.addEventListener("keydown", (e) => {
+    const button = e.target;
+    if (!button?.classList.contains("accordion-trigger")) return;
+
+    const accordion = button.closest(".accordion");
+    if (!accordion) return;
+
+    const allItems = accordion.querySelectorAll(".accordion-item");
+    const currentItem = button.closest(".accordion-item");
+    const currentIndex = Array.from(allItems).indexOf(currentItem);
+
+    switch (e.key) {
+      case "Enter":
+      case " ":
+        e.preventDefault();
+        button.click();
+        break;
+      case "ArrowDown":
+        e.preventDefault();
+        const nextIndex = (currentIndex + 1) % allItems.length;
+        allItems[nextIndex]?.querySelector(".accordion-trigger")?.focus();
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        const prevIndex = (currentIndex - 1 + allItems.length) % allItems.length;
+        allItems[prevIndex]?.querySelector(".accordion-trigger")?.focus();
+        break;
+    }
+  });
+</script>

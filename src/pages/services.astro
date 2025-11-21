@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SubpageHero from '../components/SubpageHero.astro';
-import ColumnSection from '../components/ColumnSection.astro';
-import ColorDivider from '../components/ColorDivider.astro';
+import ColorDividerShort from '../components/ColorDividerShort.astro';
 import FAQSection from '../components/FAQSection.astro';
 import MainCTA from '../components/MainCTA.astro';
 import PricingSection from '../components/PricingSection.astro';
@@ -22,16 +21,16 @@ import '../styles/theme.root.css';
   <SubpageHero
     subtitle="About Arizona Family Connections"
     title="Dedicated to Helping Families Reconnect Safely"
-    ctaText="Learn More"
-    ctaUrl="/services"
+    ctaText="Schedule a Visit"
+    ctaUrl="/schedule"
     decorationLeft="/images/rainbow-watermark.svg"
     decorationRight="/images/cactus-watermark.svg"
   />
-  <ColorDivider />
+  <ColorDividerShort />
   <PricingSection
     title="Select A Plan That Fits You Exact Needs"
-    decorationLeft="images/star-watermark-dark.svg"
-    decorationRight="images/wave-watermark-dark.svg"
+    decorationLeft="/images/star-watermark-dark.svg"
+    decorationRight="/images/wave-watermark-dark.svg"
     cards={[
       {
         title: "One Child",
@@ -44,6 +43,7 @@ import '../styles/theme.root.css';
           "Feature & Benefit Number 4",
         ],
         buttonText: "Schedule a Visit",
+        buttonUrl: "/schedule",
       },
       {
         title: "One Child",
@@ -56,6 +56,7 @@ import '../styles/theme.root.css';
           "Feature & Benefit Number 4",
         ],
         buttonText: "Schedule a Visit",
+        buttonUrl: "/schedule",
       },
       {
         title: "One Child",
@@ -68,11 +69,12 @@ import '../styles/theme.root.css';
           "Feature & Benefit Number 4",
         ],
         buttonText: "Schedule a Visit",
+        buttonUrl: "/schedule",
       },
     ]}
     ctaButtons={[
-      { text: "Primary Button", variant: "primary" },
-      { text: "Secondary Button", variant: "text" },
+      { text: "Schedule a Visit", variant: "primary", url: "/schedule" },
+      { text: "About Our Services", variant: "text", url: "/services" },
     ]}
   />
   <PageBreakCloud bgColor="#f8faff" flip={true} />
@@ -131,8 +133,8 @@ import '../styles/theme.root.css';
         description: "Services meeting Arizona Rule 81 standards for court-ordered visitation supervision.",
       },
     ]}
-    decorationLeft="/images/rainbow-watermark.svg"
-    decorationRight="/images/cactus-watermark.svg"
+    decorationLeft="/images/sun-watermark.svg"
+    decorationRight="/images/pinkDots-watermark.svg"
   />
   <FAQSection
     title="Frequently Asked Questions"
@@ -163,13 +165,13 @@ import '../styles/theme.root.css';
     title="Ready to Take the Next Step Together?"
     primaryCta={{
       text: "Schedule a Visit",
-      url: "/contact",
+      url: "/schedule",
     }}
     secondaryCta={{
-      text: "Learn More",
+      text: "About Our Company",
       url: "/about",
     }}
-    decorationLeft="images/rainbow-watermark.svg"
-    decorationRight="images/starFilled-watermark.svg"
+    decorationLeft="/images/rainbow-watermark.svg"
+    decorationRight="/images/starFilled-watermark.svg"
   />
 </BaseLayout>

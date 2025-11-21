@@ -16,6 +16,7 @@ import PageBreakCloud from '../components/PageBreakCloud.astro';
 
 import '../styles/base.css';
 import '../styles/theme.root.css';
+import ColorDividerShort from '../components/ColorDividerShort.astro';
 ---
 
 <BaseLayout
@@ -31,7 +32,7 @@ import '../styles/theme.root.css';
     description="Providing safe, compassionate supervised visitation services that help families reconnect and grow together."
     primaryCta={{
       text: 'Schedule a Visit',
-      url: '/contact',
+      url: '/schedule',
     }}
     secondaryCta={{
       text: 'About Our Services',
@@ -42,7 +43,7 @@ import '../styles/theme.root.css';
     title="Creating Safe Spaces for Family Connection"
     description="At Arizona Family Connections, we understand that every family’s situation is unique. Our supervised visitation services provide a safe, neutral environment where children and parents can spend meaningful time together. Each visit is guided by trained, compassionate supervisors who ensure every interaction supports the child’s well-being and encourages positive, healthy relationships."
     ctaText="Schedule a Visit"
-    ctaUrl="/contact"
+    ctaUrl="/schedule"
     decorationLeft="/images/rainbow-watermark.svg"
     decorationRight="/images/cactus-watermark.svg"
     features={[
@@ -98,8 +99,8 @@ import '../styles/theme.root.css';
   <PageBreakCloud bgColor="#f8faff" />
   <PricingSection
     title="Select A Plan That Fits You Exact Needs"
-    decorationLeft="images/star-watermark-dark.svg"
-    decorationRight="images/wave-watermark-dark.svg"
+    decorationLeft="/images/star-watermark-dark.svg"
+    decorationRight="/images/wave-watermark-dark.svg"
     cards={[
       {
         title: "One Child",
@@ -112,6 +113,7 @@ import '../styles/theme.root.css';
           "Feature & Benefit Number 4",
         ],
         buttonText: "Schedule a Visit",
+        buttonUrl: "/schedule",
       },
       {
         title: "One Child",
@@ -124,6 +126,7 @@ import '../styles/theme.root.css';
           "Feature & Benefit Number 4",
         ],
         buttonText: "Schedule a Visit",
+        buttonUrl: "/schedule",
       },
       {
         title: "One Child",
@@ -136,11 +139,12 @@ import '../styles/theme.root.css';
           "Feature & Benefit Number 4",
         ],
         buttonText: "Schedule a Visit",
+        buttonUrl: "/schedule",
       },
     ]}
     ctaButtons={[
-      { text: "Primary Button", variant: "primary" },
-      { text: "Secondary Button", variant: "text" },
+      { text: "Schedule a Visit", variant: "primary", url: "/schedule" },
+      { text: "About Our Services", variant: "text", url: "/services" },
     ]}
   />
   <PageBreakCloud bgColor="#f8faff" flip={true} />
@@ -149,31 +153,32 @@ import '../styles/theme.root.css';
     imageAlt="Service example"
     title="Here for Families, Every Step of the Way"
     description="Reunification is a journey, and no family should walk it alone. We’re here to provide steady guidance, safe spaces, and genuine care that help relationships heal and grow stronger with each visit. Through patience, understanding, and consistent support, we help families find stability and renewed trust, one connection at a time."
-    ctaText="Get Started"
-    ctaUrl="/services"
+    ctaText="Schedule a Visit"
+    ctaUrl="/schedule"
     buttonVariant="primary"
     imagePosition="left"
-    decorationLeft="images/pinkDots-watermark.svg"
-    decorationRight="images/sun-watermark.svg"
+    decorationLeft="/images/pinkDots-watermark.svg"
+    decorationRight="/images/sun-watermark.svg"
   />
   <DocumentsResourcesSection
     title="Documents & Resources"
     limit={4}
-    decorationRight="images/greenHand-watermark.svg"
+    decorationRight="/images/greenHand-watermark.svg"
     allResourcesUrl="/resources"
     allResourcesText="View All Resources"
   />
+  <ColorDividerShort />
   <MainCTA
     title="Ready to Take the Next Step Together?"
     primaryCta={{
       text: "Schedule a Visit",
-      url: "/contact",
+      url: "/schedule",
     }}
     secondaryCta={{
-      text: "Learn More",
-      url: "/about",
+      text: "Our Services",
+      url: "/services",
     }}
-    decorationLeft="images/rainbow-watermark.svg"
-    decorationRight="images/starFilled-watermark.svg"
+    decorationLeft="/images/rainbow-watermark.svg"
+    decorationRight="/images/starFilled-watermark.svg"
   />
 </BaseLayout>

@@ -19,6 +19,7 @@ collections:
           widget: "select",
           label: "Category",
           options: ["documents", "forms", "external"],
+          hint: "Choose the type of resource",
         }
       - {
           name: "language",
@@ -32,8 +33,24 @@ collections:
           widget: "list",
           label: "Links",
           fields:
-            - { name: "label", widget: "string", label: "Link Label" }
-            - { name: "url", widget: "string", label: "URL" }
+            - { name: "label", widget: "string", label: "Link Label", hint: "e.g., 'Download PDF' or 'Visit Website'" }
+            - {
+                name: "url",
+                widget: "file",
+                label: "Upload File",
+                required: false,
+                media_folder: "public/uploads",
+                public_folder: "/uploads",
+                condition: "parent.parent.category !== 'external'",
+              }
+            - {
+                name: "external_url",
+                widget: "string",
+                label: "External Website URL",
+                required: false,
+                hint: "e.g., https://example.com",
+                condition: "parent.parent.category === 'external'",
+              }
             - {
                 name: "language",
                 widget: "select",

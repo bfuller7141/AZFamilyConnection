@@ -5,12 +5,13 @@ interface Card {
   subtitle: string;
   features: string[];
   buttonText: string;
+  buttonUrl?: string;
 }
 
 interface Props {
   title: string;
   cards: Card[];
-  ctaButtons?: Array<{ text: string; variant: "primary" | "text" }>;
+  ctaButtons?: Array<{ text: string; variant: "primary" | "text"; url?: string }>;
   decorationLeft?: string;
   decorationRight?: string;
 }
@@ -49,7 +50,9 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
             ))}
           </ul>
 
-          <button class="card-button">{card.buttonText}</button>
+          <a href={card.buttonUrl || '/schedule'} class="card-button">
+            {card.buttonText}
+          </a>
         </div>
       ))}
     </div>
@@ -57,9 +60,9 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
     {ctaButtons && ctaButtons.length > 0 && (
       <div class="pricing-cta">
         {ctaButtons.map((btn) => (
-          <button class={`btn btn-${btn.variant}`}>
+          <a href={btn.url || '#'} class={`btn btn-${btn.variant}`}>
             {btn.text}
-          </button>
+          </a>
         ))}
       </div>
     )}
@@ -131,6 +134,20 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
     transition: all var(--duration-std) var(--ease-standard);
   }
 
+  .card-button {
+    display: inline-block;
+    padding: var(--space-3) var(--space-5);
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all var(--duration-std) var(--ease-standard);
+    font-family: var(--font-heading);
+    text-decoration: none;
+    text-align: center;
+  }
+
   /* Card 0 - Secondary (Hot Pink) */
   .card-0 {
     background: var(--brand-secondary-50);
@@ -147,6 +164,7 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
 
   .card-0 .card-button {
     background: var(--brand-secondary-500);
+    color: white;
   }
 
   .card-0 .card-button:hover {
@@ -170,6 +188,7 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
 
   .card-1 .card-button {
     background: var(--brand-primary-500);
+    color: white;
   }
 
   .card-1 .card-button:hover {
@@ -192,6 +211,7 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
 
   .card-2 .card-button {
     background: var(--brand-tertiary-500);
+    color: white;
   }
 
   .card-2 .card-button:hover {
@@ -233,17 +253,6 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
     padding: var(--space-2) 0;
     color: var(--color-text);
     line-height: var(--line-normal);
-  }
-
-  .card-button {
-    padding: var(--space-3) var(--space-5);
-    border: none;
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    font-size: var(--text-sm);
-    cursor: pointer;
-    transition: all var(--duration-std) var(--ease-standard);
-    font-family: var(--font-heading);
   }
 
   .card-button:hover {

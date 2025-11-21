@@ -11,9 +11,14 @@ const resourcesCollection = defineCollection({
     links: z.array(
       z.object({
         label: z.string(),
-        url: z.string(),
+        url: z.string().optional(),
+        external_url: z.string().optional(),
         language: z.enum(["en", "es"]).optional(),
-      })
+      }).transform(link => ({
+        ...link,
+        // Combine url and external_url into a single url field
+        url: link.url || link.external_url || '',
+      }))
     ),
     icon: z.string().optional(),
   }),

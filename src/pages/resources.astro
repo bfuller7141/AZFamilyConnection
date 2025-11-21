@@ -4,10 +4,10 @@ import SubpageHero from '../components/SubpageHero.astro';
 import ResourceSection from '../components/ResourceSection.astro';
 import FAQSection from '../components/FAQSection.astro';
 import MainCTA from '../components/MainCTA.astro';
-import ColorDivider from '../components/ColorDivider.astro';
+import ColorDividerShort from '../components/ColorDividerShort.astro';
 
 import '../styles/base.css';
-import '../styles/theme.root.css';
+import '../styles/theme.root.css';---
 ---
 
 <BaseLayout
@@ -21,7 +21,7 @@ import '../styles/theme.root.css';
     title="Documents & Resources"
   />
 
-  <ColorDivider />
+  <ColorDividerShort />
 
   <ResourceSection
     title=""
@@ -56,13 +56,13 @@ import '../styles/theme.root.css';
     title="Ready to Take the Next Step Together?"
     primaryCta={{
       text: "Schedule a Visit",
-      url: "/contact",
+      url: "/schedule",
     }}
     secondaryCta={{
-      text: "Learn More",
-      url: "/about",
+      text: "Our Services",
+      url: "/services",
     }}
-    decorationLeft="images/rainbow-watermark.svg"
-    decorationRight="images/starFilled-watermark.svg"
+    decorationLeft="/images/rainbow-watermark.svg"
+    decorationRight="/images/starFilled-watermark.svg"
   />
 </BaseLayout>

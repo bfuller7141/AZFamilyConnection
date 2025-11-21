@@ -1,0 +1,401 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SubpageHero from '../components/SubpageHero.astro';
+import ColorDividerShort from '../components/ColorDividerShort.astro';
+
+import '../styles/base.css';
+import '../styles/theme.root.css';
+import FAQSection from '../components/FAQSection.astro';
+---
+
+<BaseLayout
+  title="Contact Us - Arizona Family Connections"
+  description="Get in touch with Arizona Family Connections. We're here to help."
+  language="en"
+  canonical="/contact"
+>
+  <SubpageHero
+    subtitle="Get in Touch"
+    title="Contact Us"
+    description="Have questions? We'd love to hear from you. Reach out to our team and we'll respond as soon as possible."
+  />
+  <ColorDividerShort />
+  <section class="contact-section">
+    <div class="contact-container">
+      <!-- Contact Information Cards -->
+      <div class="contact-info-grid">
+        <div class="contact-card">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="contact-card-title">Email</h3>
+          <a href="mailto:info@arizonafamilyconnections.com" class="contact-link">
+            contact@azfamilyconnections.com
+          </a>
+          <p class="contact-card-response">We'll respond within 24 hours</p>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </div>
+          <h3 class="contact-card-title">Phone</h3>
+          <a href="tel:+16025551234" class="contact-link">
+            (602) 555-1234
+          </a>
+          <p class="contact-card-response">Monday-Friday, 9am-5pm</p>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form-wrapper">
+
+        <form class="contact-form" method="POST" action="/api/contact">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name" class="form-label">Your Name: *</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                class="form-input" 
+                required 
+                placeholder="John Doe"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email" class="form-label">Email Address: *</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="form-input" 
+                required 
+                placeholder="you@example.com"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone" class="form-label">Phone Number:</label>
+              <input 
+                type="tel" 
+                id="phone" 
+                name="phone" 
+                class="form-input" 
+                placeholder="(602) 555-1234"
+              />
+            </div>
+            <div class="form-group">
+              <label for="subject" class="form-label">Subject: *</label>
+              <select id="subject" name="subject" class="form-select" required>
+                <option value="">-- Select a Subject --</option>
+                <option value="Inquiry">General Inquiry</option>
+                <option value="Scheduling">Scheduling Question</option>
+                <option value="Services">Services Information</option>
+                <option value="Feedback">Feedback</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">Message: *</label>
+            <textarea 
+              id="message" 
+              name="message" 
+              class="form-textarea" 
+              rows="5" 
+              required
+              placeholder="Please share your message here..."
+            ></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <FAQSection
+    title="Frequently Asked Questions"
+    faqs={[
+      {
+        id: "1",
+        title: "What services do you offer?",
+        content: "We offer comprehensive family support services including counseling, education programs, and resource coordination.",
+      },
+      {
+        id: "2",
+        title: "How do I enroll?",
+        content: "You can enroll by visiting our office or filling out the online enrollment form on our website.",
+      },
+      {
+        id: "3",
+        title: "What is the cost?",
+        content: "Our services are free for eligible families. Contact us to learn about eligibility requirements.",
+      },
+      {
+        id: "4",
+        title: "Do you offer services in Spanish?",
+        content: "Yes, we offer bilingual services in both English and Spanish.",
+      },
+    ]}
+  />
+</BaseLayout>
+
+<style>
+  .contact-section {
+    padding: var(--space-8) 0;
+  }
+
+  .contact-container {
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: 0 var(--pad-component-lg);
+  }
+
+  /* Contact Info Grid */
+  .contact-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+
+  .contact-card {
+    background: linear-gradient(135deg, var(--color-surface) 0%, rgba(6, 169, 231, 0.05) 100%);
+    border: 2px solid var(--brand-primary-200);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    text-align: center;
+    transition: all var(--duration-std) var(--ease-standard);
+  }
+
+  .contact-card:hover {
+    border-color: var(--brand-primary-500);
+    box-shadow: 0 8px 24px rgba(6, 169, 231, 0.12);
+    transform: translateY(-4px);
+  }
+
+  .contact-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto var(--space-4);
+    padding: var(--space-3);
+    background: linear-gradient(135deg, var(--brand-primary-500), var(--brand-primary-400));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .contact-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .contact-card-title {
+    margin: 0 0 var(--space-2);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+  }
+
+  .contact-link {
+    display: inline-block;
+    color: var(--brand-primary-500);
+    text-decoration: none;
+    font-weight: var(--weight-bold);
+    font-size: var(--text-base);
+    margin-bottom: var(--space-2);
+    transition: color var(--duration-std) var(--ease-standard);
+  }
+
+  .contact-link:hover {
+    color: var(--brand-primary-600);
+  }
+
+  .contact-card-text {
+    margin: 0 0 var(--space-2);
+    font-size: var(--text-base);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .contact-card-response {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    font-style: italic;
+  }
+
+  /* Contact Form */
+  .contact-form-wrapper {
+    background: linear-gradient(135deg, var(--color-surface) 0%, rgba(6, 169, 231, 0.03) 100%);
+    border: 2px solid var(--brand-primary-200);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+  }
+
+  .contact-form-header {
+    text-align: center;
+    margin-bottom: var(--space-6);
+  }
+
+  .contact-form-header h2 {
+    margin: 0 0 var(--space-2);
+    font-size: var(--text-h3);
+    color: var(--color-text);
+  }
+
+  .contact-form-header p {
+    margin: 0;
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .form-label {
+    font-weight: var(--weight-bold);
+    font-size: var(--text-base);
+    color: var(--color-text);
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: var(--space-3);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--color-text);
+    background: var(--color-surface);
+    transition: all var(--duration-std) var(--ease-standard);
+  }
+
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    color: var(--color-text-secondary);
+  }
+
+  .form-input:hover,
+  .form-select:hover,
+  .form-textarea:hover {
+    border-color: var(--brand-primary-300);
+  }
+
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    outline: none;
+    border-color: var(--brand-primary-500);
+    box-shadow: 0 0 0 3px rgba(6, 169, 231, 0.1);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 140px;
+    font-family: var(--font-body);
+  }
+
+  .form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+  }
+
+  .form-note {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    text-align: center;
+  }
+
+  @media (max-width: 767px) {
+    .contact-container {
+      padding: 0 var(--pad-component);
+    }
+
+    .contact-info-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+
+    .contact-form-wrapper {
+      padding: var(--space-6);
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-form-header h2 {
+      font-size: var(--text-h4);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-card,
+    .form-input,
+    .form-select,
+    .form-textarea,
+    .contact-link {
+      transition: none;
+    }
+
+    .contact-card:hover {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  const form = document.querySelector('.contact-form') as HTMLFormElement;
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+      
+      // Simple validation
+      if (!data.name || !data.email || !data.message) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      
+      console.log('Form submitted:', data);
+      alert('Thank you for your message! We\'ll be in touch soon.');
+      form.reset();
+    });
+  }
+</script>

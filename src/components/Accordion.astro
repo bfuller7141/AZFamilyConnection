@@ -13,10 +13,10 @@
   }
 </style>
 
-<script>
+<script is:inline>
   // Handle accordion logic - only one open at a time
   document.addEventListener("click", (e) => {
-    const target = e.target as HTMLElement;
+    const target = e.target;
     const button = target.closest(".accordion-trigger");
 
     if (!button) return;
@@ -43,7 +43,7 @@
 
   // Handle keyboard navigation (Enter/Space to toggle, Arrow keys to navigate)
   document.addEventListener("keydown", (e) => {
-    const button = e.target as HTMLElement;
+    const button = e.target;
     if (!button.classList.contains("accordion-trigger")) return;
 
     const accordion = button.closest(".accordion");
@@ -51,7 +51,7 @@
 
     const allItems = accordion.querySelectorAll(".accordion-item");
     const currentItem = button.closest(".accordion-item");
-    const currentIndex = Array.from(allItems).indexOf(currentItem as Element);
+    const currentIndex = Array.from(allItems).indexOf(currentItem);
 
     switch (e.key) {
       case "Enter":
@@ -62,17 +62,17 @@
       case "ArrowDown":
         e.preventDefault();
         const nextIndex = (currentIndex + 1) % allItems.length;
-        (allItems[nextIndex].querySelector(
+        allItems[nextIndex].querySelector(
           ".accordion-trigger"
-        ) as HTMLElement)?.focus();
+        )?.focus();
         break;
       case "ArrowUp":
         e.preventDefault();
         const prevIndex =
           (currentIndex - 1 + allItems.length) % allItems.length;
-        (allItems[prevIndex].querySelector(
+        allItems[prevIndex].querySelector(
           ".accordion-trigger"
-        ) as HTMLElement)?.focus();
+        )?.focus();
         break;
     }
   });

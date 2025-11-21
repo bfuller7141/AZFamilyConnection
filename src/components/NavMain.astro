@@ -311,6 +311,7 @@ const getIsActive = (url: string) => {
     background: var(--color-primary-subtle);
     color: var(--color-primary);
     border-left-color: var(--color-primary);
+    border-bottom: 1px solid var(--color-border);
   }
 
   /* =========================================
@@ -522,82 +523,91 @@ const getIsActive = (url: string) => {
   }
 </style>
 
-<script>
-  // Mobile menu toggle
-  const hamburgerBtn = document.getElementById('hamburgerBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const navbar = document.getElementById('navbar');
-  const navbarContainer = document.querySelector('.navbar-container');
+<script is:inline>
+  function setupNavbar() {
+    const hamburgerBtn = document.getElementById("hamburgerBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const navbar = document.getElementById("navbar");
+    const navbarContainer = document.querySelector(".navbar-container");
+    const logoImg = document.querySelector(".navbar-logo img");
+    const isHomePage = !navbar?.classList.contains("not-home");
 
-  if (hamburgerBtn && mobileMenu) {
-    hamburgerBtn.addEventListener('click', () => {
-      const isActive = hamburgerBtn.classList.toggle('active');
-      mobileMenu.classList.toggle('active');
-      hamburgerBtn.setAttribute('aria-expanded', isActive.toString());
+    if (hamburgerBtn && mobileMenu) {
+      hamburgerBtn.addEventListener("click", () => {
+        const isActive = hamburgerBtn.classList.toggle("active");
+        mobileMenu.classList.toggle("active");
+        hamburgerBtn.setAttribute("aria-expanded", String(isActive));
 
-      if (isActive) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
-      }
-    });
-
-    const menuLinks = mobileMenu.querySelectorAll('.navbar-link');
-    menuLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        hamburgerBtn.classList.remove('active');
-        mobileMenu.classList.remove('active');
-        hamburgerBtn.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
+        if (isActive) {
+          document.body.style.overflow = "hidden";
+        } else {
+          document.body.style.overflow = "";
+        }
       });
+
+      const menuLinks = mobileMenu.querySelectorAll(".navbar-link");
+      menuLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          hamburgerBtn.classList.remove("active");
+          mobileMenu.classList.remove("active");
+          hamburgerBtn.setAttribute("aria-expanded", "false");
+          document.body.style.overflow = "";
+        });
+      });
+
+      document.addEventListener("click", (e) => {
+        if (
+          navbarContainer &&
+          !navbarContainer.contains(e.target) &&
+          navbar &&
+          !navbar.contains(e.target)
+        ) {
+          hamburgerBtn.classList.remove("active");
+          mobileMenu.classList.remove("active");
+          hamburgerBtn.setAttribute("aria-expanded", "false");
+          document.body.style.overflow = "";
+        }
+      });
+    }
+
+    // Scroll detection
+    let lastScrollY = 0;
+    let isScrolled = false;
+
+    window.addEventListener("scroll", () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > 200 && !isScrolled) {
+        navbar?.classList.add("scrolled");
+        if (isHomePage && logoImg) logoImg.src = "/images/logo-dark.svg";
+        isScrolled = true;
+      } else if (currentScrollY < 50 && isScrolled) {
+        navbar?.classList.remove("scrolled");
+        if (isHomePage && logoImg) logoImg.src = "/images/logo.svg";
+        isScrolled = false;
+      }
+
+      if (currentScrollY > lastScrollY) {
+        navbar?.classList.remove("visible");
+      } else {
+        navbar?.classList.add("visible");
+      }
+
+      lastScrollY = currentScrollY;
     });
 
-    document.addEventListener('click', (e) => {
-      if (
-        navbarContainer &&
-        !navbarContainer.contains(e.target as Node) &&
-        navbar &&
-        !navbar.contains(e.target as Node)
-      ) {
-        hamburgerBtn.classList.remove('active');
-        mobileMenu.classList.remove('active');
-        hamburgerBtn.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      }
-    });
+    if (navbar) {
+      navbar.classList.add("visible");
+    }
   }
 
-  // Scroll detection for navbar visibility and background
-  let lastScrollY = 0;
-  let isScrolled = false;
+  // Setup on load and on page transitions
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupNavbar);
+  } else {
+    setupNavbar();
+  }
 
-  window.addEventListener('scroll', () => {
-    const currentScrollY = window.scrollY;
-
-    // Add/remove scrolled class based on position
-    // Add when past 200px, remove only when near top
-    if (currentScrollY > 200 && !isScrolled) {
-      navbar?.classList.add('scrolled');
-      isScrolled = true;
-    } else if (currentScrollY < 50 && isScrolled) {
-      navbar?.classList.remove('scrolled');
-      isScrolled = false;
-    }
-
-    // Show/hide based on scroll direction
-    if (currentScrollY > lastScrollY) {
-      // Scrolling down
-      navbar?.classList.remove('visible');
-    } else {
-      // Scrolling up
-      navbar?.classList.add('visible');
-    }
-
-    lastScrollY = currentScrollY;
-  });
-
-  // Show navbar on initial load
-  window.addEventListener('load', () => {
-    navbar?.classList.add('visible');
-  });
+  // For Astro view transitions
+  document.addEventListener("astro:after-swap", setupNavbar);
 </script>

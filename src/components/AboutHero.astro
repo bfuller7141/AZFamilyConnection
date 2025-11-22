@@ -25,11 +25,15 @@ const {
 } = Astro.props;
 ---
 
-<section class="about-hero">
+<section
+  class="about-hero"
+  aria-labelledby="about-hero-title"
+  aria-describedby={description ? "about-hero-description" : undefined}
+>
   {
     decorationLeft && (
       <div class="decoration decoration-left">
-        <img src={decorationLeft} alt="" aria-hidden="true" />
+        <img src={decorationLeft} alt="" aria-hidden="true" loading="lazy" />
       </div>
     )
   }
@@ -37,28 +41,33 @@ const {
   {
     decorationRight && (
       <div class="decoration decoration-right">
-        <img src={decorationRight} alt="" aria-hidden="true" />
+        <img src={decorationRight} alt="" aria-hidden="true" loading="lazy" />
       </div>
     )
   }
 
   <div class="about-hero-content">
     <p class="about-hero-subtitle">{subtitle}</p>
-    <h1 class="about-hero-title">{title}</h1>
-    
+
+    <h1 id="about-hero-title" class="about-hero-title">
+      {title}
+    </h1>
+
     {description && (
-      <p class="about-hero-description">{description}</p>
+      <p id="about-hero-description" class="about-hero-description">
+        {description}
+      </p>
     )}
 
-    <a href={ctaUrl} class="btn btn-primary">
+    <a href={ctaUrl} class="btn btn-primary about-hero-cta">
       {ctaText}
     </a>
   </div>
 
   <div class="about-hero-images">
     {images.map((image, index) => (
-      <div class={`image-column ${index === 1 ? 'center' : ''}`}>
-        <img src={image.src} alt={image.alt} />
+      <div class={`image-column ${index === 1 ? "center" : ""}`}>
+        <img src={image.src} alt={image.alt} loading="lazy" />
       </div>
     ))}
   </div>
@@ -91,8 +100,8 @@ const {
   .decoration-left {
     left: -10%;
     top: 50px;
-    transform: rotate(10deg);
-    width: 800px;
+    transform: rotate(-10deg);
+    width: 700px;
     height: auto;
   }
 
@@ -121,6 +130,18 @@ const {
     font-weight: var(--weight-bold);
     color: var(--brand-secondary-500);
     letter-spacing: 0.5px;
+  }
+
+  .about-hero-title {
+    margin: 0;
+  }
+
+  .about-hero-description {
+    margin: 0;
+  }
+
+  .about-hero-cta {
+    margin-top: var(--space-4);
   }
 
   .about-hero-images {

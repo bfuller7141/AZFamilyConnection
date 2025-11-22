@@ -18,31 +18,38 @@ const {
   decorationLeft,
   decorationRight,
 } = Astro.props;
+
+const headingId = `subpage-hero-title-${Math.random().toString(36).slice(2, 10)}`;
+const descriptionId = description
+  ? `subpage-hero-description-${Math.random().toString(36).slice(2, 10)}`
+  : undefined;
 ---
 
-<section class="page-hero">
-  {
-    decorationLeft && (
-      <div class="decoration decoration-left">
-        <img src={decorationLeft} alt="" aria-hidden="true" />
-      </div>
-    )
-  }
+<section
+  class="page-hero"
+  aria-labelledby={headingId}
+  aria-describedby={descriptionId}
+>
+  {decorationLeft && (
+    <div class="decoration decoration-left" aria-hidden="true">
+      <img src={decorationLeft} alt="" loading="lazy" />
+    </div>
+  )}
 
-  {
-    decorationRight && (
-      <div class="decoration decoration-right">
-        <img src={decorationRight} alt="" aria-hidden="true" />
-      </div>
-    )
-  }
+  {decorationRight && (
+    <div class="decoration decoration-right" aria-hidden="true">
+      <img src={decorationRight} alt="" loading="lazy" />
+    </div>
+  )}
 
   <div class="page-hero-content">
     <p class="page-hero-subtitle">{subtitle}</p>
-    <h1 class="page-hero-title">{title}</h1>
-    
+    <h1 id={headingId} class="page-hero-title">{title}</h1>
+
     {description && (
-      <p class="page-hero-description">{description}</p>
+      <p id={descriptionId} class="page-hero-description">
+        {description}
+      </p>
     )}
 
     {ctaText && (
@@ -82,7 +89,6 @@ const {
     top: 50px;
     transform: rotate(10deg);
     width: 800px;
-    height: auto;
   }
 
   .decoration-right {
@@ -90,7 +96,6 @@ const {
     top: 0;
     transform: rotate(-10deg);
     width: 550px;
-    height: auto;
   }
 
   .page-hero-content {
@@ -109,13 +114,27 @@ const {
     font-size: var(--text-lg);
     font-weight: var(--weight-bold);
     color: var(--brand-secondary-500);
-    letter-spacing: 0.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .page-hero-description {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--line-normal);
+    max-width: var(--container-lg);
   }
 
   @media (max-width: 1023px) {
     .decoration-left,
     .decoration-right {
       display: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .page-hero {
+      padding: var(--space-7) var(--pad-component);
     }
   }
 </style>

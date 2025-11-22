@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AboutHero from '../../components/AboutHero.astro';
+import MissionValuesSection from '../../components/MissionValuesSection.astro';
+import ColumnSection from '../../components/ColumnSection.astro';
+import ColorDivider from '../../components/ColorDivider.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import MainCTA from '../../components/MainCTA.astro';
+
+import '../../styles/base.css';
+import '../../styles/theme.root.css';
+---
+
+<BaseLayout
+  title="Sobre Arizona Family Connections | Nuestra misión y equipo"
+  description="Conozca nuestra misión, valores y el equipo dedicado a brindar servicios de visitas supervisadas seguras y de apoyo que ayudan a las familias a reconectarse y fortalecer sus lazos."
+  language="es"
+  canonical="https://arizonafamilyconnections.com/es/about"
+>
+  <AboutHero
+    subtitle="Sobre Arizona Family Connections"
+    title="Comprometidos con ayudar a las familias a reconectarse de forma segura"
+    ctaText="Ver nuestros servicios"
+    ctaUrl="/es/services"
+    images={[
+      {
+        src: "/images/child-chalk.webp",
+        alt: "Dos niños pequeños sentados en el piso eligiendo tizas de colores de una caja abierta.",
+      },
+      {
+        src: "/images/child-blocks.webp",
+        alt: "Niño pequeño sentado en el piso apilando figuras de madera de colores en un juguete con clavijas, con bloques de madera cerca.",
+      },
+      {
+        src: "/images/child-paints.webp",
+        alt: "Mano de un niño cubierta de pintura azul brillante durante una actividad de pintura con los dedos.",
+      },
+    ]}
+    decorationLeft="/images/starPink-watermark.svg"
+    decorationRight="/images/cactus-watermark.svg"
+  />
+  <ColorDivider />
+  <MissionValuesSection
+    title="Nuestra misión y valores"
+    description="En Arizona Family Connections, nuestra misión es crear espacios seguros y de apoyo donde las familias puedan reconectarse, reconstruir la confianza y fortalecerse por medio de la compasión y la comprensión."
+    values={[
+      {
+        icon: "/images/heart-icon.svg",
+        iconAlt: "Ícono de compasión",
+        title: "Compasión",
+        description: "Escuchamos con empatía y tratamos a cada familia con un cuidado genuino.",
+      },
+      {
+        icon: "/images/star-icon.svg",
+        iconAlt: "Ícono de integridad",
+        title: "Integridad",
+        description: "Nos mantenemos transparentes y justos en cada interacción que tenemos.",
+      },
+      {
+        icon: "/images/shield-icon.svg",
+        iconAlt: "Ícono de seguridad",
+        title: "Seguridad",
+        description: "Hacemos que cada visita sea segura tanto para los niños como para los padres.",
+      },
+      {
+        icon: "/images/puzzle-icon.svg",
+        iconAlt: "Ícono de colaboración",
+        title: "Colaboración",
+        description: "Trabajamos en equipo para apoyar a las familias con respeto y unidad.",
+      },
+    ]}
+    decorationLeft="/images/greenHand-watermark.svg"
+    decorationRight=""
+  />
+  <ColumnSection
+    image="/images/father-son-basket.webp"
+    imageAlt="Padre riendo mientras empuja a su hijo pequeño en una canasta de ropa en la sala, los dos disfrutando de un momento de juego."
+    title="Un equipo de profesionales apasionados"
+    description="Nuestros supervisores son imparciales y transparentes, lo que ayuda a que las familias se sientan apoyadas y respetadas en cada visita. Con más de 14 años de experiencia combinada trabajando con familias, equipos legales y el sistema judicial de Arizona, sabemos cómo guiar cada proceso de reunificación con cuidado y profesionalismo. Ya sea que sus necesidades sean a corto plazo o continuas, nuestro equipo está aquí para asegurar que cada visita sea segura, constante y centrada en la conexión."
+    ctaText="Programar una visita"
+    ctaUrl="/es/schedule"
+    buttonVariant="primary"
+    imagePosition="left"
+    decorationLeft="/images/pinkDots-watermark.svg"
+    decorationRight="/images/puzzleYellow-watermark.svg"
+  />
+  <FAQSection
+    title="Preguntas frecuentes"
+    faqs={[
+      {
+        id: "1",
+        title: "Qué servicios ofrecen",
+        content: "Ofrecemos servicios integrales de apoyo familiar que incluyen consejería, programas educativos y coordinación de recursos.",
+      },
+      {
+        id: "2",
+        title: "Cómo me inscribo",
+        content: "Puede inscribirse visitando nuestra oficina o llenando el formulario de inscripción en línea en nuestro sitio web.",
+      },
+      {
+        id: "3",
+        title: "Cuál es el costo",
+        content: "Nuestros servicios son gratuitos para las familias que califican. Contáctenos para conocer los requisitos de elegibilidad.",
+      },
+      {
+        id: "4",
+        title: "Ofrecen servicios en español",
+        content: "Sí, ofrecemos servicios bilingües tanto en inglés como en español.",
+      },
+    ]}
+  />
+  <MainCTA
+    title="Listos para dar el siguiente paso juntos"
+    primaryCta={{
+      text: "Programar una visita",
+      url: "/es/schedule",
+    }}
+    secondaryCta={{
+      text: "Nuestros servicios",
+      url: "/es/services",
+    }}
+    decorationLeft="/images/rainbow-watermark.svg"
+    decorationRight="/images/starFilled-watermark.svg"
+  />
+</BaseLayout>

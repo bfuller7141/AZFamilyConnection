@@ -1,6 +1,6 @@
 ---
-import Accordion from './Accordion.astro';
-import AccordionItem from './AccordionItem.astro';
+import Accordion from "./Accordion.astro";
+import AccordionItem from "./AccordionItem.astro";
 
 interface FAQItem {
   id: string;
@@ -18,13 +18,25 @@ interface Props {
 
 const { title, description, faqs, decorationLeft, decorationRight } =
   Astro.props;
+
+const headingId = `faq-section-title-${Math.random()
+  .toString(36)
+  .slice(2, 11)}`;
 ---
 
-<section class="faq-section">
+<section
+  class="faq-section"
+  aria-labelledby={headingId}
+>
   {
     decorationLeft && (
       <div class="decoration decoration-left">
-        <img src={decorationLeft} alt="" aria-hidden="true" />
+        <img
+          src={decorationLeft}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+        />
       </div>
     )
   }
@@ -32,23 +44,35 @@ const { title, description, faqs, decorationLeft, decorationRight } =
   {
     decorationRight && (
       <div class="decoration decoration-right">
-        <img src={decorationRight} alt="" aria-hidden="true" />
+        <img
+          src={decorationRight}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+        />
       </div>
     )
   }
 
   <div class="faq-container">
     <div class="faq-header">
-      <h2 class="faq-title">{title}</h2>
-      {description && <p class="faq-description">{description}</p>}
+      <h2 id={headingId} class="faq-title">
+        {title}
+      </h2>
+      {description && (
+        <p class="faq-description">
+          {description}
+        </p>
+      )}
     </div>
 
-    <Accordion>
-      {
-        faqs.map((faq) => (
-          <AccordionItem title={faq.title} content={faq.content} />
-        ))
-      }
+    <Accordion label={title}>
+      {faqs.map((faq) => (
+        <AccordionItem
+          title={faq.title}
+          content={faq.content}
+        />
+      ))}
     </Accordion>
   </div>
 </section>

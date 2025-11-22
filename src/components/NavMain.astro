@@ -8,82 +8,83 @@ interface Props {
     label: string;
     url: string;
   }>;
-  currentLanguage?: 'en' | 'es';
+  currentLanguage?: "en" | "es";
 }
 
 const {
-  logoUrl = '/images/logo.svg',
-  logoAlt = 'Arizona Family Connections',
-  ctaText = 'Get Started',
-  ctaUrl = '#',
+  logoUrl = "/images/logo.svg",
+  logoAlt = "Arizona Family Connections",
+  ctaText = "Schedule a Visit",
+  ctaUrl = "#",
   menuItems = [
-    { label: 'Home', url: '/' },
-    { label: 'About', url: '/about' },
-    { label: 'Services', url: '/services' },
-    { label: 'Resources', url: '/resources' },
-    { label: 'Contact', url: '/contact' },
+    { label: "Home", url: "/" },
+    { label: "About", url: "/about" },
+    { label: "Services", url: "/services" },
+    { label: "Resources", url: "/resources" },
+    { label: "Contact", url: "/contact" },
   ],
-  currentLanguage = 'en',
+  currentLanguage = "en",
 } = Astro.props;
 
-// Get current pathname and swap language
 const currentPath = Astro.url.pathname;
 
-// Normalize path: remove /es or /en prefix, remove trailing slashes
-const cleanPath = currentPath
-  .replace(/^\/es\/?/, '')
-  .replace(/^\/en\/?/, '')
-  .replace(/\/$/, '')
-  .toLowerCase() || '/';
+// Normalize: strip language prefix, collapse trailing slashes, ensure leading slash
+const basePath =
+  currentPath
+    .replace(/^\/(en|es)(\/|$)/, "/")
+    .replace(/\/+$/, "") || "/";
 
-// Build language paths
-const spanishPath = `/es${cleanPath === '/' ? '' : cleanPath}`;
-const englishPath = cleanPath === '/' ? '/' : cleanPath;
+const cleanPath = basePath === "" ? "/" : basePath;
+
+// Language paths
+const englishPath = cleanPath;
+const spanishPath = cleanPath === "/" ? "/es/" : `/es${cleanPath}`;
 
 // Determine if on home page
-const isHomePage = cleanPath === '/' || cleanPath === '';
+const isHomePage = cleanPath === "/";
 
 // Set logo based on page
-const currentLogoUrl = isHomePage ? logoUrl : '/images/logo-dark.svg';
+const currentLogoUrl = isHomePage ? logoUrl : "/images/logo-dark.svg";
 
 // Determine active menu item
 const getIsActive = (url: string) => {
-  const normalizedUrl = url
-    .replace(/\/$/, '')
-    .toLowerCase() || '/';
-  
-  const normalizedCleanPath = cleanPath === '' ? '/' : cleanPath;
-  
-  // Handle homepage
-  if (normalizedUrl === '' || normalizedUrl === '/') {
-    return normalizedCleanPath === '/' || normalizedCleanPath === '';
+  let normalizedUrl = url.replace(/\/+$/, "");
+  if (!normalizedUrl.startsWith("/")) normalizedUrl = `/${normalizedUrl}`;
+  if (normalizedUrl === "") normalizedUrl = "/";
+
+  const normalizedPath = cleanPath || "/";
+
+  if (normalizedUrl === "/" || normalizedUrl === "") {
+    return normalizedPath === "/" || normalizedPath === "";
   }
-  
-  return normalizedCleanPath === normalizedUrl;
+
+  return normalizedPath === normalizedUrl;
 };
 ---
 
-<nav class={`navbar ${!isHomePage ? 'not-home' : ''}`} id="navbar">
+<nav
+  class={`navbar ${!isHomePage ? "not-home" : ""}`}
+  id="navbar"
+  aria-label="Main navigation"
+>
   <div class="navbar-container">
     <div class="navbar-left">
-      <a href="/" class="navbar-logo">
+      <a href={englishPath} class="navbar-logo">
         <img src={currentLogoUrl} alt={logoAlt} />
       </a>
 
-      <!-- Desktop Menu -->
       <ul class="navbar-menu navbar-menu-desktop">
-        {
-          menuItems.map((item) => (
-            <li>
-              <a
-                href={item.url}
-                class={`navbar-link ${getIsActive(item.url) ? 'active' : ''}`}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))
-        }
+        {menuItems.map((item) => (
+          <li>
+            <a
+              href={item.url}
+              class={`navbar-link ${getIsActive(item.url) ? "active" : ""}`}
+              aria-current={getIsActive(item.url) ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
 
@@ -92,28 +93,35 @@ const getIsActive = (url: string) => {
         {ctaText}
       </a>
 
-      <div class="language-toggle">
+      <div class="language-toggle" aria-label="Language selection">
         <a
           href={englishPath}
-          class={`language-link ${currentLanguage === 'en' ? 'active' : ''}`}
+          class={`language-link ${
+            currentLanguage === "en" ? "active" : ""
+          }`}
+          aria-current={currentLanguage === "en" ? "page" : undefined}
         >
           EN
         </a>
         <span class="language-divider">/</span>
         <a
           href={spanishPath}
-          class={`language-link ${currentLanguage === 'es' ? 'active' : ''}`}
+          class={`language-link ${
+            currentLanguage === "es" ? "active" : ""
+          }`}
+          aria-current={currentLanguage === "es" ? "page" : undefined}
         >
           ES
         </a>
       </div>
 
-      <!-- Hamburger Menu Button -->
       <button
         class="navbar-hamburger"
         id="hamburgerBtn"
-        aria-label="Toggle menu"
+        type="button"
+        aria-label="Toggle navigation menu"
         aria-expanded="false"
+        aria-controls="mobileMenu"
       >
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
@@ -122,38 +130,41 @@ const getIsActive = (url: string) => {
     </div>
   </div>
 
-  <!-- Mobile Menu -->
   <ul class="navbar-menu navbar-menu-mobile" id="mobileMenu">
-    {
-      menuItems.map((item) => (
-        <li>
-          <a
-            href={item.url}
-            class={`navbar-link ${getIsActive(item.url) ? 'active' : ''}`}
-          >
-            {item.label}
-          </a>
-        </li>
-      ))
-    }
+    {menuItems.map((item) => (
+      <li>
+        <a
+          href={item.url}
+          class={`navbar-link ${getIsActive(item.url) ? "active" : ""}`}
+          aria-current={getIsActive(item.url) ? "page" : undefined}
+        >
+          {item.label}
+        </a>
+      </li>
+    ))}
 
-    <!-- Mobile Menu Footer -->
     <li class="mobile-menu-footer">
       <a href={ctaUrl} class="btn btn-secondary btn-mobile">
         {ctaText}
       </a>
 
-      <div class="language-toggle-mobile">
+      <div class="language-toggle-mobile" aria-label="Language selection">
         <a
           href={englishPath}
-          class={`language-link ${currentLanguage === 'en' ? 'active' : ''}`}
+          class={`language-link ${
+            currentLanguage === "en" ? "active" : ""
+          }`}
+          aria-current={currentLanguage === "en" ? "page" : undefined}
         >
           EN
         </a>
         <span class="language-divider">/</span>
         <a
           href={spanishPath}
-          class={`language-link ${currentLanguage === 'es' ? 'active' : ''}`}
+          class={`language-link ${
+            currentLanguage === "es" ? "active" : ""
+          }`}
+          aria-current={currentLanguage === "es" ? "page" : undefined}
         >
           ES
         </a>
@@ -163,10 +174,6 @@ const getIsActive = (url: string) => {
 </nav>
 
 <style>
-  /* =========================================
-   * NAVBAR STRUCTURE
-   * ========================================= */
-
   .navbar {
     background: none;
     border-bottom: none;
@@ -191,7 +198,6 @@ const getIsActive = (url: string) => {
     box-shadow: var(--shadow-elev-1);
   }
 
-  /* Non-home page styling */
   .navbar-container {
     display: flex;
     align-items: center;
@@ -201,10 +207,6 @@ const getIsActive = (url: string) => {
     padding: var(--pad-component) var(--pad-component);
     gap: var(--space-2);
   }
-
-  /* =========================================
-   * LEFT SECTION (Logo + Menu)
-   * ========================================= */
 
   .navbar-left {
     display: flex;
@@ -228,10 +230,6 @@ const getIsActive = (url: string) => {
     width: auto;
   }
 
-  /* =========================================
-   * DESKTOP MENU
-   * ========================================= */
-
   .navbar-menu-desktop {
     display: none;
     list-style: none;
@@ -251,10 +249,7 @@ const getIsActive = (url: string) => {
     transition: all var(--duration-std) var(--ease-standard);
   }
 
-  .navbar.not-home .navbar-link {
-    color: var(--color-text);
-  }
-
+  .navbar.not-home .navbar-link,
   .navbar.scrolled .navbar-link {
     color: var(--color-text);
   }
@@ -269,10 +264,6 @@ const getIsActive = (url: string) => {
     outline: 0;
     box-shadow: var(--focus-ring);
   }
-
-  /* =========================================
-   * MOBILE MENU (Hidden by default)
-   * ========================================= */
 
   .navbar-menu-mobile {
     display: none;
@@ -331,10 +322,6 @@ const getIsActive = (url: string) => {
     border-bottom: 1px solid var(--color-border);
   }
 
-  /* =========================================
-   * MOBILE MENU FOOTER
-   * ========================================= */
-
   .mobile-menu-footer {
     padding: var(--pad-component);
     display: flex;
@@ -374,10 +361,6 @@ const getIsActive = (url: string) => {
     color: var(--color-text);
   }
 
-  /* =========================================
-   * RIGHT SECTION (Language + CTA + Hamburger)
-   * ========================================= */
-
   .navbar-right {
     display: flex;
     align-items: center;
@@ -401,10 +384,7 @@ const getIsActive = (url: string) => {
     transition: all var(--duration-std) var(--ease-standard);
   }
 
-  .navbar.not-home .language-link {
-    color: var(--color-text);
-  }
-
+  .navbar.not-home .language-link,
   .navbar.scrolled .language-link {
     color: var(--color-text);
   }
@@ -424,10 +404,7 @@ const getIsActive = (url: string) => {
     color: var(--color-text-inverse);
   }
 
-  .navbar.not-home .language-divider {
-    color: var(--color-text);
-  }
-
+  .navbar.not-home .language-divider,
   .navbar.scrolled .language-divider {
     color: var(--color-text);
   }
@@ -435,10 +412,6 @@ const getIsActive = (url: string) => {
   .navbar-right .btn {
     display: none;
   }
-
-  /* =========================================
-   * HAMBURGER MENU BUTTON
-   * ========================================= */
 
   .navbar-hamburger {
     display: flex;
@@ -450,8 +423,13 @@ const getIsActive = (url: string) => {
     gap: var(--space-2);
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     box-shadow: none;
+  }
+
+  .navbar-hamburger:focus-visible {
+    outline: 0;
+    box-shadow: var(--focus-ring);
   }
 
   .hamburger-line {
@@ -464,15 +442,11 @@ const getIsActive = (url: string) => {
     transform-origin: center;
   }
 
-  .navbar.not-home .hamburger-line {
-    background: var(--neutral-1000);
-  }
-
+  .navbar.not-home .hamburger-line,
   .navbar.scrolled .hamburger-line {
     background: var(--neutral-1000);
   }
 
-  /* Hamburger animation - open state */
   .navbar-hamburger.active .hamburger-line:nth-child(1) {
     transform: translateY(10px) rotate(45deg);
   }
@@ -484,10 +458,6 @@ const getIsActive = (url: string) => {
   .navbar-hamburger.active .hamburger-line:nth-child(3) {
     transform: translateY(-10px) rotate(-45deg);
   }
-
-  /* =========================================
-   * DESKTOP BREAKPOINT (768px+)
-   * ========================================= */
 
   @media (min-width: 768px) {
     .navbar-menu-desktop {
@@ -521,10 +491,6 @@ const getIsActive = (url: string) => {
     }
   }
 
-  /* =========================================
-   * ACCESSIBILITY & REDUCED MOTION
-   * ========================================= */
-
   @media (prefers-reduced-motion: reduce) {
     .navbar-link,
     .hamburger-line,
@@ -545,7 +511,6 @@ const getIsActive = (url: string) => {
     const hamburgerBtn = document.getElementById("hamburgerBtn");
     const mobileMenu = document.getElementById("mobileMenu");
     const navbar = document.getElementById("navbar");
-    const navbarContainer = document.querySelector(".navbar-container");
     const logoImg = document.querySelector(".navbar-logo img");
     const isHomePage = !navbar?.classList.contains("not-home");
 
@@ -555,11 +520,7 @@ const getIsActive = (url: string) => {
         mobileMenu.classList.toggle("active");
         hamburgerBtn.setAttribute("aria-expanded", String(isActive));
 
-        if (isActive) {
-          document.body.style.overflow = "hidden";
-        } else {
-          document.body.style.overflow = "";
-        }
+        document.body.style.overflow = isActive ? "hidden" : "";
       });
 
       const menuLinks = mobileMenu.querySelectorAll(".navbar-link");
@@ -571,25 +532,18 @@ const getIsActive = (url: string) => {
           document.body.style.overflow = "";
         });
       });
-
-      document.addEventListener("click", (e) => {
-        if (
-          navbarContainer &&
-          !navbarContainer.contains(e.target) &&
-          navbar &&
-          !navbar.contains(e.target)
-        ) {
-          hamburgerBtn.classList.remove("active");
-          mobileMenu.classList.remove("active");
-          hamburgerBtn.setAttribute("aria-expanded", "false");
-          document.body.style.overflow = "";
-        }
-      });
     }
 
-    // Scroll detection
-    let lastScrollY = 0;
-    let isScrolled = false;
+    let lastScrollY = window.scrollY;
+    let isScrolled = window.scrollY > 200;
+
+    if (navbar) {
+      if (isScrolled) {
+        navbar.classList.add("scrolled");
+        if (isHomePage && logoImg) logoImg.src = "/images/logo-dark.svg";
+      }
+      navbar.classList.add("visible");
+    }
 
     window.addEventListener("scroll", () => {
       const currentScrollY = window.scrollY;
@@ -612,19 +566,13 @@ const getIsActive = (url: string) => {
 
       lastScrollY = currentScrollY;
     });
-
-    if (navbar) {
-      navbar.classList.add("visible");
-    }
   }
 
-  // Setup on load and on page transitions
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", setupNavbar);
   } else {
     setupNavbar();
   }
 
-  // For Astro view transitions
   document.addEventListener("astro:after-swap", setupNavbar);
 </script>

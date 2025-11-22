@@ -176,9 +176,7 @@
    * ========================================= */
 
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
-
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.10), 0 2px 4px rgba(0, 0, 0, 0.06);
-
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.12), 0 4px 6px rgba(0, 0, 0, 0.08);
 
   /* =========================================
@@ -316,7 +314,7 @@
   /* Focus */
   --focus-ring-width: 3px;
   --focus-ring-offset: 3px;
-  --focus-ring-color:var(--brand-secondary-500);
+  --focus-ring-color: var(--brand-secondary-500);
   --focus-ring: 0 0 0 var(--focus-ring-width) var(--focus-ring-color);
 
   /* Interactive states */

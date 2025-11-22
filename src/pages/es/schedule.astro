@@ -1,38 +1,38 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SubpageHero from '../components/SubpageHero.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SubpageHero from '../../components/SubpageHero.astro';
 
 const serviceParam = Astro.url.searchParams.get('service') || '';
 
 const services = [
-  "Off-Site Supervised Visitation",
-  "Supervised Exchange",
-  "Virtual Supervised Visitation",
-  "Court Testimony",
-  "Objective Reports",
-  "Supervised Visitation (East Valley)",
-  "Therapeutic Visitation",
-  "Supervised Video/Telephonic Visitation",
-  "Safe Exchange",
-  "Rule 81 Compliance",
+  "Visitas Supervisadas Fuera del Sitio",
+  "Intercambio Supervisado",
+  "Visitas Supervisadas Virtuales",
+  "Testimonio en la Corte",
+  "Informes Objetivos",
+  "Visitas Supervisadas (East Valley)",
+  "Visitas Terapéuticas",
+  "Visitas Supervisadas por Video/Telefónicas",
+  "Intercambio Seguro",
+  "Cumplimiento de la Regla 81",
 ];
 
-import '../styles/base.css';
-import '../styles/theme.root.css';
+import '../../styles/base.css';
+import '../../styles/theme.root.css';
 ---
 
 <BaseLayout
-  title="Schedule Supervised Visitation | AZ Family Connections"
-  description="Request visitation or safe exchange services with Arizona Family Connections. Share your case details and our team will follow up to confirm your visit soon."
-  language="en"
-  canonical="https://arizonafamilyconnections.com/schedule"
+  title="Programar Visitas Supervisadas | AZ Family Connections"
+  description="Solicite servicios de visitas supervisadas o intercambio seguro con Arizona Family Connections. Comparta los detalles de su caso y nuestro equipo se comunicará con usted para confirmar su visita pronto."
+  language="es"
+  canonical="https://arizonafamilyconnections.com/es/schedule"
 >
   <SubpageHero
-    subtitle="Schedule Your Visitation"
-    title="Start Your Visitation Journey"
-    description="Fill out the form below to begin the intake process. Our team will review your information and contact you to discuss the next steps."
-    ctaText="Fill Out Intake Form"
-    ctaUrl="/schedule#intake-form"
+    subtitle="Programe su visita"
+    title="Comience su proceso de visitas"
+    description="Complete el siguiente formulario para comenzar el proceso de admisión. Nuestro equipo revisará su información y lo contactará para hablar sobre los próximos pasos."
+    ctaText="Completar formulario de admisión"
+    ctaUrl="/es/schedule#intake-form"
     decorationLeft="/images/calendar-watermark.svg"
     decorationRight="/images/checkbox-watermark.svg"
   />
@@ -40,12 +40,13 @@ import '../styles/theme.root.css';
   <section class="schedule-section">
     <div class="schedule-container">
       <form class="schedule-form" method="POST" action="/api/schedule" id="intake-form">
+        
         <!-- Service Selection -->
         <fieldset class="form-fieldset">
-          <legend class="form-legend">Service Information</legend>
+          <legend class="form-legend">Información del servicio</legend>
 
           <div class="form-group">
-            <label for="service" class="form-label">Interested in Service: *</label>
+            <label for="service" class="form-label">Servicio de interés: *</label>
             <select 
               id="service" 
               name="service" 
@@ -53,7 +54,7 @@ import '../styles/theme.root.css';
               required
               data-service-param={serviceParam}
             >
-              <option value="">-- Select a Service --</option>
+              <option value="">-- Seleccione un servicio --</option>
               {
                 services.map((service) => (
                   <option value={service}>
@@ -65,62 +66,62 @@ import '../styles/theme.root.css';
           </div>
 
           <div class="form-group">
-            <label class="form-label">Service Type: *</label>
+            <label class="form-label">Tipo de servicio: *</label>
             <div class="form-checkboxes">
               <label class="form-checkbox">
-                <input type="checkbox" name="serviceType" value="Supervised Visitation" />
-                Supervised Visitation
+                <input type="checkbox" name="serviceType" value="Visitas Supervisadas" />
+                Visitas Supervisadas
               </label>
               <label class="form-checkbox">
-                <input type="checkbox" name="serviceType" value="Monitored Exchange" />
-                Monitored Exchange
+                <input type="checkbox" name="serviceType" value="Intercambio Monitoreado" />
+                Intercambio Monitoreado
               </label>
               <label class="form-checkbox">
-                <input type="checkbox" name="serviceType" value="Child Transportation" />
-                Child Transportation
+                <input type="checkbox" name="serviceType" value="Transporte de Niños" />
+                Transporte de Niños
               </label>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="caseNumber" class="form-label">Family Law Case Number:</label>
+            <label for="caseNumber" class="form-label">Número de caso familiar:</label>
             <input type="text" id="caseNumber" name="caseNumber" class="form-input" />
           </div>
 
           <div class="form-group">
-            <label for="nextCourtDate" class="form-label">Next Court Date:</label>
+            <label for="nextCourtDate" class="form-label">Próxima fecha en la corte:</label>
             <input type="date" id="nextCourtDate" name="nextCourtDate" class="form-input" />
           </div>
         </fieldset>
 
         <!-- Your Information -->
         <fieldset class="form-fieldset">
-          <legend class="form-legend">Your Information</legend>
+          <legend class="form-legend">Su información</legend>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="yourName" class="form-label">Your Name: *</label>
+              <label for="yourName" class="form-label">Su nombre: *</label>
               <input type="text" id="yourName" name="yourName" class="form-input" required />
             </div>
             <div class="form-group">
-              <label for="yourRole" class="form-label">Your Role: *</label>
+              <label for="yourRole" class="form-label">Su rol: *</label>
               <select id="yourRole" name="yourRole" class="form-select" required>
-                <option value="">-- Select --</option>
-                <option value="Custodial Parent">Custodial Parent</option>
-                <option value="Visiting Parent">Visiting Parent</option>
-                <option value="Guardian">Guardian</option>
-                <option value="Attorney">Attorney</option>
+                <option value="">-- Seleccione --</option>
+                <option value="Custodial Parent">Padre/Madre con custodia</option>
+                <option value="Visiting Parent">Padre/Madre visitante</option>
+                <option value="Guardian">Tutor</option>
+                <option value="Attorney">Abogado/a</option>
               </select>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="email" class="form-label">Email: *</label>
+              <label for="email" class="form-label">Correo electrónico: *</label>
               <input type="email" id="email" name="email" class="form-input" required />
             </div>
             <div class="form-group">
-              <label for="phone" class="form-label">Phone Number: *</label>
+              <label for="phone" class="form-label">Número de teléfono: *</label>
               <input type="tel" id="phone" name="phone" class="form-input" required />
             </div>
           </div>
@@ -128,32 +129,32 @@ import '../styles/theme.root.css';
 
         <!-- Other Parent Information -->
         <fieldset class="form-fieldset">
-          <legend class="form-legend">Other Parent Information</legend>
+          <legend class="form-legend">Información del otro padre/madre</legend>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="otherParentName" class="form-label">Other Parent Name:</label>
+              <label for="otherParentName" class="form-label">Nombre del otro padre/madre:</label>
               <input type="text" id="otherParentName" name="otherParentName" class="form-input" />
             </div>
             <div class="form-group">
-              <label for="otherParentRole" class="form-label">Role:</label>
+              <label for="otherParentRole" class="form-label">Rol:</label>
               <select id="otherParentRole" name="otherParentRole" class="form-select">
-                <option value="">-- Select --</option>
-                <option value="Custodial Parent">Custodial Parent</option>
-                <option value="Visiting Parent">Visiting Parent</option>
-                <option value="Guardian">Guardian</option>
-                <option value="Attorney">Attorney</option>
+                <option value="">-- Seleccione --</option>
+                <option value="Custodial Parent">Padre/Madre con custodia</option>
+                <option value="Visiting Parent">Padre/Madre visitante</option>
+                <option value="Guardian">Tutor</option>
+                <option value="Attorney">Abogado/a</option>
               </select>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="otherParentEmail" class="form-label">Email:</label>
+              <label for="otherParentEmail" class="form-label">Correo electrónico:</label>
               <input type="email" id="otherParentEmail" name="otherParentEmail" class="form-input" />
             </div>
             <div class="form-group">
-              <label for="otherParentPhone" class="form-label">Phone Number:</label>
+              <label for="otherParentPhone" class="form-label">Número de teléfono:</label>
               <input type="tel" id="otherParentPhone" name="otherParentPhone" class="form-input" />
             </div>
           </div>
@@ -161,30 +162,30 @@ import '../styles/theme.root.css';
 
         <!-- Children Information -->
         <fieldset class="form-fieldset">
-          <legend class="form-legend">Children Information</legend>
+          <legend class="form-legend">Información de los niños</legend>
 
           <div class="form-group">
-            <p class="form-note">Please provide information for each child</p>
+            <p class="form-note">Proporcione información para cada niño</p>
           </div>
 
           {[1, 2, 3].map((index) => (
             <div class="form-child-section">
-              <h4 class="form-subheading">Child {index}</h4>
+              <h4 class="form-subheading">Niño {index}</h4>
               
               <div class="form-row">
                 <div class="form-group">
-                  <label for={`childName${index}`} class="form-label">Name:</label>
+                  <label for={`childName${index}`} class="form-label">Nombre:</label>
                   <input type="text" id={`childName${index}`} name={`childName${index}`} class="form-input" />
                 </div>
                 <div class="form-group">
-                  <label for={`childAge${index}`} class="form-label">Age:</label>
+                  <label for={`childAge${index}`} class="form-label">Edad:</label>
                   <input type="number" id={`childAge${index}`} name={`childAge${index}`} class="form-input" min="0" max="18" />
                 </div>
               </div>
 
               <div class="form-group">
-                <label for={`childNeeds${index}`} class="form-label">Special Needs or Considerations:</label>
-                <textarea id={`childNeeds${index}`} name={`childNeeds${index}`} class="form-textarea" rows="2" placeholder="Any relevant information we should know..."></textarea>
+                <label for={`childNeeds${index}`} class="form-label">Necesidades especiales o consideraciones:</label>
+                <textarea id={`childNeeds${index}`} name={`childNeeds${index}`} class="form-textarea" rows="2" placeholder="Cualquier información relevante que debamos saber..."></textarea>
               </div>
             </div>
           ))}
@@ -192,14 +193,14 @@ import '../styles/theme.root.css';
 
         <!-- Safety & Concerns -->
         <fieldset class="form-fieldset">
-          <legend class="form-legend">Safety & Special Considerations</legend>
+          <legend class="form-legend">Seguridad y consideraciones especiales</legend>
 
           <div class="form-group">
-            <label class="form-label">Are there any concerns about family violence or domestic violence?</label>
+            <label class="form-label">¿Existen preocupaciones sobre violencia familiar o doméstica?</label>
             <div class="form-radios">
               <label class="form-radio">
                 <input type="radio" name="violenceConcerns" value="yes" />
-                Yes
+                Sí
               </label>
               <label class="form-radio">
                 <input type="radio" name="violenceConcerns" value="no" />
@@ -209,11 +210,11 @@ import '../styles/theme.root.css';
           </div>
 
           <div class="form-group">
-            <label class="form-label">Is there a current protective (restraining) order?</label>
+            <label class="form-label">¿Existe actualmente una orden de protección o restricción?</label>
             <div class="form-radios">
               <label class="form-radio">
                 <input type="radio" name="protectiveOrder" value="yes" />
-                Yes
+                Sí
               </label>
               <label class="form-radio">
                 <input type="radio" name="protectiveOrder" value="no" />
@@ -223,36 +224,36 @@ import '../styles/theme.root.css';
           </div>
 
           <div class="form-group">
-            <label for="childSafety" class="form-label">Do you have any concerns about the safety of the child/children?</label>
-            <textarea id="childSafety" name="childSafety" class="form-textarea" rows="3" placeholder="Please describe any safety concerns..."></textarea>
+            <label for="childSafety" class="form-label">¿Tiene preocupaciones sobre la seguridad del/de los niño(s)?</label>
+            <textarea id="childSafety" name="childSafety" class="form-textarea" rows="3" placeholder="Describa cualquier preocupación de seguridad..."></textarea>
           </div>
 
           <div class="form-group">
-            <label for="parentSafety" class="form-label">Do you have any concerns about your safety when around the other parent?</label>
-            <textarea id="parentSafety" name="parentSafety" class="form-textarea" rows="3" placeholder="Please describe any safety concerns..."></textarea>
+            <label for="parentSafety" class="form-label">¿Tiene preocupaciones sobre su seguridad al estar cerca del otro padre/madre?</label>
+            <textarea id="parentSafety" name="parentSafety" class="form-textarea" rows="3" placeholder="Describa cualquier preocupación de seguridad..."></textarea>
           </div>
 
           <div class="form-group">
-            <label for="healthIssues" class="form-label">Do you or your child/children have any health issues we should know about?</label>
-            <textarea id="healthIssues" name="healthIssues" class="form-textarea" rows="3" placeholder="Please share relevant health information..."></textarea>
+            <label for="healthIssues" class="form-label">¿Usted o sus hijos tienen problemas de salud que debamos conocer?</label>
+            <textarea id="healthIssues" name="healthIssues" class="form-textarea" rows="3" placeholder="Comparta información médica relevante..."></textarea>
           </div>
 
           <div class="form-group">
-            <label for="additionalInfo" class="form-label">Additional Information:</label>
-            <textarea id="additionalInfo" name="additionalInfo" class="form-textarea" rows="4" placeholder="Please share any additional information you think we should know..."></textarea>
+            <label for="additionalInfo" class="form-label">Información adicional:</label>
+            <textarea id="additionalInfo" name="additionalInfo" class="form-textarea" rows="4" placeholder="Cualquier información adicional que considere importante..."></textarea>
           </div>
         </fieldset>
 
         <!-- Attorney Information -->
         <fieldset class="form-fieldset">
-          <legend class="form-legend">Legal Representation</legend>
+          <legend class="form-legend">Representación legal</legend>
 
           <div class="form-group">
-            <label class="form-label">Are you represented by an attorney?</label>
+            <label class="form-label">¿Cuenta con representación legal?</label>
             <div class="form-radios">
               <label class="form-radio">
                 <input type="radio" name="hasAttorney" value="yes" />
-                Yes
+                Sí
               </label>
               <label class="form-radio">
                 <input type="radio" name="hasAttorney" value="no" />
@@ -262,21 +263,21 @@ import '../styles/theme.root.css';
           </div>
 
           <div class="form-group">
-            <label for="attorneyInfo" class="form-label">Attorney Name & Phone (if applicable):</label>
+            <label for="attorneyInfo" class="form-label">Nombre y teléfono del abogado (si aplica):</label>
             <input type="text" id="attorneyInfo" name="attorneyInfo" class="form-input" />
           </div>
         </fieldset>
 
         <!-- Language -->
         <fieldset class="form-fieldset">
-          <legend class="form-legend">Language Preference</legend>
+          <legend class="form-legend">Preferencia de idioma</legend>
 
           <div class="form-group">
-            <label class="form-label">Can you receive services in English?</label>
+            <label class="form-label">¿Puede recibir servicios en inglés?</label>
             <div class="form-radios">
               <label class="form-radio">
                 <input type="radio" name="englishServices" value="yes" required />
-                Yes
+                Sí
               </label>
               <label class="form-radio">
                 <input type="radio" name="englishServices" value="no" required />
@@ -288,7 +289,7 @@ import '../styles/theme.root.css';
 
         <!-- Submit -->
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary">Schedule Service</button>
+          <button type="submit" class="btn btn-primary">Programar servicio</button>
         </div>
       </form>
     </div>

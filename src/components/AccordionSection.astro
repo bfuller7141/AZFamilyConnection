@@ -7,11 +7,17 @@ interface Props {
   decorationLeft?: string;
 }
 
-const { title, description, image, imageAlt, decorationLeft } =
-  Astro.props;
+const { title, description, image, imageAlt, decorationLeft } = Astro.props;
+
+const headingId = `accordion-section-title-${Math.random()
+  .toString(36)
+  .slice(2, 11)}`;
 ---
 
-<section class="accordion-section">
+<section
+  class="accordion-section"
+  aria-labelledby={headingId}
+>
   <div class="feature-bg-decoration">
     <slot name="bg-decoration" />
   </div>
@@ -19,14 +25,20 @@ const { title, description, image, imageAlt, decorationLeft } =
   {
     decorationLeft && (
       <div class="decoration decoration-left">
-        <img src={decorationLeft} alt="" aria-hidden="true" />
+        <img
+          src={decorationLeft}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+        />
       </div>
     )
   }
+
   <div class="accordion-container">
     <!-- Left Column -->
     <div class="accordion-left">
-      <h2>{title}</h2>
+      <h2 id={headingId}>{title}</h2>
       <p class="accordion-description">{description}</p>
 
       <div class="accordion-wrapper">
@@ -36,7 +48,11 @@ const { title, description, image, imageAlt, decorationLeft } =
 
     <!-- Right Column -->
     <div class="accordion-right">
-      <img src={image} alt={imageAlt} />
+      <img
+        src={image}
+        alt={imageAlt ?? ""}
+        loading="lazy"
+      />
     </div>
   </div>
 </section>
@@ -92,7 +108,9 @@ const { title, description, image, imageAlt, decorationLeft } =
   .accordion-right img {
     width: 100%;
     height: auto;
+    display: block;
     border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
     object-fit: cover;
   }
 
@@ -114,7 +132,7 @@ const { title, description, image, imageAlt, decorationLeft } =
 
   .decoration-left {
     left: -4%;
-    top: 0px;
+    top: 0;
     transform: rotate(0deg);
     width: 500px;
     height: auto;

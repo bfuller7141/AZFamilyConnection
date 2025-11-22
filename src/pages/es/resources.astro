@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SubpageHero from '../../components/SubpageHero.astro';
+import ResourceSection from '../../components/ResourceSection.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import MainCTA from '../../components/MainCTA.astro';
+import ColorDividerShort from '../../components/ColorDividerShort.astro';
+
+import '../../styles/base.css';
+import '../../styles/theme.root.css';
+---
+
+<BaseLayout
+  title="Documentos y recursos familiares | Arizona Family Connections"
+  description="Acceda a documentos de visitas supervisadas, formularios de admisión, políticas y recursos de Arizona Family Connections para prepararse para visitas familiares seguras y con apoyo."
+  language="es"
+  canonical="/es/resources"
+>
+  <SubpageHero
+    subtitle="Documentos y recursos"
+    title="Documentos y recursos para apoyar su proceso"
+    description="Encuentre todos los formularios, políticas y recursos necesarios para asegurar una experiencia fluida con Arizona Family Connections. Estamos aquí para acompañarle en cada paso del camino."
+    ctaText="Programar una visita"
+    ctaUrl="/es/schedule"
+    decorationLeft="/images/waveGreen-watermark.svg"
+    decorationRight="/images/puzzleYellow-watermark.svg"
+  />
+
+  <ColorDividerShort />
+
+  <ResourceSection
+    title="Documentos y recursos"
+  />
+
+  <FAQSection
+    title="Preguntas frecuentes"
+    faqs={[
+      {
+        id: "1",
+        title: "¿Qué servicios ofrecen?",
+        content: "Ofrecemos servicios integrales de apoyo familiar que incluyen consejería, programas educativos y coordinación de recursos.",
+      },
+      {
+        id: "2",
+        title: "¿Cómo me inscribo?",
+        content: "Puede inscribirse visitando nuestra oficina o llenando el formulario de inscripción en línea en nuestro sitio web.",
+      },
+      {
+        id: "3",
+        title: "¿Cuál es el costo?",
+        content: "Nuestros servicios son gratuitos para las familias que califican. Contáctenos para conocer los requisitos de elegibilidad.",
+      },
+      {
+        id: "4",
+        title: "¿Ofrecen servicios en español?",
+        content: "Sí, ofrecemos servicios bilingües tanto en inglés como en español.",
+      },
+    ]}
+  />
+
+  <MainCTA
+    title="¿Listos para dar el siguiente paso juntos?"
+    primaryCta={{
+      text: "Programar una visita",
+      url: "/es/schedule",
+    }}
+    secondaryCta={{
+      text: "Nuestros servicios",
+      url: "/es/services",
+    }}
+    decorationLeft="/images/rainbow-watermark.svg"
+    decorationRight="/images/starFilled-watermark.svg"
+  />
+</BaseLayout>

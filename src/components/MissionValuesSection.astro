@@ -21,43 +21,56 @@ const {
   decorationLeft,
   decorationRight,
 } = Astro.props;
+
+const headingId = `mission-values-title-${Math.random()
+  .toString(36)
+  .slice(2, 10)}`;
+const descId = `mission-values-description-${Math.random()
+  .toString(36)
+  .slice(2, 10)}`;
 ---
 
-<section class="mission-values">
-  {
-    decorationLeft && (
-      <div class="decoration decoration-left">
-        <img src={decorationLeft} alt="" aria-hidden="true" />
-      </div>
-    )
-  }
+<section
+  class="mission-values"
+  aria-labelledby={headingId}
+  aria-describedby={descId}
+>
+  {decorationLeft && (
+    <div class="decoration decoration-left" aria-hidden="true">
+      <img src={decorationLeft} alt="" loading="lazy" />
+    </div>
+  )}
 
-  {
-    decorationRight && (
-      <div class="decoration decoration-right">
-        <img src={decorationRight} alt="" aria-hidden="true" />
-      </div>
-    )
-  }
+  {decorationRight && (
+    <div class="decoration decoration-right" aria-hidden="true">
+      <img src={decorationRight} alt="" loading="lazy" />
+    </div>
+  )}
 
   <div class="mission-values-container">
     <div class="mission-values-header">
-      <h2 class="mission-values-title">{title}</h2>
-      <p class="mission-values-description">{description}</p>
+      <h2 id={headingId} class="mission-values-title">
+        {title}
+      </h2>
+      <p id={descId} class="mission-values-description">
+        {description}
+      </p>
     </div>
 
     <div class="values-grid">
-      {
-        values.map((value) => (
-          <div class="value-item">
-            <div class="value-icon">
-              <img src={value.icon} alt={value.iconAlt} />
-            </div>
-            <h3 class="value-title">{value.title}</h3>
-            <p class="value-description">{value.description}</p>
+      {values.map((value, index) => (
+        <div class="value-item">
+          <div class="value-icon">
+            <img
+              src={value.icon}
+              alt={value.iconAlt}
+              loading="lazy"
+            />
           </div>
-        ))
-      }
+          <h3 class="value-title">{value.title}</h3>
+          <p class="value-description">{value.description}</p>
+        </div>
+      ))}
     </div>
   </div>
 </section>
@@ -86,7 +99,6 @@ const {
     top: 80px;
     transform: rotate(10deg);
     width: 500px;
-    height: auto;
   }
 
   .decoration-right {
@@ -94,7 +106,6 @@ const {
     top: 0;
     transform: rotate(-10deg);
     width: 550px;
-    height: auto;
   }
 
   .mission-values-container {
@@ -144,7 +155,7 @@ const {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all var(--duration-std) var(--ease-standard);
+    transition: transform var(--duration-std) var(--ease-standard);
   }
 
   .value-item:hover .value-icon {

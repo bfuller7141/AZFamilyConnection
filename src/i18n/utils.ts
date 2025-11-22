@@ -16,11 +16,14 @@ export function getLanguageFromUrl(url: URL): Language {
   return 'en';
 }
 
-export function getLocalizedPath(
-  path: string,
-  language: Language
-): string {
-  // Remove existing language prefix if present
-  const cleanPath = path.replace(/^\/[a-z]{2}/, '');
-  return `/${language}${cleanPath}`;
+export function getLocalizedPath(path: string, language: Language): string {
+  const normalized = path.startsWith('/') ? path : `/${path}`;
+
+  const cleanPath = normalized.replace(/^\/(en|es)(?=\/|$)/, '');
+
+  if (language === 'en') {
+    return cleanPath === '' ? '/' : cleanPath;
+  }
+
+  return cleanPath === '/' ? '/es/' : `/es${cleanPath}`;
 }

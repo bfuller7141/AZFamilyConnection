@@ -7,26 +7,23 @@ interface Props {
 }
 
 const {
-  color1 = 'var(--brand-primary-500)',
-  color2 = 'var(--brand-secondary-500)',
-  color3 = 'var(--brand-accent-500)',
-  color4 = 'var(--brand-tertiary-500)',
+  color1 = "var(--brand-primary-500)",
+  color2 = "var(--brand-secondary-500)",
+  color3 = "var(--brand-accent-500)",
+  color4 = "var(--brand-tertiary-500)",
 } = Astro.props;
 ---
 
 <div
   class="color-divider"
-  style={`
-    --divider-color-1: ${color1};
-    --divider-color-2: ${color2};
-    --divider-color-3: ${color3};
-    --divider-color-4: ${color4};
-  `}
+  role="presentation"
+  aria-hidden="true"
+  style={`--divider-color-1:${color1}; --divider-color-2:${color2}; --divider-color-3:${color3}; --divider-color-4:${color4};`}
 >
-  <div class="divider-section divider-section-1"></div>
-  <div class="divider-section divider-section-2"></div>
-  <div class="divider-section divider-section-3"></div>
-  <div class="divider-section divider-section-4"></div>
+  <div class="divider-section section-1"></div>
+  <div class="divider-section section-2"></div>
+  <div class="divider-section section-3"></div>
+  <div class="divider-section section-4"></div>
 </div>
 
 <style>
@@ -35,7 +32,6 @@ const {
     height: 20px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0;
   }
 
   .divider-section {
@@ -43,19 +39,16 @@ const {
     height: 100%;
   }
 
-  .divider-section-1 {
-    background-color: var(--divider-color-1);
+  .section-1 {
+    background: var(--divider-color-1);
   }
-
-  .divider-section-2 {
-    background-color: var(--divider-color-2);
+  .section-2 {
+    background: var(--divider-color-2);
   }
-
-  .divider-section-3 {
-    background-color: var(--divider-color-3);
+  .section-3 {
+    background: var(--divider-color-3);
   }
-
-  .divider-section-4 {
-    background-color: var(--divider-color-4);
+  .section-4 {
+    background: var(--divider-color-4);
   }
 </style>

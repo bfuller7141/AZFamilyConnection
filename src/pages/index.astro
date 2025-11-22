@@ -20,8 +20,8 @@ import ColorDividerShort from '../components/ColorDividerShort.astro';
 ---
 
 <BaseLayout
-  title="Home - Arizona Family Connections"
-  description="Trusted support for stronger connections"
+  title="Arizona Family Connections | Court Ordered Visitation"
+  description="Arizona Family Connections provides safe, compassionate supervised visitation services that help children and parents stay connected in a supportive setting."
   language="en"
   canonical="/"
 >
@@ -64,21 +64,14 @@ import ColorDividerShort from '../components/ColorDividerShort.astro';
       },
     ]}
   >
-    <div slot="bg-decoration">
-      {/* Add your background decoration images here */}
-      <img
-        src=""
-        alt=""
-        class="decoration-image"
-      />
     </div>
   </FeatureSection>
   <ColorDivider />
   <AccordionSection
     title="Visitation Options That Fit Every Family’s Needs"
     description="We offer flexible visitation settings that make each meeting safe, comfortable, and meaningful for everyone involved."
-    image="/images/mother-daughter_home.webp"
-    imageAlt="FAQ"
+    image="/images/father-son-blocks.webp"
+    imageAlt="Father and young child playing together with colorful wooden blocks and toy cars at a table."
     decorationLeft="/images/yellowHand-watermark.svg"
   >
     <Accordion>
@@ -149,8 +142,8 @@ import ColorDividerShort from '../components/ColorDividerShort.astro';
   />
   <PageBreakCloud bgColor="#f8faff" flip={true} />
   <ColumnSection
-    image="/images/father-daughter_home.webp"
-    imageAlt="Service example"
+    image="/images/mother-son-selfie.webp"
+    imageAlt="Mother and young child lying on the floor smiling while taking a selfie together with a smartphone."
     title="Here for Families, Every Step of the Way"
     description="Reunification is a journey, and no family should walk it alone. We’re here to provide steady guidance, safe spaces, and genuine care that help relationships heal and grow stronger with each visit. Through patience, understanding, and consistent support, we help families find stability and renewed trust, one connection at a time."
     ctaText="Schedule a Visit"
@@ -168,6 +161,31 @@ import ColorDividerShort from '../components/ColorDividerShort.astro';
     allResourcesText="View All Resources"
   />
   <ColorDividerShort />
+  <FAQSection
+    title="Frequently Asked Questions"
+    faqs={[
+      {
+        id: "1",
+        title: "What services do you offer?",
+        content: "We offer comprehensive family support services including counseling, education programs, and resource coordination.",
+      },
+      {
+        id: "2",
+        title: "How do I enroll?",
+        content: "You can enroll by visiting our office or filling out the online enrollment form on our website.",
+      },
+      {
+        id: "3",
+        title: "What is the cost?",
+        content: "Our services are free for eligible families. Contact us to learn about eligibility requirements.",
+      },
+      {
+        id: "4",
+        title: "Do you offer services in Spanish?",
+        content: "Yes, we offer bilingual services in both English and Spanish.",
+      },
+    ]}
+  />
   <MainCTA
     title="Ready to Take the Next Step Together?"
     primaryCta={{

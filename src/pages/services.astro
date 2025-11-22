@@ -13,20 +13,23 @@ import '../styles/theme.root.css';
 ---
 
 <BaseLayout
-  title="About - Arizona Family Connections"
-  description="Trusted support for stronger connections"
+  title="Supervised Visitation Services | AZ Family Connections"
+  description="Explore supervised visitation, safe exchange, and family services with Arizona Family Connections. Get support that protects children and strengthens bonds."
   language="en"
-  canonical="/about"
+  canonical="https://arizonafamilyconnections.com/services"
 >
   <SubpageHero
-    subtitle="About Arizona Family Connections"
-    title="Dedicated to Helping Families Reconnect Safely"
+    subtitle="Arizona Family Connections Services"
+    title="Visitation Services Designed with Family in Mind"
+    description="We provide safe, structured visitation options that support each family’s unique needs. With compassion and experience, our supervisors create environments where parents and children can reconnect, rebuild trust, and grow together."
     ctaText="Schedule a Visit"
     ctaUrl="/schedule"
-    decorationLeft="/images/rainbow-watermark.svg"
-    decorationRight="/images/cactus-watermark.svg"
+    decorationLeft="/images/cloud-watermark.svg"
+    decorationRight="/images/flower-watermark.svg"
   />
+
   <ColorDividerShort />
+
   <PricingSection
     title="Select A Plan That Fits You Exact Needs"
     decorationLeft="/images/star-watermark-dark.svg"
@@ -77,58 +80,50 @@ import '../styles/theme.root.css';
       { text: "About Our Services", variant: "text", url: "/services" },
     ]}
   />
+
   <PageBreakCloud bgColor="#f8faff" flip={true} />
+
   <ServicesGrid
-    title="Our Services"
-    description="Comprehensive support tailored to your family's needs."
+    title="Our Visitation Services"
+    description="Every family’s needs are different. We offer a range of supervised visitation options designed to ensure safety, comfort, and meaningful connection during every visit."
     services={[
       {
-        icon: "/images/offsite-visitation-icon.svg",
+        icon: "/images/home-icon.svg",
         title: "Off-Site Supervised Visitation",
         description: "Safe, monitored visits in our neutral office setting designed to support positive parent-child connections.",
       },
       {
-        icon: "/images/supervised-exchange-icon.svg",
+        icon: "/images/pins-icon.svg",
         title: "Supervised Exchange",
         description: "Monitored exchanges between parents in a safe, neutral environment.",
       },
       {
-        icon: "/images/virtual-visitation-icon.svg",
+        icon: "/images/webcam-icon.svg",
         title: "Virtual Supervised Visitation",
         description: "Secure video calls between parents and children under professional supervision.",
       },
       {
-        icon: "/images/court-testimony-icon.svg",
+        icon: "/images/gavel-icon.svg",
         title: "Court Testimony",
         description: "Professional documentation and expert testimony regarding supervised visits.",
       },
       {
-        icon: "/images/objective-reports-icon.svg",
+        icon: "/images/pen-icon.svg",
         title: "Objective Reports",
         description: "Detailed, impartial reports documenting visitation observations and interactions.",
       },
       {
-        icon: "/images/east-valley-icon.svg",
+        icon: "/images/cactus-icon.svg",
         title: "Supervised Visitation (East Valley)",
         description: "Convenient supervised visitation services at our East Valley location.",
       },
       {
-        icon: "/images/therapeutic-visitation-icon.svg",
-        title: "Therapeutic Visitation",
-        description: "Specialized supervised visits with therapeutic support to promote healing and connection.",
-      },
-      {
-        icon: "/images/video-telephonic-icon.svg",
-        title: "Supervised Video/Telephonic Visitation",
-        description: "Monitored phone and video calls to maintain parent-child relationships.",
-      },
-      {
-        icon: "/images/safe-exchange-icon.svg",
+        icon: "/images/sheild-icon-blue.svg",
         title: "Safe Exchange",
         description: "Secure, neutral location exchanges to ensure child safety during transitions.",
       },
       {
-        icon: "/images/rule-81-icon.svg",
+        icon: "/images/az81-icon.svg",
         title: "Rule 81 Compliance",
         description: "Services meeting Arizona Rule 81 standards for court-ordered visitation supervision.",
       },
@@ -136,6 +131,7 @@ import '../styles/theme.root.css';
     decorationLeft="/images/sun-watermark.svg"
     decorationRight="/images/pinkDots-watermark.svg"
   />
+
   <FAQSection
     title="Frequently Asked Questions"
     faqs={[
@@ -160,7 +156,9 @@ import '../styles/theme.root.css';
         content: "Yes, we offer bilingual services in both English and Spanish.",
       },
     ]}
+    decorationLeft="/images/rainbow-watermark.svg"
   />
+
   <MainCTA
     title="Ready to Take the Next Step Together?"
     primaryCta={{
@@ -171,7 +169,6 @@ import '../styles/theme.root.css';
       text: "About Our Company",
       url: "/about",
     }}
-    decorationLeft="/images/rainbow-watermark.svg"
     decorationRight="/images/starFilled-watermark.svg"
   />
 </BaseLayout>

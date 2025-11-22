@@ -24,13 +24,26 @@ const {
   decorationRight,
   imagePosition = "left",
 } = Astro.props;
+
+const headingId = `column-section-title-${Math.random()
+  .toString(36)
+  .slice(2, 11)}`;
 ---
 
-<section class="column-section" data-image-position={imagePosition}>
+<section
+  class="column-section"
+  data-image-position={imagePosition}
+  aria-labelledby={headingId}
+>
   {
     decorationLeft && (
       <div class="decoration decoration-left">
-        <img src={decorationLeft} alt="" aria-hidden="true" />
+        <img
+          src={decorationLeft}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+        />
       </div>
     )
   }
@@ -38,7 +51,12 @@ const {
   {
     decorationRight && (
       <div class="decoration decoration-right">
-        <img src={decorationRight} alt="" aria-hidden="true" />
+        <img
+          src={decorationRight}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+        />
       </div>
     )
   }
@@ -46,12 +64,19 @@ const {
   <div class="column-container">
     <!-- Image Column -->
     <div class="column-image">
-      <img src={image} alt={imageAlt} class="desktop-image" />
+      <img
+        src={image}
+        alt={imageAlt}
+        class="desktop-image"
+        loading="lazy"
+      />
     </div>
 
     <!-- Content Column -->
     <div class="column-content">
-      <h2 class="column-title">{title}</h2>
+      <h2 id={headingId} class="column-title">
+        {title}
+      </h2>
       <p class="column-description">{description}</p>
       <a href={ctaUrl} class={`btn btn-${buttonVariant}`}>
         {ctaText}
@@ -87,7 +112,7 @@ const {
   }
 
   .decoration-right {
-    right: 0%;
+    right: 0;
     top: 40px;
     width: 400px;
     height: auto;
@@ -105,10 +130,6 @@ const {
     align-items: center;
   }
 
-  .column-section[data-image-position="right"] .column-container {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .column-section[data-image-position="right"] .column-image {
     order: 2;
   }
@@ -118,16 +139,17 @@ const {
   }
 
   .column-image {
-    position: relative;
     width: 100%;
-    overflow: hidden;
+    height: auto;
+    box-shadow: var(--shadow-md);
     border-radius: var(--radius-lg);
+    overflow: hidden;
   }
 
   .column-image img {
     width: 100%;
     height: auto;
-    display: block;
+    object-fit: cover;
   }
 
   .column-content {
@@ -145,7 +167,7 @@ const {
     .decoration-right {
       display: none;
     }
-    
+
     .column-container {
       grid-template-columns: 1fr;
       gap: var(--space-6);

@@ -7,18 +7,23 @@ import MainCTA from '../components/MainCTA.astro';
 import ColorDividerShort from '../components/ColorDividerShort.astro';
 
 import '../styles/base.css';
-import '../styles/theme.root.css';---
+import '../styles/theme.root.css';
 ---
 
 <BaseLayout
-  title="Resources - Arizona Family Connections"
-  description="Documents, forms, and resources for families"
+  title="Family Documents & Resources | Arizona Family Connections"
+  description="Access supervised visitation documents, intake forms, policies, and resources from Arizona Family Connections to prepare for safe, supported family visits."
   language="en"
   canonical="/resources"
 >
   <SubpageHero
-    subtitle="Resources"
-    title="Documents & Resources"
+    subtitle="Documents & Resources"
+    title="Documents & Resources to Support Your Journey"
+    description="Find all the necessary forms, policies, and resources to ensure a smooth experience with Arizona Family Connections. We're here to support you every step of the way."
+    ctaText="Schedule a Visit"
+    ctaUrl="/schedule"
+    decorationLeft="/images/waveGreen-watermark.svg"
+    decorationRight="/images/puzzleYellow-watermark.svg"
   />
 
   <ColorDividerShort />
@@ -52,6 +57,7 @@ import '../styles/theme.root.css';---
       },
     ]}
   />
+
   <MainCTA
     title="Ready to Take the Next Step Together?"
     primaryCta={{

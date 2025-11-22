@@ -5,6 +5,9 @@ interface Props {
 }
 
 const { title, content } = Astro.props;
+
+const panelId = `accordion-panel-${Math.random().toString(36).slice(2, 11)}`;
+const buttonId = `${panelId}-trigger`;
 ---
 
 <div class="accordion-item">
@@ -12,7 +15,8 @@ const { title, content } = Astro.props;
     class="accordion-trigger"
     type="button"
     aria-expanded="false"
-    aria-controls={`panel-${Math.random().toString(36).substr(2, 9)}`}
+    aria-controls={panelId}
+    id={buttonId}
   >
     <span class="accordion-title">{title}</span>
     <span class="accordion-icon">
@@ -21,6 +25,8 @@ const { title, content } = Astro.props;
         viewBox="0 0 85 85"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        focusable="false"
       >
         <path
           d="M82.45,52.06h-29.61v30.39h-20.68v-30.39H2.55v-19.11h29.61V2.55h20.68v30.39h29.61v19.11Z"
@@ -32,6 +38,8 @@ const { title, content } = Astro.props;
         viewBox="0 0 85 85"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        focusable="false"
       >
         <path
           d="M82.45,33.26v18.48H2.55v-18.48h79.89Z"
@@ -41,7 +49,12 @@ const { title, content } = Astro.props;
     </span>
   </button>
 
-  <div class="accordion-content" role="region">
+  <div
+    class="accordion-content"
+    role="region"
+    id={panelId}
+    aria-labelledby={buttonId}
+  >
     <div class="accordion-body">
       {content}
     </div>

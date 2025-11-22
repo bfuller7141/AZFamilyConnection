@@ -1,4 +1,7 @@
 ---
+import type { Language } from '../i18n/types';
+import { getLanguageFromUrl, getLocalizedPath } from '../i18n/utils';
+
 interface ServiceItem {
   title: string;
   description: string;
@@ -12,6 +15,8 @@ interface Props {
   decorationLeft?: string;
   decorationRight?: string;
   schedulingFormUrl?: string;
+  scheduleCtaLabel?: string;
+  ariaLabelPrefix?: string;
 }
 
 const {
@@ -21,54 +26,75 @@ const {
   decorationLeft,
   decorationRight,
   schedulingFormUrl = "/schedule",
+  scheduleCtaLabel = "Schedule a Visitation",
+  ariaLabelPrefix = "Schedule a visitation for",
 } = Astro.props;
+
+const currentLanguage: Language = getLanguageFromUrl(Astro.url);
+const localizedSchedulingFormUrl = getLocalizedPath(schedulingFormUrl, currentLanguage);
+
+const headingId = `services-title-${Math.random().toString(36).slice(2, 10)}`;
+const descriptionId = description
+  ? `services-description-${Math.random().toString(36).slice(2, 10)}`
+  : undefined;
 ---
 
-<section class="services-section">
-  {
-    decorationLeft && (
-      <div class="decoration decoration-left">
-        <img src={decorationLeft} alt="" aria-hidden="true" />
-      </div>
-    )
-  }
+<section
+  class="services-section"
+  aria-labelledby={headingId}
+  aria-describedby={descriptionId}
+>
+  {decorationLeft && (
+    <div class="decoration decoration-left" aria-hidden="true">
+      <img src={decorationLeft} alt="" loading="lazy" />
+    </div>
+  )}
 
-  {
-    decorationRight && (
-      <div class="decoration decoration-right">
-        <img src={decorationRight} alt="" aria-hidden="true" />
-      </div>
-    )
-  }
+  {decorationRight && (
+    <div class="decoration decoration-right" aria-hidden="true">
+      <img src={decorationRight} alt="" loading="lazy" />
+    </div>
+  )}
 
   <div class="services-container">
     <div class="services-header">
-      <h2 class="services-title">{title}</h2>
-      {description && <p class="services-description">{description}</p>}
+      <h2 id={headingId} class="services-title">
+        {title}
+      </h2>
+      {description && (
+        <p id={descriptionId} class="services-description">
+          {description}
+        </p>
+      )}
     </div>
 
-    <div class="services-grid">
-      {
-        services.map((service) => {
-          const serviceParam = encodeURIComponent(service.title);
-          const serviceUrl = `${schedulingFormUrl}?service=${serviceParam}`;
-          
-          return (
-            <a href={serviceUrl} class="service-card">
-              {service.icon && (
-                <div class="service-icon">
-                  <img src={service.icon} alt="" />
-                </div>
-              )}
-              
-              <h3 class="service-title">{service.title}</h3>
-              <p class="service-description">{service.description}</p>
-              
-              <span class="service-cta">Schedule a Visitation</span>
-            </a>
-          );
-        })
-      }
+    <div class="services-grid" role="list">
+      {services.map((service) => {
+        const serviceParam = encodeURIComponent(service.title);
+        const serviceUrl = `${localizedSchedulingFormUrl}?service=${serviceParam}`;
+
+        return (
+          <a
+            href={serviceUrl}
+            class="service-card"
+            role="listitem"
+            aria-label={`${ariaLabelPrefix} ${service.title}`}
+          >
+            {service.icon && (
+              <div class="service-icon" aria-hidden="true">
+                <img src={service.icon} alt="" loading="lazy" />
+              </div>
+            )}
+
+            <h3 class="service-title">{service.title}</h3>
+            <p class="service-description">{service.description}</p>
+
+            <span class="service-cta">
+              {scheduleCtaLabel}
+            </span>
+          </a>
+        );
+      })}
     </div>
   </div>
 </section>
@@ -97,7 +123,6 @@ const {
     top: 40px;
     transform: rotate(10deg);
     width: 600px;
-    height: auto;
   }
 
   .decoration-right {
@@ -105,7 +130,6 @@ const {
     bottom: 60px;
     transform: rotate(-10deg);
     width: 300px;
-    height: auto;
   }
 
   .services-container {
@@ -181,12 +205,10 @@ const {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    padding: var(--space-2);
   }
 
   .service-title {
     margin: 0;
-    text-decoration: none;
     font-size: var(--text-lg);
     font-weight: var(--weight-bold);
     color: var(--color-text);
@@ -207,7 +229,7 @@ const {
     font-size: var(--text-base);
     font-weight: var(--weight-bold);
     color: var(--brand-secondary-500);
-    transition: gap var(--duration-std) var(--ease-standard);
+    transition: color var(--duration-std) var(--ease-standard);
   }
 
   .service-card:hover .service-cta {
@@ -249,11 +271,6 @@ const {
     .service-description {
       font-size: var(--text-xs);
     }
-
-    .service-icon {
-      width: 50px;
-      height: 50px;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -265,6 +282,7 @@ const {
 
     .service-card:hover {
       transform: none;
+      box-shadow: none;
     }
 
     .service-card:hover .service-icon {

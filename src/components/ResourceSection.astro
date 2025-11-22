@@ -30,23 +30,18 @@ const {
 
 type ResourceEntry = CollectionEntry<"resources">;
 
-// Fetch resources from CMS
 const allDocuments: ResourceEntry[] = await getCollection("resources");
 
-// Sort by creation date
 let sortedDocuments = allDocuments.sort(
-  (a, b) =>
-    new Date(b.data.id).getTime() - new Date(a.data.id).getTime()
+  (a, b) => new Date(b.data.id).getTime() - new Date(a.data.id).getTime()
 );
 
-// Filter by category if filter is provided
 if (filter) {
   sortedDocuments = sortedDocuments.filter(
     (doc) => doc.data.category === filter
   );
 }
 
-// Apply limit if provided
 const limitedDocuments = limit
   ? sortedDocuments.slice(0, limit)
   : sortedDocuments;
@@ -68,49 +63,70 @@ interface ResourceLink {
   url: string;
   language?: "en" | "es";
 }
+
+const headingId = `resources-title-${Math.random()
+  .toString(36)
+  .slice(2, 10)}`;
+
+const descriptionId = description
+  ? `resources-description-${Math.random().toString(36).slice(2, 10)}`
+  : undefined;
 ---
 
-<section class="resources-section">
-  {
-    decorationLeft && (
-      <div class="decoration decoration-left">
-        <img src={decorationLeft} alt="" aria-hidden="true" />
-      </div>
-    )
-  }
+<section
+  class="resources-section"
+  aria-labelledby={headingId}
+  aria-describedby={descriptionId}
+>
+  {decorationLeft && (
+    <div class="decoration decoration-left" aria-hidden="true">
+      <img src={decorationLeft} alt="" loading="lazy" />
+    </div>
+  )}
 
-  {
-    decorationRight && (
-      <div class="decoration decoration-right">
-        <img src={decorationRight} alt="" aria-hidden="true" />
-      </div>
-    )
-  }
+  {decorationRight && (
+    <div class="decoration decoration-right" aria-hidden="true">
+      <img src={decorationRight} alt="" loading="lazy" />
+    </div>
+  )}
 
   <div class="resources-container">
-    {
-      title && (
-        <div
-          class={`resources-header ${showDivider ? "has-divider" : ""} padding-${headerPadding}`}
-        >
-          <h2 class="resources-title">{title}</h2>
-          {description && (
-            <p class="resources-description">{description}</p>
-          )}
-        </div>
-      )
-    }
+    {title && (
+      <div
+        class={`resources-header ${
+          showDivider ? "has-divider" : ""
+        } padding-${headerPadding}`}
+      >
+        <h2 id={headingId} class="resources-title">
+          {title}
+        </h2>
+        {description && (
+          <p
+            id={descriptionId}
+            class="resources-description"
+          >
+            {description}
+          </p>
+        )}
+      </div>
+    )}
 
-    <div class="resources-grid">
+    <div class="resources-grid" role="list">
       {limitedDocuments.map((doc) => (
-        <div class={`resource-card card-${doc.data.category}`}>
+        <div
+          class={`resource-card card-${doc.data.category}`}
+          role="listitem"
+        >
           <div class="resource-header">
             <div class="resource-category">
               <span
-                class={`category-badge ${categoryColors[doc.data.category]}`}
+                class={`category-badge ${
+                  categoryColors[doc.data.category]
+                }`}
               >
                 {singleCategoryLabels[doc.data.category]}
               </span>
+
               {doc.data.language === "both" && (
                 <span class="language-badge">EN / ES</span>
               )}
@@ -126,7 +142,9 @@ interface ResourceLink {
           <h4 class="resource-title">{doc.data.title}</h4>
 
           {doc.data.description && (
-            <p class="resource-description">{doc.data.description}</p>
+            <p class="resource-description">
+              {doc.data.description}
+            </p>
           )}
 
           <div class="resource-links">
@@ -145,16 +163,22 @@ interface ResourceLink {
                   {link.language === "en" && (
                     <span class="link-lang">(EN)</span>
                   )}
+                  <span class="sr-only">
+                    (opens in a new tab)
+                  </span>
                 </span>
                 <svg
                   width="16"
                   height="16"
                   viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
+                  aria-hidden="true"
                 >
-                  <path d="M7 17L17 7M17 7H7M17 7V17"></path>
+                  <path
+                    d="M7 17L17 7M17 7H7M17 7V17"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  ></path>
                 </svg>
               </a>
             ))}
@@ -163,15 +187,13 @@ interface ResourceLink {
       ))}
     </div>
 
-    {
-      limit && (
-        <div class="resources-footer">
-          <a href={allResourcesUrl} class="btn btn-text">
-            {allResourcesText}
-          </a>
-        </div>
-      )
-    }
+    {limit && (
+      <div class="resources-footer">
+        <a href={allResourcesUrl} class="btn btn-text">
+          {allResourcesText}
+        </a>
+      </div>
+    )}
   </div>
 </section>
 
@@ -199,7 +221,6 @@ interface ResourceLink {
     top: -40px;
     transform: rotate(10deg);
     width: 800px;
-    height: auto;
   }
 
   .decoration-right {
@@ -207,7 +228,6 @@ interface ResourceLink {
     top: 0;
     transform: rotate(-10deg);
     width: 550px;
-    height: auto;
   }
 
   .resources-container {
@@ -490,6 +510,7 @@ interface ResourceLink {
 
     .resource-card:hover {
       transform: none;
+      box-shadow: none;
     }
 
     .resource-link:hover svg {
@@ -497,17 +518,3 @@ interface ResourceLink {
     }
   }
 </style>
-
-<script is:inline>
-  const headers = document.querySelectorAll(".accordion-trigger");
-  headers.forEach((header) => {
-    header.addEventListener("click", () => {
-      const item = header.closest(".accordion-item");
-      item?.classList.toggle("open");
-      header.setAttribute(
-        "aria-expanded",
-        String(item?.classList.contains("open"))
-      );
-    });
-  });
-</script>

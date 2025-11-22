@@ -22,34 +22,42 @@ const {
   decorationLeft,
   decorationRight,
 } = Astro.props;
+
+const headingId = `cta-heading-${Math.random().toString(36).slice(2, 10)}`;
+const descId = description
+  ? `cta-description-${Math.random().toString(36).slice(2, 10)}`
+  : undefined;
 ---
 
-<section class="cta-section">
-  {
-    decorationLeft && (
-      <div class="decoration decoration-left">
-        <img src={decorationLeft} alt="" aria-hidden="true" />
-      </div>
-    )
-  }
+<section
+  class="cta-section"
+  aria-labelledby={headingId}
+  aria-describedby={descId}
+>
+  {decorationLeft && (
+    <div class="decoration decoration-left" aria-hidden="true">
+      <img src={decorationLeft} alt="" />
+    </div>
+  )}
 
-  {
-    decorationRight && (
-      <div class="decoration decoration-right">
-        <img src={decorationRight} alt="" aria-hidden="true" />
-      </div>
-    )
-  }
+  {decorationRight && (
+    <div class="decoration decoration-right" aria-hidden="true">
+      <img src={decorationRight} alt="" />
+    </div>
+  )}
 
   <div class="cta-container">
-    <h1 class="cta-title">{title}</h1>
+    <h2 id={headingId} class="cta-title">{title}</h2>
 
-    {description && <p class="cta-description">{description}</p>}
+    {description && (
+      <p id={descId} class="cta-description">{description}</p>
+    )}
 
     <div class="cta-buttons">
       <a href={primaryCta.url} class="btn btn-primary">
         {primaryCta.text}
       </a>
+
       <a href={secondaryCta.url} class="btn btn-text">
         {secondaryCta.text}
       </a>
@@ -81,7 +89,6 @@ const {
     top: 5%;
     transform: rotate(10deg);
     width: 600px;
-    height: auto;
   }
 
   .decoration-right {
@@ -89,7 +96,6 @@ const {
     top: 5%;
     transform: rotate(-10deg);
     width: 400px;
-    height: auto;
   }
 
   .cta-container {
@@ -108,7 +114,7 @@ const {
   .cta-title {
     margin: 0;
     font-size: var(--text-h1);
-    font-weight: 500;
+    font-weight: var(--weight-heading-active);
     color: var(--color-accent);
     line-height: 1.1;
     max-width: 900px;
@@ -118,7 +124,6 @@ const {
     margin: 0;
     font-size: var(--text-lg);
     color: var(--color-text-secondary);
-    line-height: var(--line-normal);
     max-width: 700px;
   }
 
@@ -138,6 +143,7 @@ const {
   }
 
   @media (max-width: 767px) {
+
     .cta-buttons {
       flex-direction: column;
       width: 100%;

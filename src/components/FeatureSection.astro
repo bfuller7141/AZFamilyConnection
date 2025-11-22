@@ -18,15 +18,22 @@ interface Props {
 const {
   title,
   description,
-  ctaText = 'Learn More',
-  ctaUrl = '#',
+  ctaText = "Learn More",
+  ctaUrl = "#",
   features,
   decorationLeft,
   decorationRight,
 } = Astro.props;
+
+const headingId = `feature-section-title-${Math.random()
+  .toString(36)
+  .slice(2, 11)}`;
 ---
 
-<section class="feature-section">
+<section
+  class="feature-section"
+  aria-labelledby={headingId}
+>
   <!-- Background decorations -->
   <div class="feature-bg-decoration">
     <slot name="bg-decoration" />
@@ -35,7 +42,12 @@ const {
   {
     decorationLeft && (
       <div class="decoration decoration-left">
-        <img src={decorationLeft} alt="" aria-hidden="true" />
+        <img
+          src={decorationLeft}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+        />
       </div>
     )
   }
@@ -43,7 +55,12 @@ const {
   {
     decorationRight && (
       <div class="decoration decoration-right">
-        <img src={decorationRight} alt="" aria-hidden="true" />
+        <img
+          src={decorationRight}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+        />
       </div>
     )
   }
@@ -51,7 +68,7 @@ const {
   <div class="feature-container">
     <!-- Left Column -->
     <div class="feature-left">
-      <h2>{title}</h2>
+      <h2 id={headingId}>{title}</h2>
       <p class="feature-description">{description}</p>
       <a href={ctaUrl} class="btn btn-primary">
         {ctaText}
@@ -60,21 +77,29 @@ const {
 
     <!-- Right Column -->
     <div class="feature-right">
-      {
-        features.map((feature, index) => (
-          <div
-            class={`feature-item ${index === 1 ? 'feature-item-offset' : ''}`}
-          >
-            <div class="feature-icon">
-              <img src={feature.icon} alt={feature.title} />
-            </div>
-            <div class="feature-content">
-              <h3 class="feature-item-title">{feature.title}</h3>
-              <p class="feature-item-description">{feature.description}</p>
-            </div>
+      {features.map((feature, index) => (
+        <div
+          class={`feature-item ${
+            index === 1 ? "feature-item-offset" : ""
+          }`}
+        >
+          <div class="feature-icon">
+            <img
+              src={feature.icon}
+              alt={feature.title}
+              loading="lazy"
+            />
           </div>
-        ))
-      }
+          <div class="feature-content">
+            <h3 class="feature-item-title">
+              {feature.title}
+            </h3>
+            <p class="feature-item-description">
+              {feature.description}
+            </p>
+          </div>
+        </div>
+      ))}
     </div>
   </div>
 </section>
@@ -92,10 +117,7 @@ const {
 
   .feature-bg-decoration {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     z-index: 0;
     pointer-events: none;
   }
@@ -157,6 +179,13 @@ const {
   .feature-left h2 {
     margin: 0;
     font-size: var(--text-h2);
+  }
+
+  .feature-description {
+    margin: 0;
+    font-size: var(--text-base);
+    color: var(--color-text);
+    line-height: var(--line-normal);
   }
 
   .feature-left .btn {
@@ -228,7 +257,7 @@ const {
 
   .feature-item-title {
     margin: 0;
-    font-size: var(--text-md);
+    font-size: var(--text-lg);
     font-weight: var(--weight-bold);
     color: var(--color-text);
     line-height: 1.3;

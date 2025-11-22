@@ -11,34 +11,44 @@ interface Card {
 interface Props {
   title: string;
   cards: Card[];
-  ctaButtons?: Array<{ text: string; variant: "primary" | "text"; url?: string }>;
+  ctaButtons?: Array<{
+    text: string;
+    variant: "primary" | "text";
+    url?: string;
+  }>;
   decorationLeft?: string;
   decorationRight?: string;
 }
 
 const { title, cards, ctaButtons, decorationLeft, decorationRight } =
   Astro.props;
+
+const headingId = `pricing-title-${Math.random().toString(36).slice(2, 10)}`;
 ---
 
-<section class="pricing-section">
+<section class="pricing-section" aria-labelledby={headingId}>
   {decorationLeft && (
-    <div class="decoration decoration-left">
-      <img src={decorationLeft} alt="" />
+    <div class="decoration decoration-left" aria-hidden="true">
+      <img src={decorationLeft} alt="" loading="lazy" />
     </div>
   )}
+
   {decorationRight && (
-    <div class="decoration decoration-right">
-      <img src={decorationRight} alt="" />
+    <div class="decoration decoration-right" aria-hidden="true">
+      <img src={decorationRight} alt="" loading="lazy" />
     </div>
   )}
 
   <div class="pricing-container">
-    <h2 class="pricing-title">{title}</h2>
+    <h2 id={headingId} class="pricing-title">
+      {title}
+    </h2>
 
-    <div class="pricing-cards">
+    <div class="pricing-cards" role="list">
       {cards.map((card, index) => (
-        <div class={`pricing-card card-${index}`}>
+        <div class={`pricing-card card-${index}`} role="listitem">
           <h3 class="card-title">{card.title}</h3>
+
           <div class="card-price">
             <span class="price-amount">{card.price}</span>
             <span class="price-label">{card.subtitle}</span>
@@ -50,7 +60,10 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
             ))}
           </ul>
 
-          <a href={card.buttonUrl || '/schedule'} class="card-button">
+          <a
+            href={card.buttonUrl || "/schedule"}
+            class="card-button"
+          >
             {card.buttonText}
           </a>
         </div>
@@ -60,7 +73,10 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
     {ctaButtons && ctaButtons.length > 0 && (
       <div class="pricing-cta">
         {ctaButtons.map((btn) => (
-          <a href={btn.url || '#'} class={`btn btn-${btn.variant}`}>
+          <a
+            href={btn.url || "#"}
+            class={`btn btn-${btn.variant}`}
+          >
             {btn.text}
           </a>
         ))}
@@ -73,7 +89,7 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
   .pricing-section {
     position: relative;
     padding: var(--space-9) 0;
-    background: #f8faff;
+    background: var(--neutral-50, #f8faff);
     overflow: hidden;
   }
 
@@ -94,15 +110,13 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
     top: 80px;
     transform: rotate(-20deg);
     width: 250px;
-    height: auto;
   }
 
   .decoration-right {
-    right: 0%;
+    right: 0;
     bottom: 200px;
     transform: rotate(-10deg);
     width: 550px;
-    height: auto;
   }
 
   .pricing-container {
@@ -131,7 +145,11 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
     border-radius: var(--radius-lg);
     display: flex;
     flex-direction: column;
-    transition: all var(--duration-std) var(--ease-standard);
+    transition:
+      transform var(--duration-std) var(--ease-standard),
+      box-shadow var(--duration-std) var(--ease-standard),
+      border-color var(--duration-std) var(--ease-standard),
+      background-color var(--duration-std) var(--ease-standard);
   }
 
   .card-button {
@@ -139,10 +157,13 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
     padding: var(--space-3) var(--space-5);
     border: none;
     border-radius: var(--radius-md);
-    font-weight: 600;
+    font-weight: var(--weight-medium);
     font-size: var(--text-sm);
     cursor: pointer;
-    transition: all var(--duration-std) var(--ease-standard);
+    transition:
+      transform var(--duration-std) var(--ease-standard),
+      background-color var(--duration-std) var(--ease-standard),
+      box-shadow var(--duration-std) var(--ease-standard);
     font-family: var(--font-heading);
     text-decoration: none;
     text-align: center;
@@ -164,7 +185,7 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
 
   .card-0 .card-button {
     background: var(--brand-secondary-500);
-    color: white;
+    color: var(--neutral-0);
   }
 
   .card-0 .card-button:hover {
@@ -188,7 +209,7 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
 
   .card-1 .card-button {
     background: var(--brand-primary-500);
-    color: white;
+    color: var(--neutral-0);
   }
 
   .card-1 .card-button:hover {
@@ -211,7 +232,7 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
 
   .card-2 .card-button {
     background: var(--brand-tertiary-500);
-    color: white;
+    color: var(--neutral-0);
   }
 
   .card-2 .card-button:hover {
@@ -233,7 +254,7 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
 
   .price-amount {
     font-size: var(--text-h3);
-    font-weight: 700;
+    font-weight: var(--weight-bold);
   }
 
   .price-label {
@@ -244,7 +265,7 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
 
   .card-features {
     list-style: none;
-    margin: 0 0 var(--space-5) 0;
+    margin: 0 0 var(--space-5);
     padding: 0;
     flex-grow: 1;
   }
@@ -257,6 +278,7 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
 
   .card-button:hover {
     transform: translateY(-2px);
+    box-shadow: var(--shadow-elev-1);
   }
 
   .pricing-cta {
@@ -271,7 +293,7 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
     .decoration-right {
       display: none;
     }
-    
+
     .pricing-cards {
       grid-template-columns: 1fr;
     }
@@ -282,6 +304,20 @@ const { title, cards, ctaButtons, decorationLeft, decorationRight } =
 
     .pricing-cta {
       flex-direction: column;
+    }
+
+    .pricing-cta .btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pricing-card,
+    .card-button {
+      transition: none;
+      transform: none;
+      box-shadow: none;
     }
   }
 </style>

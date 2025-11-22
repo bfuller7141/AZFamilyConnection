@@ -1,25 +1,25 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SubpageHero from '../components/SubpageHero.astro';
-import ColorDividerShort from '../components/ColorDividerShort.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SubpageHero from '../../components/SubpageHero.astro';
+import ColorDividerShort from '../../components/ColorDividerShort.astro';
 
-import '../styles/base.css';
-import '../styles/theme.root.css';
-import FAQSection from '../components/FAQSection.astro';
+import '../../styles/base.css';
+import '../../styles/theme.root.css';
+import FAQSection from '../../components/FAQSection.astro';
 ---
 
 <BaseLayout
-  title="Contact Arizona Family Connections | Reach Our Team"
-  description="Contact Arizona Family Connections with questions about supervised visitation or family support services. Our team is here to help and will respond promptly."
-  language="en"
-  canonical="/contact"
+  title="Contacto | Arizona Family Connections"
+  description="Póngase en contacto con Arizona Family Connections si tiene preguntas sobre visitas supervisadas o servicios de apoyo familiar. Nuestro equipo está aquí para ayudarle y responderá con prontitud."
+  language="es"
+  canonical="/es/contact"
 >
   <SubpageHero
-    subtitle="Contact Arizona Family Connections"
-    title="We’re Here to Help Every Step of the Way"
-    description="Have questions or need to schedule a visit? Reach out to our team for caring support and clear guidance."
-    ctaText="Send us a Message"
-    ctaUrl="/contact#contact-form"
+    subtitle="Contacto de Arizona Family Connections"
+    title="Estamos aquí para ayudarle en cada paso"
+    description="¿Tiene preguntas o necesita programar una visita? Comuníquese con nuestro equipo para recibir apoyo atento y orientación clara."
+    ctaText="Envíenos un mensaje"
+    ctaUrl="/es/contact#contact-form"
     decorationLeft="/images/email-watermark.svg"
     decorationRight="/images/phone-watermark.svg"
   />
@@ -31,7 +31,7 @@ import FAQSection from '../components/FAQSection.astro';
   >
     <div class="contact-container">
       <h2 id="contact-details-heading" class="visually-hidden">
-        Contact details and message form
+        Detalles de contacto y formulario de mensaje
       </h2>
 
       <div class="contact-info-grid">
@@ -39,32 +39,32 @@ import FAQSection from '../components/FAQSection.astro';
           <div class="contact-icon">
             <img
               src="/images/email-icon.svg"
-              alt="Email Icon"
+              alt="Ícono de correo electrónico"
             />
           </div>
-          <h3 class="contact-card-title">Send us an Email</h3>
+          <h3 class="contact-card-title">Envíanos un correo</h3>
           <a
             href="mailto:contact@azfamilyconnections.com"
             class="contact-link"
           >
             contact@azfamilyconnections.com
           </a>
-          <p class="contact-card-response">We'll respond within 1-2 business days</p>
+          <p class="contact-card-response">Respondemos dentro de 1–2 días hábiles</p>
         </div>
 
         <div class="contact-card">
           <div class="contact-icon">
             <img
               src="/images/phone-icon.svg"
-              alt="Phone Icon"
+              alt="Ícono de teléfono"
             />
           </div>
-          <h3 class="contact-card-title">Give us a Call</h3>
+          <h3 class="contact-card-title">Llámanos</h3>
           <a href="tel:+14807646689" class="contact-link">
             (480) 764-6689
           </a>
-          <p class="contact-card-response">Monday-Friday, 9am-6pm</p>
-          <p class="contact-card-response">Saturday-Sunday, By Appointment</p>
+          <p class="contact-card-response">Lunes–Viernes, 9am–6pm</p>
+          <p class="contact-card-response">Sábado–Domingo, con cita previa</p>
         </div>
       </div>
 
@@ -73,11 +73,11 @@ import FAQSection from '../components/FAQSection.astro';
           class="contact-form"
           method="POST"
           action="/api/contact"
-          aria-label="Contact form"
+          aria-label="Formulario de contacto"
         >
           <div class="form-row">
             <div class="form-group">
-              <label for="name" class="form-label">Your Name: *</label>
+              <label for="name" class="form-label">Su nombre: *</label>
               <input
                 type="text"
                 id="name"
@@ -85,11 +85,11 @@ import FAQSection from '../components/FAQSection.astro';
                 class="form-input"
                 required
                 autocomplete="name"
-                placeholder="John Doe"
+                placeholder="Juan Pérez"
               />
             </div>
             <div class="form-group">
-              <label for="email" class="form-label">Email Address: *</label>
+              <label for="email" class="form-label">Correo electrónico: *</label>
               <input
                 type="email"
                 id="email"
@@ -97,14 +97,14 @@ import FAQSection from '../components/FAQSection.astro';
                 class="form-input"
                 required
                 autocomplete="email"
-                placeholder="you@example.com"
+                placeholder="usted@ejemplo.com"
               />
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="phone" class="form-label">Phone Number:</label>
+              <label for="phone" class="form-label">Número de teléfono:</label>
               <input
                 type="tel"
                 id="phone"
@@ -115,38 +115,38 @@ import FAQSection from '../components/FAQSection.astro';
               />
             </div>
             <div class="form-group">
-              <label for="subject" class="form-label">Subject: *</label>
+              <label for="subject" class="form-label">Asunto: *</label>
               <select
                 id="subject"
                 name="subject"
                 class="form-select"
                 required
               >
-                <option value="">-- Select a Subject --</option>
-                <option value="Inquiry">General Inquiry</option>
-                <option value="Scheduling">Scheduling Question</option>
-                <option value="Services">Services Information</option>
-                <option value="Feedback">Feedback</option>
-                <option value="Other">Other</option>
+                <option value="">-- Seleccione un asunto --</option>
+                <option value="Inquiry">Consulta general</option>
+                <option value="Scheduling">Pregunta sobre programación</option>
+                <option value="Services">Información de servicios</option>
+                <option value="Feedback">Comentarios</option>
+                <option value="Other">Otro</option>
               </select>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="message" class="form-label">Message: *</label>
+            <label for="message" class="form-label">Mensaje: *</label>
             <textarea
               id="message"
               name="message"
               class="form-textarea"
               rows="5"
               required
-              placeholder="Please share your message here..."
+              placeholder="Comparta su mensaje aquí..."
             ></textarea>
           </div>
 
           <div class="form-actions">
             <button type="submit" class="btn btn-primary">
-              Send Message
+              Enviar mensaje
             </button>
           </div>
         </form>
@@ -155,31 +155,31 @@ import FAQSection from '../components/FAQSection.astro';
   </section>
 
   <FAQSection
-    title="Frequently Asked Questions"
+    title="Preguntas frecuentes"
     faqs={[
       {
         id: '1',
-        title: 'What services do you offer?',
+        title: '¿Qué servicios ofrecen?',
         content:
-          'We offer comprehensive family support services including counseling, education programs, and resource coordination.',
+          'Ofrecemos servicios integrales de apoyo familiar que incluyen consejería, programas educativos y coordinación de recursos.',
       },
       {
         id: '2',
-        title: 'How do I enroll?',
+        title: '¿Cómo me inscribo?',
         content:
-          'You can enroll by visiting our office or filling out the online enrollment form on our website.',
+          'Puede inscribirse visitando nuestra oficina o llenando el formulario de inscripción en línea en nuestro sitio web.',
       },
       {
         id: '3',
-        title: 'What is the cost?',
+        title: '¿Cuál es el costo?',
         content:
-          'Our services are free for eligible families. Contact us to learn about eligibility requirements.',
+          'Nuestros servicios son gratuitos para las familias que califican. Contáctenos para conocer los requisitos de elegibilidad.',
       },
       {
         id: '4',
-        title: 'Do you offer services in Spanish?',
+        title: '¿Ofrecen servicios en español?',
         content:
-          'Yes, we offer bilingual services in both English and Spanish.',
+          'Sí, ofrecemos servicios bilingües tanto en inglés como en español.',
       },
     ]}
     decorationRight="/images/heart-watermark.svg"
@@ -413,12 +413,12 @@ import FAQSection from '../components/FAQSection.astro';
       const data = Object.fromEntries(formData.entries());
 
       if (!data.name || !data.email || !data.message) {
-        alert('Please fill in all required fields.');
+        alert('Por favor complete todos los campos obligatorios.');
         return;
       }
 
-      console.log('Form submitted:', data);
-      alert("Thank you for your message! We'll be in touch soon.");
+      console.log('Formulario enviado:', data);
+      alert("¡Gracias por su mensaje! Nos pondremos en contacto pronto.");
       form.reset();
     });
   }

@@ -24,51 +24,80 @@ const {
   ogImageAlt,
 } = Astro.props;
 
-// Detect language from URL if not explicitly passed
 const currentLanguage: Language = language || getLanguageFromUrl(Astro.url);
 const i18n = getI18n(currentLanguage);
 ---
 
 <!doctype html>
 <html lang={currentLanguage}>
-  <head>
-    <BaseHead
-      title={title}
-      description={description}
-      canonical={canonical}
-      ogImage={ogImage}
-      ogImageAlt={ogImageAlt}
-    />
-  </head>
-  <body>
-    <!-- Navigation -->
+  <BaseHead
+    title={title}
+    description={description}
+    canonical={canonical}
+    ogImage={ogImage}
+    ogImageAlt={ogImageAlt}
+  />
+  <body class="site-body">
+    <a href="#main-content" class="skip-link">
+      Skip to main content
+    </a>
+
     <NavMain
       logoUrl="/images/logo.svg"
       logoAlt={i18n.logoAlt}
       ctaText={i18n.cta}
-      ctaUrl={currentLanguage === 'en' ? '/en/contact' : '/es/contacto'}
+      ctaUrl={currentLanguage === 'en' ? 'schedule' : '/es/schedule'}
       menuItems={i18n.menuItems}
       currentLanguage={currentLanguage}
     />
 
-    <!-- Main Content -->
-    <main>
+    <main id="main-content" class="site-main">
       <slot />
     </main>
-    <PageBreakCloud />
-    <!-- Footer -->
+
+    <PageBreakCloud aria-hidden="true" />
+
     <FootMain language={currentLanguage} canonical={canonical} />
   </body>
 </html>
 
 <style>
-  body {
+  .site-body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body-active);
   }
 
-  main {
+  .site-main {
     flex: 1;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-primary);
+    color: var(--color-primary-contrast);
+    font-size: var(--text-sm);
+    border-radius: var(--radius-md);
+    z-index: 1001;
+    text-decoration: none;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity var(--duration-std) var(--ease-standard),
+      transform var(--duration-std) var(--ease-standard);
+  }
+
+  .skip-link:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(0, 8px);
+    outline: 0;
+    box-shadow: var(--focus-ring);
   }
 </style>

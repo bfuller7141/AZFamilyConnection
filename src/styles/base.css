@@ -2,16 +2,6 @@
  * ROOT & DOCUMENT SETUP
  * ========================================= */
 
-html,
-body {
-  height: 100%;
-}
-
-::selection {
-  background: rgba(6, 169, 231, 0.7);
-  color: white;
-}
-
 :root {
   /* Fluid type from tokens.brand.css */
   font-family: var(--font-body-active);
@@ -19,6 +9,27 @@ body {
   line-height: var(--line-body-active);
   letter-spacing: var(--track-body-active);
   font-weight: var(--weight-body-active);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+::selection {
+  background: rgba(6, 169, 231, 0.7);
+  color: #fff;
 }
 
 body {
@@ -32,16 +43,9 @@ body {
 }
 
 /* =========================================
- * LAYOUT FUNDAMENTALS
+ * MEDIA ELEMENTS
  * ========================================= */
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-/* Media predictability */
 img,
 picture,
 video,
@@ -249,16 +253,20 @@ li {
 
 code,
 kbd,
-samp {
-  font-family: var(--font-acc2-active, ui-monospace, "SFMono-Regular",
-    "Menlo", "Consolas", monospace);
+samp,
+pre {
+  font-family: var(
+    --font-acc2-active,
+    ui-monospace,
+    "SFMono-Regular",
+    "Menlo",
+    "Consolas",
+    monospace
+  );
   font-size: 0.95em;
 }
 
 pre {
-  font-family: var(--font-acc2-active, ui-monospace, "SFMono-Regular",
-    "Menlo", "Consolas", monospace);
-  font-size: 0.95em;
   padding: var(--space-4);
   background: var(--color-surface-2);
   border-radius: var(--radius-md);
@@ -400,11 +408,8 @@ label {
 }
 
 .is-error:focus-visible {
-  box-shadow: 0 0 0 var(--focus-ring-width) color-mix(
-    in srgb,
-    var(--color-error) 35%,
-    transparent
-  );
+  box-shadow: 0 0 0 var(--focus-ring-width)
+    color-mix(in srgb, var(--color-error) 35%, transparent);
 }
 
 .is-success {
@@ -413,11 +418,8 @@ label {
 }
 
 .is-success:focus-visible {
-  box-shadow: 0 0 0 var(--focus-ring-width) color-mix(
-    in srgb,
-    var(--color-success) 35%,
-    transparent
-  );
+  box-shadow: 0 0 0 var(--focus-ring-width)
+    color-mix(in srgb, var(--color-success) 35%, transparent);
 }
 
 /* =========================================
@@ -447,40 +449,7 @@ button,
   user-select: none;
 }
 
-button.btn-text,
-.btn.btn-text {
-  background: transparent;
-  color: var(--color-accent);
-  font-weight: 500;
-  box-shadow: none;
-  transition:
-    all var(--duration-std) var(--ease-emphasized);
-}
-
-button.btn-text-inverse,
-.btn.btn-text-inverse {
-  background: transparent;
-  color: var(--color-primary-contrast);
-  box-shadow: none;
-  transition:
-    color var(--duration-std) var(--ease-emphasized),
-    background-color var(--duration-std) var(--ease-emphasized);
-}
-
-button.btn-text:hover,
-.btn.btn-text:hover {
-  color: var(--color-primary-hover);
-  background: transparent;
-  box-shadow: none;
-  transition: all var(--duration-std) var(--ease-emphasized);
-}
-
-button.btn-text-inverse:hover,
-.btn.btn-text-inverse:hover {
-  color: var(--color-accent-hover);
-  background: transparent;
-  box-shadow: none;
-}
+/* Generic button states */
 
 button:hover,
 .btn:hover {
@@ -611,6 +580,41 @@ button.btn-error:active,
   background: var(--color-error-active);
 }
 
+/* Text button variants (placed last so they override generic states) */
+
+button.btn-text,
+.btn.btn-text {
+  background: transparent;
+  color: var(--color-accent);
+  font-weight: 500;
+  box-shadow: none;
+  transition: all var(--duration-std) var(--ease-emphasized);
+}
+
+button.btn-text:hover,
+.btn.btn-text:hover {
+  color: var(--color-primary-hover);
+  background: transparent;
+  box-shadow: none;
+}
+
+button.btn-text-inverse,
+.btn.btn-text-inverse {
+  background: transparent;
+  color: var(--color-primary-contrast);
+  box-shadow: none;
+  transition:
+    color var(--duration-std) var(--ease-emphasized),
+    background-color var(--duration-std) var(--ease-emphasized);
+}
+
+button.btn-text-inverse:hover,
+.btn.btn-text-inverse:hover {
+  color: var(--color-accent-hover);
+  background: transparent;
+  box-shadow: none;
+}
+
 /* =========================================
  * FOCUS VISIBILITY (global)
  * ========================================= */
@@ -648,6 +652,7 @@ section.section-xl {
 }
 
 /* Vertical padding only */
+
 section.section-y-sm {
   padding-top: var(--space-3);
   padding-bottom: var(--space-3);
@@ -669,6 +674,7 @@ section.section-y-xl {
 }
 
 /* Horizontal padding only */
+
 section.section-x-sm {
   padding-left: var(--space-3);
   padding-right: var(--space-3);
@@ -690,7 +696,7 @@ section.section-x-xl {
 }
 
 /* =========================================
- * UTILITY CLASSES
+ * LAYOUT UTILITIES
  * ========================================= */
 
 /* Centered container with responsive padding */

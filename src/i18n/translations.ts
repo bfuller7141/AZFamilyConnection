@@ -26,9 +26,9 @@ const translations: Record<Language, I18nStrings> = {
     menuItems: [
       { label: 'Inicio', url: '/es/' },
       { label: 'Acerca de', url: '/es/about' },
-      { label: 'Servicios', url: '/es/servicios' },
-      { label: 'Recursos', url: '/es/recursos' },
-      { label: 'Contacto', url: '/es/contacto' },
+      { label: 'Servicios', url: '/es/services' },
+      { label: 'Recursos', url: '/es/resources' },
+      { label: 'Contacto', url: '/es/contact' },
     ],
   },
 };

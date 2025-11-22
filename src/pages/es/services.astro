@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SubpageHero from '../../components/SubpageHero.astro';
+import ColorDividerShort from '../../components/ColorDividerShort.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import MainCTA from '../../components/MainCTA.astro';
+import PricingSection from '../../components/PricingSection.astro';
+import ServicesGrid from '../../components/ServicesGrid.astro';
+import PageBreakCloud from '../../components/PageBreakCloud.astro';
+
+import '../../styles/base.css';
+import '../../styles/theme.root.css';
+---
+
+<BaseLayout
+  title="Servicios de visitas supervisadas | AZ Family Connections"
+  description="Conozca los servicios de visitas supervisadas, intercambio seguro y apoyo familiar de Arizona Family Connections. Obtenga apoyo que protege a los niños y fortalece los vínculos."
+  language="es"
+  canonical="https://arizonafamilyconnections.com/es/services"
+>
+  <SubpageHero
+    subtitle="Servicios de Arizona Family Connections"
+    title="Servicios de visita pensados para la familia"
+    description="Ofrecemos opciones de visitas seguras y estructuradas que apoyan las necesidades únicas de cada familia. Con compasión y experiencia, nuestros supervisores crean entornos donde los padres y los niños pueden reconectarse, reconstruir la confianza y crecer juntos."
+    ctaText="Programar una visita"
+    ctaUrl="/es/schedule"
+    decorationLeft="/images/cloud-watermark.svg"
+    decorationRight="/images/flower-watermark.svg"
+  />
+
+  <ColorDividerShort />
+
+  <PricingSection
+    title="Elija un plan que se adapte a sus necesidades"
+    decorationLeft="/images/star-watermark-dark.svg"
+    decorationRight="/images/wave-watermark-dark.svg"
+    cards={[
+      {
+        title: "Un niño",
+        price: "$450",
+        subtitle: "Por niño",
+        features: [
+          "Característica y beneficio número 1",
+          "Característica y beneficio número 2",
+          "Característica y beneficio número 3",
+          "Característica y beneficio número 4",
+        ],
+        buttonText: "Programar una visita",
+        buttonUrl: "/es/schedule",
+      },
+      {
+        title: "Un niño",
+        price: "$450",
+        subtitle: "Por niño",
+        features: [
+          "Característica y beneficio número 1",
+          "Característica y beneficio número 2",
+          "Característica y beneficio número 3",
+          "Característica y beneficio número 4",
+        ],
+        buttonText: "Programar una visita",
+        buttonUrl: "/es/schedule",
+      },
+      {
+        title: "Un niño",
+        price: "$450",
+        subtitle: "Por niño",
+        features: [
+          "Característica y beneficio número 1",
+          "Característica y beneficio número 2",
+          "Característica y beneficio número 3",
+          "Característica y beneficio número 4",
+        ],
+        buttonText: "Programar una visita",
+        buttonUrl: "/es/schedule",
+      },
+    ]}
+    ctaButtons={[
+      { text: "Programar una visita", variant: "primary", url: "/es/schedule" },
+      { text: "Sobre nuestros servicios", variant: "text", url: "/es/services" },
+    ]}
+  />
+
+  <PageBreakCloud bgColor="#f8faff" flip={true} />
+
+  <ServicesGrid
+    title="Nuestros servicios de visita"
+    description="Cada familia tiene necesidades diferentes. Ofrecemos una variedad de opciones de visitas supervisadas diseñadas para asegurar seguridad, comodidad y una conexión significativa en cada visita."
+    services={[
+      {
+        icon: "/images/home-icon.svg",
+        title: "Visitas supervisadas fuera del sitio",
+        description: "Visitas seguras y monitoreadas en nuestro entorno neutral de oficina, diseñadas para apoyar conexiones positivas entre padres e hijos.",
+      },
+      {
+        icon: "/images/pins-icon.svg",
+        title: "Intercambio supervisado",
+        description: "Intercambios monitoreados entre padres en un entorno seguro y neutral.",
+      },
+      {
+        icon: "/images/webcam-icon.svg",
+        title: "Visitas supervisadas virtuales",
+        description: "Videollamadas seguras entre padres y niños bajo supervisión profesional.",
+      },
+      {
+        icon: "/images/gavel-icon.svg",
+        title: "Testimonio en la corte",
+        description: "Documentación profesional y testimonio experto sobre las visitas supervisadas.",
+      },
+      {
+        icon: "/images/pen-icon.svg",
+        title: "Informes objetivos",
+        description: "Informes detallados e imparciales que documentan observaciones e interacciones durante las visitas.",
+      },
+      {
+        icon: "/images/cactus-icon.svg",
+        title: "Visitas supervisadas (East Valley)",
+        description: "Servicios convenientes de visitas supervisadas en nuestra ubicación de East Valley.",
+      },
+      {
+        icon: "/images/sheild-icon-blue.svg",
+        title: "Intercambio seguro",
+        description: "Intercambios en un lugar seguro y neutral para proteger al niño durante las transiciones.",
+      },
+      {
+        icon: "/images/az81-icon.svg",
+        title: "Cumplimiento de la Regla 81",
+        description: "Servicios que cumplen con los estándares de la Regla 81 de Arizona para la supervisión de visitas ordenadas por la corte.",
+      },
+    ]}
+    decorationLeft="/images/sun-watermark.svg"
+    decorationRight="/images/pinkDots-watermark.svg"
+  />
+
+  <FAQSection
+    title="Preguntas frecuentes"
+    faqs={[
+      {
+        id: "1",
+        title: "¿Qué servicios ofrecen?",
+        content: "Ofrecemos servicios integrales de apoyo familiar que incluyen consejería, programas educativos y coordinación de recursos.",
+      },
+      {
+        id: "2",
+        title: "¿Cómo me inscribo?",
+        content: "Puede inscribirse visitando nuestra oficina o llenando el formulario de inscripción en línea en nuestro sitio web.",
+      },
+      {
+        id: "3",
+        title: "¿Cuál es el costo?",
+        content: "Nuestros servicios son gratuitos para las familias que califican. Contáctenos para conocer los requisitos de elegibilidad.",
+      },
+      {
+        id: "4",
+        title: "¿Ofrecen servicios en español?",
+        content: "Sí, ofrecemos servicios bilingües tanto en inglés como en español.",
+      },
+    ]}
+    decorationLeft="/images/rainbow-watermark.svg"
+  />
+
+  <MainCTA
+    title="¿Listos para dar el siguiente paso juntos?"
+    primaryCta={{
+      text: "Programar una visita",
+      url: "/es/schedule",
+    }}
+    secondaryCta={{
+      text: "Sobre nuestra organización",
+      url: "/es/about",
+    }}
+    decorationRight="/images/starFilled-watermark.svg"
+  />
+</BaseLayout>

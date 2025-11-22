@@ -1,13 +1,13 @@
 ---
-id: "parent-handbook"
-title: "Parent Handbook"
+id: "visitation-guidelines"
+title: "Visitation Guidelines"
 category: "documents"
 language: "both"
 links:
   - label: "Download PDF"
-    url: "/uploads/handbook-en.pdf"
+    url: "/uploads/guidelines-en.pdf"
     language: "en"
   - label: "Descargar PDF"
-    url: "/uploads/handbook-es.pdf"
+    url: "/uploads/guidelines-es.pdf"
     language: "es"
 ---

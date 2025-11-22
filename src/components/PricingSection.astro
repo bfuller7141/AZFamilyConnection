@@ -18,15 +18,24 @@ interface Props {
   }>;
   decorationLeft?: string;
   decorationRight?: string;
+  disclaimer?: string;
+  disclaimerLinkUrl?: string;
 }
 
-const { title, cards, ctaButtons, decorationLeft, decorationRight } =
-  Astro.props;
+const {
+  title,
+  cards,
+  ctaButtons,
+  decorationLeft,
+  decorationRight,
+  disclaimer,
+  disclaimerLinkUrl,
+} = Astro.props;
 
 const headingId = `pricing-title-${Math.random().toString(36).slice(2, 10)}`;
 ---
 
-<section class="pricing-section" aria-labelledby={headingId}>
+<section class="pricing-section" aria-labelledby={headingId} id="pricing">
   {decorationLeft && (
     <div class="decoration decoration-left" aria-hidden="true">
       <img src={decorationLeft} alt="" loading="lazy" />
@@ -68,6 +77,27 @@ const headingId = `pricing-title-${Math.random().toString(36).slice(2, 10)}`;
           </a>
         </div>
       ))}
+    </div>
+    <div class="disclaimer-wrapper">
+      {(disclaimer || disclaimerLinkUrl) && (
+        <p class="pricing-disclaimer">
+          {disclaimer}
+          {disclaimerLinkUrl && (
+            <>
+              {" "}
+              <a
+                href={disclaimerLinkUrl}
+                class="pricing-disclaimer-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Download the full agreement (PDF)
+                <span class="sr-only"> (opens in a new tab)</span>
+              </a>
+            </>
+          )}
+        </p>
+      )}
     </div>
 
     {ctaButtons && ctaButtons.length > 0 && (
@@ -136,7 +166,7 @@ const headingId = `pricing-title-${Math.random().toString(36).slice(2, 10)}`;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-7);
-    margin-bottom: var(--space-9);
+    margin-bottom: var(--space-6);
     align-items: flex-start;
   }
 
@@ -169,7 +199,6 @@ const headingId = `pricing-title-${Math.random().toString(36).slice(2, 10)}`;
     text-align: center;
   }
 
-  /* Card 0 - Secondary (Hot Pink) */
   .card-0 {
     background: var(--brand-secondary-50);
     border: 2px solid var(--brand-secondary-500);
@@ -192,7 +221,6 @@ const headingId = `pricing-title-${Math.random().toString(36).slice(2, 10)}`;
     background: var(--brand-secondary-600);
   }
 
-  /* Card 1 - Primary (Cyan) */
   .card-1 {
     background: var(--brand-primary-50);
     border: 2px solid var(--brand-primary-500);
@@ -216,7 +244,6 @@ const headingId = `pricing-title-${Math.random().toString(36).slice(2, 10)}`;
     background: var(--brand-primary-600);
   }
 
-  /* Card 2 - Tertiary (Lime Green) */
   .card-2 {
     background: var(--brand-tertiary-50);
     border: 2px solid var(--brand-tertiary-500);
@@ -279,6 +306,42 @@ const headingId = `pricing-title-${Math.random().toString(36).slice(2, 10)}`;
   .card-button:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-elev-1);
+  }
+
+  .disclaimer-wrapper {
+    text-align: center;
+    margin-top: var(--space-6);
+  }
+
+  .pricing-disclaimer {
+    max-width: 56rem;
+    margin: 0 auto var(--space-6);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    text-align: center;
+    line-height: var(--line-normal);
+  }
+
+  .pricing-disclaimer-link {
+    font-weight: var(--weight-medium);
+    color: var(--brand-primary-600);
+    text-decoration: underline;
+  }
+
+  .pricing-disclaimer-link:hover {
+    color: var(--brand-primary-700);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .pricing-cta {

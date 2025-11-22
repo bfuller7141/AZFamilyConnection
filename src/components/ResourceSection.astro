@@ -7,6 +7,7 @@ interface Props {
   description?: string;
   limit?: number;
   filter?: "documents" | "forms" | "external";
+  filterCategories?: Array<"documents" | "forms" | "external">;
   decorationLeft?: string;
   decorationRight?: string;
   allResourcesUrl?: string;
@@ -20,6 +21,7 @@ const {
   description,
   limit,
   filter,
+  filterCategories,
   decorationLeft,
   decorationRight,
   allResourcesUrl = "/resources",
@@ -39,6 +41,12 @@ let sortedDocuments = allDocuments.sort(
 if (filter) {
   sortedDocuments = sortedDocuments.filter(
     (doc) => doc.data.category === filter
+  );
+}
+
+if (filterCategories && filterCategories.length > 0) {
+  sortedDocuments = sortedDocuments.filter((doc) =>
+    filterCategories.includes(doc.data.category)
   );
 }
 
@@ -100,6 +108,7 @@ const descriptionId = description
         <h2 id={headingId} class="resources-title">
           {title}
         </h2>
+
         {description && (
           <p
             id={descriptionId}

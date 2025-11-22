@@ -11,7 +11,7 @@ interface FAQItem {
 interface Props {
   title: string;
   description?: string;
-  faqs: FAQItem[];
+  faqs?: FAQItem[];
   decorationLeft?: string;
   decorationRight?: string;
 }
@@ -66,14 +66,20 @@ const headingId = `faq-section-title-${Math.random()
       )}
     </div>
 
-    <Accordion label={title}>
-      {faqs.map((faq) => (
-        <AccordionItem
-          title={faq.title}
-          content={faq.content}
-        />
-      ))}
-    </Accordion>
+    {
+      Astro.slots?.default ? (
+        <slot />
+      ) : faqs && faqs.length > 0 ? (
+        <Accordion label={title}>
+          {faqs.map((faq) => (
+            <AccordionItem
+              title={faq.title}
+              content={faq.content}
+            />
+          ))}
+        </Accordion>
+      ) : null
+    }
   </div>
 </section>
 

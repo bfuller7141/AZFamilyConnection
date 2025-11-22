@@ -7,6 +7,8 @@ import MainCTA from '../../components/MainCTA.astro';
 import PricingSection from '../../components/PricingSection.astro';
 import ServicesGrid from '../../components/ServicesGrid.astro';
 import PageBreakCloud from '../../components/PageBreakCloud.astro';
+import Accordion from '../../components/Accordion.astro';
+import AccordionItem from '../../components/AccordionItem.astro';
 
 import '../../styles/base.css';
 import '../../styles/theme.root.css';
@@ -31,53 +33,58 @@ import '../../styles/theme.root.css';
   <ColorDividerShort />
 
   <PricingSection
-    title="Elija un plan que se adapte a sus necesidades"
+    title="Tarifas de Visitas Supervisadas y Entregas Monitoreadas"
     decorationLeft="/images/star-watermark-dark.svg"
     decorationRight="/images/wave-watermark-dark.svg"
     cards={[
       {
-        title: "Un niño",
-        price: "$450",
-        subtitle: "Por niño",
+        title: "1–2 Niños",
+        price: "$60/hr",
+        subtitle: "Por Niño",
         features: [
-          "Característica y beneficio número 1",
-          "Característica y beneficio número 2",
-          "Característica y beneficio número 3",
-          "Característica y beneficio número 4",
+          "Intercambio Monitoreado disponible (ver tarifas abajo)",
+          "$40 por cada 15 minutos dentro de 5 millas de la oficina de AFC",
+          "$60 por cada 15 minutos fuera del radio de 5 millas",
+          "No se otorga crédito de tiempo por llegadas tarde de cualquiera de las partes",
+          "$120 tarifa única del padre solicitante, requerida antes de comenzar las visitas",
         ],
-        buttonText: "Programar una visita",
-        buttonUrl: "/es/schedule",
+        buttonText: "Programar una Visita",
+        buttonUrl: "/schedule",
       },
       {
-        title: "Un niño",
-        price: "$450",
-        subtitle: "Por niño",
+        title: "3–4 Niños",
+        price: "$80/hr",
+        subtitle: "Por Niño",
         features: [
-          "Característica y beneficio número 1",
-          "Característica y beneficio número 2",
-          "Característica y beneficio número 3",
-          "Característica y beneficio número 4",
+          "Intercambio Monitoreado disponible (ver tarifas abajo)",
+          "$40 por cada 15 minutos dentro de 5 millas de la oficina de AFC",
+          "$60 por cada 15 minutos fuera del radio de 5 millas",
+          "Coordinación adicional requerida para visitas con múltiples niños",
+          "$120 tarifa única del padre solicitante, requerida antes de comenzar las visitas",
         ],
-        buttonText: "Programar una visita",
-        buttonUrl: "/es/schedule",
+        buttonText: "Programar una Visita",
+        buttonUrl: "/schedule",
       },
       {
-        title: "Un niño",
-        price: "$450",
-        subtitle: "Por niño",
+        title: "4+ Niños",
+        price: "$100/hr",
+        subtitle: "Por Niño",
         features: [
-          "Característica y beneficio número 1",
-          "Característica y beneficio número 2",
-          "Característica y beneficio número 3",
-          "Característica y beneficio número 4",
+          "Intercambio Monitoreado disponible (ver tarifas abajo)",
+          "$40 por cada 15 minutos dentro de 5 millas de la oficina de AFC",
+          "$60 por cada 15 minutos fuera del radio de 5 millas",
+          "Puede requerir personal adicional o apoyo de seguridad",
+          "$120 tarifa única del padre solicitante, requerida antes de comenzar las visitas",
         ],
-        buttonText: "Programar una visita",
-        buttonUrl: "/es/schedule",
+        buttonText: "Programar una Visita",
+        buttonUrl: "/schedule",
       },
     ]}
+    disclaimer="Para obtener más información sobre tarifas, políticas y términos, revise nuestro Acuerdo de Visitas Supervisadas y Entregas Monitoreadas o comuníquese con nosotros al correo contact@azfamilyconnections.com."
+    disclaimerLinkUrl="/uploads/agreement-es.pdf"
     ctaButtons={[
-      { text: "Programar una visita", variant: "primary", url: "/es/schedule" },
-      { text: "Sobre nuestros servicios", variant: "text", url: "/es/services" },
+      { text: "Programar una Visita", variant: "primary", url: "/schedule" },
+      { text: "Sobre Nuestros Servicios", variant: "text", url: "/services" },
     ]}
   />
 
@@ -134,30 +141,99 @@ import '../../styles/theme.root.css';
 
   <FAQSection
     title="Preguntas frecuentes"
-    faqs={[
-      {
-        id: "1",
-        title: "¿Qué servicios ofrecen?",
-        content: "Ofrecemos servicios integrales de apoyo familiar que incluyen consejería, programas educativos y coordinación de recursos.",
-      },
-      {
-        id: "2",
-        title: "¿Cómo me inscribo?",
-        content: "Puede inscribirse visitando nuestra oficina o llenando el formulario de inscripción en línea en nuestro sitio web.",
-      },
-      {
-        id: "3",
-        title: "¿Cuál es el costo?",
-        content: "Nuestros servicios son gratuitos para las familias que califican. Contáctenos para conocer los requisitos de elegibilidad.",
-      },
-      {
-        id: "4",
-        title: "¿Ofrecen servicios en español?",
-        content: "Sí, ofrecemos servicios bilingües tanto en inglés como en español.",
-      },
-    ]}
-    decorationLeft="/images/rainbow-watermark.svg"
-  />
+    description="Encuentre respuestas rápidas sobre visitas supervisadas, intercambios, transporte y cómo comenzar con Arizona Family Connections."
+  >
+    <Accordion label="Preguntas frecuentes">
+      <AccordionItem title="¿Son miembros de alguna organización profesional?">
+        <p>
+          Sí. Arizona Family Connections está registrada en SV Directory y en la
+          Supervised Visitation Network. También aparecemos en las bases de datos de
+          recursos de RSAT y Second Chance, y somos un miembro activo de la Cámara
+          de Comercio de Peoria.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="¿Cuánto cuestan los servicios?">
+        <p>
+          Nuestras tarifas por visitas supervisadas e intercambios monitoreados se
+          cobran por hora y se basan en el número de niños y el tipo de servicio
+          proporcionado. Puede revisar las tarifas actuales en nuestra
+          <a href="/es/#pricing" class="link-inline">sección de precios</a>. Si tiene
+          preguntas sobre su situación específica, con gusto le ayudaremos a revisar
+          los costos.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="¿Proporcionan transporte para los niños?">
+        <p>
+          Sí. Un miembro de nuestro equipo puede recoger y llevar a su hijo cuando se
+          necesite transporte para una visita o intercambio. Hay una tarifa de
+          transporte, y nuestro personal puede proporcionar asientos de seguridad
+          para niños cuando sea necesario.
+        </p>
+        <p>
+          Si el transporte formará parte de su plan, le recomendamos mencionarlo durante
+          el proceso de admisión para que podamos organizarlo con anticipación.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="¿Qué tipo de servicios ofrecen?">
+        <p>
+          Ofrecemos una variedad de servicios para apoyar un contacto seguro y estructurado
+          entre padres e hijos, incluyendo visitas supervisadas, intercambios monitoreados,
+          visitas virtuales o telefónicas, apoyo en transporte y documentación relacionada
+          como informes objetivos y testimonio en la corte cuando corresponde.
+        </p>
+        <p>
+          Puede conocer más sobre cada opción en nuestra
+          <a href="/es/services" class="link-inline">página de Servicios</a>.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="¿Dónde se llevan a cabo las visitas?">
+        <p>
+          Las visitas pueden realizarse en diferentes lugares según el caso, incluyendo
+          nuestra oficina, ciertos lugares comunitarios aprobados u otros entornos que
+          promuevan la seguridad y el bienestar del niño.
+        </p>
+        <p>
+          Los lugares específicos se determinan durante el proceso de admisión y
+          programación. Para ver una explicación más detallada sobre los entornos de
+          visita e intercambio supervisado, visite nuestra
+          <a href="/es/services" class="link-inline">página de Servicios</a>.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="¿Cómo empiezo o programo una visita?">
+        <p>
+          Para comenzar, complete nuestro formulario seguro de admisión para que podamos
+          revisar los detalles de su caso, las órdenes de la corte y cualquier consideración
+          de seguridad. Una vez que recibamos su información, nuestro equipo se pondrá en
+          contacto con usted para confirmar elegibilidad, revisar los servicios disponibles
+          y programar su primera visita.
+        </p>
+        <p>
+          Puede iniciar el proceso en cualquier momento desde nuestra
+          <a href="/es/schedule" class="link-inline">página de Programación</a>.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="¿Ofrecen servicios en español?">
+        <p>
+          Sí. Podemos brindar servicios y comunicación tanto en inglés como en español
+          según sea necesario. Si usted o algún miembro de su familia prefiere el español,
+          por favor indíquelo durante la admisión para que podamos planear el apoyo
+          adecuado.
+        </p>
+        <p>
+          Para revisar los servicios disponibles, visite nuestra
+          <a href="/es/services" class="link-inline">página de Servicios</a>, o comience el
+          proceso de admisión desde nuestra
+          <a href="/es/schedule" class="link-inline">página de Programación</a>.
+        </p>
+      </AccordionItem>
+    </Accordion>
+  </FAQSection>
 
   <MainCTA
     title="¿Listos para dar el siguiente paso juntos?"

@@ -5,6 +5,8 @@ import ResourceSection from '../components/ResourceSection.astro';
 import FAQSection from '../components/FAQSection.astro';
 import MainCTA from '../components/MainCTA.astro';
 import ColorDividerShort from '../components/ColorDividerShort.astro';
+import Accordion from '../components/Accordion.astro';
+import AccordionItem from '../components/AccordionItem.astro';
 
 import '../styles/base.css';
 import '../styles/theme.root.css';
@@ -29,34 +31,103 @@ import '../styles/theme.root.css';
   <ColorDividerShort />
 
   <ResourceSection
-    title=""
+    title="Documents"
+    filter="documents"
+  />
+  <ResourceSection
+    title="Forms"
+    filter="forms"
+  />
+  <ResourceSection
+    title="External Resources"
+    filter="external"
   />
 
   <FAQSection
     title="Frequently Asked Questions"
-    faqs={[
-      {
-        id: "1",
-        title: "What services do you offer?",
-        content: "We offer comprehensive family support services including counseling, education programs, and resource coordination.",
-      },
-      {
-        id: "2",
-        title: "How do I enroll?",
-        content: "You can enroll by visiting our office or filling out the online enrollment form on our website.",
-      },
-      {
-        id: "3",
-        title: "What is the cost?",
-        content: "Our services are free for eligible families. Contact us to learn about eligibility requirements.",
-      },
-      {
-        id: "4",
-        title: "Do you offer services in Spanish?",
-        content: "Yes, we offer bilingual services in both English and Spanish.",
-      },
-    ]}
-  />
+    description="Find quick answers about supervised visitation, exchanges, transportation, and getting started with Arizona Family Connections."
+  >
+    <Accordion label="Frequently Asked Questions">
+      <AccordionItem title="Are you a member of any professional organizations?">
+        <p>
+          Yes. Arizona Family Connections is listed with SV Directory and the Supervised Visitation Network.
+          We are also included in the RSAT and Second Chance Resource databases, and we are an active
+          member of the Peoria Chamber of Commerce.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="How much do you charge?">
+        <p>
+          Our supervised visitation and monitored exchange fees are billed hourly and are based on the number
+          of children and the type of service provided. You can view current rates in our
+          <a href="/#pricing" class="link-inline">pricing section</a>. If you have questions about your
+          specific situation, please reach out and we’ll be happy to walk through costs with you.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Do you provide transportation for children?">
+        <p>
+          Yes. A member of our team can pick up and drop off your child when transportation is needed for a
+          visit or exchange. There is a transportation fee, and our staff can provide car seats when required.
+          For details about routes and current rates, please contact our team or review our service and
+          pricing information.
+        </p>
+        <p>
+          If transportation will be part of your plan, we recommend noting this during the intake process so
+          we can plan accordingly.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="What types of services do you offer?">
+        <p>
+          We provide a range of services to support safe and structured parent–child contact, including
+          supervised visitation, monitored exchanges, virtual/telephonic visits, transportation support, and
+          related documentation such as objective reports and court testimony when appropriate.
+        </p>
+        <p>
+          You can learn more about each option on our
+          <a href="/services" class="link-inline">Services page</a>.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Where do visits take place?">
+        <p>
+          Visits can occur in a variety of settings depending on the case, including our office, approved
+          community locations, or other arrangements that support the safety and well-being of the child.
+        </p>
+        <p>
+          Specific locations are determined during the intake and scheduling process. For a full overview of
+          our supervised visitation and exchange settings, please visit our
+          <a href="/services" class="link-inline">Services page</a>.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="How do I get started or schedule a visit?">
+        <p>
+          To begin, complete our secure intake form so we can review your case details, court orders, and
+          any safety considerations. Once we receive your information, our team will follow up to confirm
+          eligibility, discuss available services, and schedule your first visit.
+        </p>
+        <p>
+          You can start the process at any time on our
+          <a href="/schedule" class="link-inline">Schedule page</a>.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Do you offer services in Spanish?">
+        <p>
+          Yes. We can provide services and communication in both English and Spanish where needed. If you or
+          a family member prefers Spanish, please let us know during intake so we can plan appropriate
+          support.
+        </p>
+        <p>
+          To review available services, visit our
+          <a href="/services" class="link-inline">Services page</a>, or begin the intake process on our
+          <a href="/schedule" class="link-inline">Schedule page</a>.
+        </p>
+      </AccordionItem>
+    </Accordion>
+  </FAQSection>
 
   <MainCTA
     title="Ready to Take the Next Step Together?"

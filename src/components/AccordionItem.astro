@@ -1,13 +1,15 @@
 ---
 interface Props {
   title: string;
-  content: string;
+  content?: string;
 }
 
 const { title, content } = Astro.props;
 
 const panelId = `accordion-panel-${Math.random().toString(36).slice(2, 11)}`;
 const buttonId = `${panelId}-trigger`;
+
+const hasSlotContent = Boolean(Astro.slots.default);
 ---
 
 <div class="accordion-item">
@@ -56,7 +58,7 @@ const buttonId = `${panelId}-trigger`;
     aria-labelledby={buttonId}
   >
     <div class="accordion-body">
-      {content}
+      {hasSlotContent ? <slot /> : content}
     </div>
   </div>
 </div>

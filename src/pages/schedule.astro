@@ -361,8 +361,7 @@ import '../styles/theme.root.css';
 
   .form-label {
     font-weight: var(--weight-bold);
-    font-size: v
-ar(--text-base);
+    font-size: var(--text-base);
     color: var(--color-text);
   }
 
@@ -370,13 +369,13 @@ ar(--text-base);
   .form-select,
   .form-textarea {
     padding: var(--space-3);
-    border: 2px solid (var(--color-border));
+    border: 2px solid var(--color-border);
     border-radius: var(--radius-md);
     font-family: var(--font-body);
     font-size: var(--text-base);
     color: var(--color-text);
     background: var(--color-surface);
-    transition: all var(--duration-std) var(--text-base);
+    transition: all var(--duration-std) var(--ease-standard);
   }
 
   .form-input:hover,

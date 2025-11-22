@@ -42,6 +42,9 @@ import AccordionItem from '../../components/AccordionItem.astro';
             <img
               src="/images/email-icon.svg"
               alt="Ícono de correo electrónico"
+              width="56"
+              height="56"
+              loading="lazy"
             />
           </div>
           <h3 class="contact-card-title">Envíanos un correo</h3>
@@ -59,6 +62,9 @@ import AccordionItem from '../../components/AccordionItem.astro';
             <img
               src="/images/phone-icon.svg"
               alt="Ícono de teléfono"
+              width="56"
+              height="56"
+              loading="lazy"
             />
           </div>
           <h3 class="contact-card-title">Llámanos</h3>
@@ -74,9 +80,23 @@ import AccordionItem from '../../components/AccordionItem.astro';
         <form
           class="contact-form"
           method="POST"
-          action="/api/contact"
+          name="afc-contact-es"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
           aria-label="Formulario de contacto"
         >
+          <!-- Campo oculto requerido para Netlify -->
+          <input type="hidden" name="form-name" value="afc-contact-es" />
+
+          <!-- Campo oculto para asunto personalizado {Nombre} -- {Asunto} -->
+          <input type="hidden" name="custom-subject" value="" />
+
+          <!-- Honeypot para bots de spam -->
+          <p class="honeypot-field" aria-hidden="true">
+            <label for="bot-field">No llene este campo si es humano</label>
+            <input id="bot-field" name="bot-field" type="text" />
+          </p>
+
           <div class="form-row">
             <div class="form-group">
               <label for="name" class="form-label">Su nombre: *</label>
@@ -125,11 +145,11 @@ import AccordionItem from '../../components/AccordionItem.astro';
                 required
               >
                 <option value="">-- Seleccione un asunto --</option>
-                <option value="Inquiry">Consulta general</option>
-                <option value="Scheduling">Pregunta sobre programación</option>
-                <option value="Services">Información de servicios</option>
-                <option value="Feedback">Comentarios</option>
-                <option value="Other">Otro</option>
+                <option value="Consulta general">Consulta general</option>
+                <option value="Pregunta sobre programación">Pregunta sobre programación</option>
+                <option value="Información de servicios">Información de servicios</option>
+                <option value="Comentarios">Comentarios</option>
+                <option value="Otro">Otro</option>
               </select>
             </div>
           </div>
@@ -434,6 +454,10 @@ import AccordionItem from '../../components/AccordionItem.astro';
     padding-top: var(--space-4);
   }
 
+  .honeypot-field {
+    display: none;
+  }
+
   @media (max-width: 767px) {
     .contact-container {
       padding: 0 var(--pad-component);
@@ -469,6 +493,12 @@ import AccordionItem from '../../components/AccordionItem.astro';
 </style>
 
 <script is:inline>
+  function encode(data) {
+    return Object.keys(data)
+      .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .join('&');
+  }
+
   const form = document.querySelector('.contact-form');
 
   if (form instanceof HTMLFormElement) {
@@ -478,14 +508,39 @@ import AccordionItem from '../../components/AccordionItem.astro';
       const formData = new FormData(form);
       const data = Object.fromEntries(formData.entries());
 
-      if (!data.name || !data.email || !data.message) {
+      // Validación básica de campos obligatorios
+      if (!data.name || !data.email || !data.message || !data.subject) {
         alert('Por favor complete todos los campos obligatorios.');
         return;
       }
 
-      console.log('Formulario enviado:', data);
-      alert("¡Gracias por su mensaje! Nos pondremos en contacto pronto.");
-      form.reset();
+      // Asegurar que Netlify sepa qué formulario es
+      data['form-name'] = form.getAttribute('name') || 'afc-contact-es';
+
+      // Construir asunto personalizado: {Nombre} -- {Asunto}
+      const customSubject = `${data.name} -- ${data.subject}`;
+      data['custom-subject'] = customSubject;
+
+      // Mantener el campo oculto sincronizado (opcional)
+      const customSubjectInput = form.querySelector('input[name="custom-subject"]');
+      if (customSubjectInput) {
+        customSubjectInput.value = customSubject;
+      }
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode(data),
+      })
+        .then(() => {
+          console.log('Formulario enviado:', data);
+          alert('¡Gracias por su mensaje! Nos pondremos en contacto pronto.');
+          form.reset();
+        })
+        .catch((error) => {
+          console.error('Error al enviar el formulario:', error);
+          alert('Hubo un problema al enviar el formulario. Por favor, inténtelo de nuevo.');
+        });
     });
   }
 </script>

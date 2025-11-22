@@ -15,7 +15,7 @@ const {
   logoUrl = "/images/logo.svg",
   logoAlt = "Arizona Family Connections",
   ctaText = "Schedule a Visit",
-  ctaUrl = "#",
+  ctaUrl = "/schedule",
   menuItems = [
     { label: "Home", url: "/" },
     { label: "About", url: "/about" },
@@ -36,7 +36,7 @@ const basePath =
 
 const cleanPath = basePath === "" ? "/" : basePath;
 
-// Language paths
+// Language paths for the toggle (preserve current route)
 const englishPath = cleanPath;
 const spanishPath = cleanPath === "/" ? "/es/" : `/es${cleanPath}`;
 
@@ -45,6 +45,9 @@ const isHomePage = cleanPath === "/";
 
 // Set logo based on page
 const currentLogoUrl = isHomePage ? logoUrl : "/images/logo-dark.svg";
+
+// Logo should always go to the language specific home page
+const logoHomePath = currentLanguage === "es" ? "/es/" : "/";
 
 // Determine active menu item
 const getIsActive = (url: string) => {
@@ -69,8 +72,13 @@ const getIsActive = (url: string) => {
 >
   <div class="navbar-container">
     <div class="navbar-left">
-      <a href={englishPath} class="navbar-logo">
-        <img src={currentLogoUrl} alt={logoAlt} />
+      <a href={logoHomePath} class="navbar-logo">
+        <img
+          src={currentLogoUrl}
+          alt={logoAlt}
+          width="200"
+          height="55"
+        />
       </a>
 
       <ul class="navbar-menu navbar-menu-desktop">

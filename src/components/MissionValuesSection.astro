@@ -37,13 +37,25 @@ const descId = `mission-values-description-${Math.random()
 >
   {decorationLeft && (
     <div class="decoration decoration-left" aria-hidden="true">
-      <img src={decorationLeft} alt="" loading="lazy" />
+      <img
+        src={decorationLeft}
+        alt=""
+        loading="lazy"
+        width="500"
+        height="500"
+      />
     </div>
   )}
 
   {decorationRight && (
     <div class="decoration decoration-right" aria-hidden="true">
-      <img src={decorationRight} alt="" loading="lazy" />
+      <img
+        src={decorationRight}
+        alt=""
+        loading="lazy"
+        width="550"
+        height="550"
+      />
     </div>
   )}
 
@@ -58,13 +70,15 @@ const descId = `mission-values-description-${Math.random()
     </div>
 
     <div class="values-grid">
-      {values.map((value, index) => (
+      {values.map((value) => (
         <div class="value-item">
           <div class="value-icon">
             <img
               src={value.icon}
               alt={value.iconAlt}
               loading="lazy"
+              width="80"
+              height="80"
             />
           </div>
           <h3 class="value-title">{value.title}</h3>

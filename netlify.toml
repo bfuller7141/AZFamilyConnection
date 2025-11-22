@@ -1,0 +1,22 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Global security headers for all routes
+[[headers]]
+  for = "/*"
+  [headers.values]
+  # HSTS – force HTTPS
+  Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+  # Basic hardening
+  X-Content-Type-Options = "nosniff"
+  X-Frame-Options = "DENY"
+  X-XSS-Protection = "1; mode=block"
+  Referrer-Policy = "strict-origin-when-cross-origin"
+
+  # Lock down browser features
+  Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), fullscreen=(self)"
+
+  # CSP – starter version that works with your current inline scripts & Google Fonts
+  Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self';"

@@ -38,13 +38,25 @@ const headingId = `pricing-title-${Math.random().toString(36).slice(2, 10)}`;
 <section class="pricing-section" aria-labelledby={headingId} id="pricing">
   {decorationLeft && (
     <div class="decoration decoration-left" aria-hidden="true">
-      <img src={decorationLeft} alt="" loading="lazy" />
+      <img
+        src={decorationLeft}
+        alt=""
+        loading="lazy"
+        width="250"
+        height="250"
+      />
     </div>
   )}
 
   {decorationRight && (
     <div class="decoration decoration-right" aria-hidden="true">
-      <img src={decorationRight} alt="" loading="lazy" />
+      <img
+        src={decorationRight}
+        alt=""
+        loading="lazy"
+        width="550"
+        height="550"
+      />
     </div>
   )}
 
@@ -78,6 +90,7 @@ const headingId = `pricing-title-${Math.random().toString(36).slice(2, 10)}`;
         </div>
       ))}
     </div>
+
     <div class="disclaimer-wrapper">
       {(disclaimer || disclaimerLinkUrl) && (
         <p class="pricing-disclaimer">

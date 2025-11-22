@@ -33,7 +33,14 @@ const {
   {
     decorationLeft && (
       <div class="decoration decoration-left">
-        <img src={decorationLeft} alt="" aria-hidden="true" loading="lazy" />
+        <img
+          src={decorationLeft}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          width="800"
+          height="800"
+        />
       </div>
     )
   }
@@ -41,7 +48,14 @@ const {
   {
     decorationRight && (
       <div class="decoration decoration-right">
-        <img src={decorationRight} alt="" aria-hidden="true" loading="lazy" />
+        <img
+          src={decorationRight}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          width="800"
+          height="800"
+        />
       </div>
     )
   }
@@ -67,7 +81,13 @@ const {
   <div class="about-hero-images">
     {images.map((image, index) => (
       <div class={`image-column ${index === 1 ? "center" : ""}`}>
-        <img src={image.src} alt={image.alt} loading="lazy" />
+        <img
+          src={image.src}
+          alt={image.alt}
+          loading="lazy"
+          width="800"
+          height="800"
+        />
       </div>
     ))}
   </div>

@@ -46,13 +46,25 @@ const descriptionId = description
 >
   {decorationLeft && (
     <div class="decoration decoration-left" aria-hidden="true">
-      <img src={decorationLeft} alt="" loading="lazy" />
+      <img
+        src={decorationLeft}
+        alt=""
+        loading="lazy"
+        width="600"
+        height="600"
+      />
     </div>
   )}
 
   {decorationRight && (
     <div class="decoration decoration-right" aria-hidden="true">
-      <img src={decorationRight} alt="" loading="lazy" />
+      <img
+        src={decorationRight}
+        alt=""
+        loading="lazy"
+        width="300"
+        height="300"
+      />
     </div>
   )}
 
@@ -82,7 +94,13 @@ const descriptionId = description
           >
             {service.icon && (
               <div class="service-icon" aria-hidden="true">
-                <img src={service.icon} alt="" loading="lazy" />
+                <img
+                  src={service.icon}
+                  alt=""
+                  loading="lazy"
+                  width="60"
+                  height="60"
+                />
               </div>
             )}
 

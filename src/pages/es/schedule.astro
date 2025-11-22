@@ -39,7 +39,25 @@ import '../../styles/theme.root.css';
 
   <section class="schedule-section">
     <div class="schedule-container">
-      <form class="schedule-form" method="POST" action="/api/schedule" id="intake-form">
+      <form
+        class="schedule-form"
+        method="POST"
+        name="afc-schedule-es"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        id="intake-form"
+      >
+        <!-- Campo oculto requerido para Netlify -->
+        <input type="hidden" name="form-name" value="afc-schedule-es" />
+
+        <!-- Campo oculto para asunto personalizado: New Intake from {Name} -->
+        <input type="hidden" name="custom-subject" value="" />
+
+        <!-- Honeypot para bots de spam -->
+        <p class="honeypot-field" aria-hidden="true">
+          <label for="bot-field">No llene este campo si es humano</label>
+          <input id="bot-field" name="bot-field" type="text" />
+        </p>
         
         <!-- Service Selection -->
         <fieldset class="form-fieldset">
@@ -185,7 +203,13 @@ import '../../styles/theme.root.css';
 
               <div class="form-group">
                 <label for={`childNeeds${index}`} class="form-label">Necesidades especiales o consideraciones:</label>
-                <textarea id={`childNeeds${index}`} name={`childNeeds${index}`} class="form-textarea" rows="2" placeholder="Cualquier información relevante que debamos saber..."></textarea>
+                <textarea
+                  id={`childNeeds${index}`}
+                  name={`childNeeds${index}`}
+                  class="form-textarea"
+                  rows="2"
+                  placeholder="Cualquier información relevante que debamos saber..."
+                ></textarea>
               </div>
             </div>
           ))}
@@ -225,22 +249,46 @@ import '../../styles/theme.root.css';
 
           <div class="form-group">
             <label for="childSafety" class="form-label">¿Tiene preocupaciones sobre la seguridad del/de los niño(s)?</label>
-            <textarea id="childSafety" name="childSafety" class="form-textarea" rows="3" placeholder="Describa cualquier preocupación de seguridad..."></textarea>
+            <textarea
+              id="childSafety"
+              name="childSafety"
+              class="form-textarea"
+              rows="3"
+              placeholder="Describa cualquier preocupación de seguridad..."
+            ></textarea>
           </div>
 
           <div class="form-group">
             <label for="parentSafety" class="form-label">¿Tiene preocupaciones sobre su seguridad al estar cerca del otro padre/madre?</label>
-            <textarea id="parentSafety" name="parentSafety" class="form-textarea" rows="3" placeholder="Describa cualquier preocupación de seguridad..."></textarea>
+            <textarea
+              id="parentSafety"
+              name="parentSafety"
+              class="form-textarea"
+              rows="3"
+              placeholder="Describa cualquier preocupación de seguridad..."
+            ></textarea>
           </div>
 
           <div class="form-group">
             <label for="healthIssues" class="form-label">¿Usted o sus hijos tienen problemas de salud que debamos conocer?</label>
-            <textarea id="healthIssues" name="healthIssues" class="form-textarea" rows="3" placeholder="Comparta información médica relevante..."></textarea>
+            <textarea
+              id="healthIssues"
+              name="healthIssues"
+              class="form-textarea"
+              rows="3"
+              placeholder="Comparta información médica relevante..."
+            ></textarea>
           </div>
 
           <div class="form-group">
             <label for="additionalInfo" class="form-label">Información adicional:</label>
-            <textarea id="additionalInfo" name="additionalInfo" class="form-textarea" rows="4" placeholder="Cualquier información adicional que considere importante..."></textarea>
+            <textarea
+              id="additionalInfo"
+              name="additionalInfo"
+              class="form-textarea"
+              rows="4"
+              placeholder="Cualquier información adicional que considere importante..."
+            ></textarea>
           </div>
         </fieldset>
 
@@ -433,6 +481,10 @@ import '../../styles/theme.root.css';
     border-top: 1px solid var(--color-border);
   }
 
+  .honeypot-field {
+    display: none;
+  }
+
   @media (max-width: 767px) {
     .schedule-container {
       padding: 0 var(--pad-component);
@@ -455,13 +507,77 @@ import '../../styles/theme.root.css';
 </style>
 
 <script is:inline>
-  const params = new URLSearchParams(window.location.search);
-  const service = params.get("service");
-
-  if (service) {
+  // Mantener la preselección de servicio desde el query string
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const serviceParam = params.get("service");
     const serviceSelect = document.getElementById("service");
-    if (serviceSelect) {
-      serviceSelect.value = decodeURIComponent(service);
+    if (serviceParam && serviceSelect) {
+      serviceSelect.value = decodeURIComponent(serviceParam);
     }
+  })();
+
+  function encodeFormData(data) {
+    const pairs = [];
+    for (const [key, value] of data.entries()) {
+      pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+    }
+    return pairs.join('&');
+  }
+
+  const scheduleForm = document.querySelector('.schedule-form');
+
+  if (scheduleForm instanceof HTMLFormElement) {
+    scheduleForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(scheduleForm);
+
+      const yourName = formData.get('yourName');
+      const email = formData.get('email');
+      const phone = formData.get('phone');
+      const service = formData.get('service');
+
+      if (!yourName || !email || !phone || !service) {
+        alert('Por favor complete todos los campos obligatorios antes de enviar.');
+        return;
+      }
+
+      // Asegurar que Netlify sepa qué formulario es
+      formData.set('form-name', scheduleForm.getAttribute('name') || 'afc-schedule-es');
+
+      // Asunto personalizado: "New Intake from {Name}" (igual que en inglés)
+      const customSubject = `New Intake from ${yourName}`;
+      formData.set('custom-subject', customSubject);
+
+      // Mantener input oculto sincronizado (opcional)
+      const customSubjectInput = scheduleForm.querySelector('input[name="custom-subject"]');
+      if (customSubjectInput) {
+        customSubjectInput.value = customSubject;
+      }
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encodeFormData(formData),
+      })
+        .then(() => {
+          console.log('Formulario de programación enviado:', Object.fromEntries(formData.entries()));
+          alert('Gracias por completar el formulario de admisión. Nuestro equipo se pondrá en contacto con usted pronto.');
+          scheduleForm.reset();
+
+          // Volver a aplicar la preselección de servicio desde la URL después del reset (opcional)
+          const params = new URLSearchParams(window.location.search);
+          const serviceParam = params.get("service");
+          const serviceSelect = document.getElementById("service");
+          if (serviceParam && serviceSelect) {
+            serviceSelect.value = decodeURIComponent(serviceParam);
+          }
+        })
+        .catch((error) => {
+          console.error('Error al enviar el formulario de programación:', error);
+          alert('Hubo un problema al enviar el formulario. Por favor, inténtelo de nuevo.');
+        });
+    });
   }
 </script>

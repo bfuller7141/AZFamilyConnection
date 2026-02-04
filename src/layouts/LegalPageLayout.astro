@@ -1,0 +1,81 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import type { Language } from "../i18n/types";
+import "../styles/base.css";
+import "../styles/theme.root.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  language?: Language;
+}
+
+const {
+  title,
+  description = `${title} | Arizona Family Connections`,
+  canonical,
+  language = "en",
+} = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  language={language}
+  canonical={canonical}
+>
+  <section class="legal-page">
+    <div class="legal-container">
+      <h1 class="legal-title">{title}</h1>
+      <article class="legal-content">
+        <slot />
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding: var(--space-10) 0 var(--space-8);
+  }
+
+  .legal-container {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 0 var(--pad-component-lg);
+  }
+
+  .legal-title {
+    margin-bottom: var(--space-5);
+  }
+
+  .legal-content {
+    display: grid;
+    gap: var(--space-4);
+    line-height: var(--line-normal);
+    color: var(--color-text);
+  }
+
+  .legal-content :global(h2),
+  .legal-content :global(h3) {
+    margin: var(--space-5) 0 var(--space-2);
+  }
+
+  .legal-content :global(p),
+  .legal-content :global(ul),
+  .legal-content :global(ol) {
+    margin: 0;
+  }
+
+  .legal-content :global(ul),
+  .legal-content :global(ol) {
+    padding-left: var(--space-5);
+  }
+
+  @media (max-width: 767px) {
+    .legal-container {
+      padding: 0 var(--pad-component);
+    }
+  }
+</style>

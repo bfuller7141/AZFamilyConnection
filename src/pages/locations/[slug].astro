@@ -1,29 +1,37 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SubpageHero from '../components/SubpageHero.astro';
-import ColorDividerShort from '../components/ColorDividerShort.astro';
-import FAQSection from '../components/FAQSection.astro';
-import MainCTA from '../components/MainCTA.astro';
-import PricingSection from '../components/PricingSection.astro';
-import ServicesGrid from '../components/ServicesGrid.astro';
-import PageBreakCloud from '../components/PageBreakCloud.astro';
-import Accordion from '../components/Accordion.astro';
-import AccordionItem from '../components/AccordionItem.astro';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SubpageHero from "../../components/SubpageHero.astro";
+import ColorDividerShort from "../../components/ColorDividerShort.astro";
+import ServicesGrid from "../../components/ServicesGrid.astro";
+import MainCTA from "../../components/MainCTA.astro";
+import { locationPagesEn } from "../../data/locationPages";
+import FAQSection from "../../components/FAQSection.astro";
+import Accordion from "../../components/Accordion.astro";
+import AccordionItem from "../../components/AccordionItem.astro";
 
-import '../styles/base.css';
-import '../styles/theme.root.css';
+import "../../styles/base.css";
+import "../../styles/theme.root.css";
+
+export function getStaticPaths() {
+  return locationPagesEn.map((page) => ({
+    params: { slug: page.slug },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
 ---
 
 <BaseLayout
-  title="Supervised Visitation Services | AZ Family Connections"
-  description="Explore supervised visitation, safe exchange, and family services with Arizona Family Connections. Get support that protects children and strengthens bonds."
+  title={`${page.city} Supervised Visitation | Arizona Family Connections`}
+  description={page.description}
   language="en"
-  canonical="https://arizonafamilyconnections.com/services"
+  canonical={`/locations/${page.slug}`}
 >
   <SubpageHero
-    subtitle="Arizona Family Connections Services"
-    title="Visitation Services Designed with Family in Mind"
-    description="We provide safe, structured visitation options that support each family’s unique needs. With compassion and experience, our supervisors create environments where parents and children can reconnect, rebuild trust, and grow together."
+    subtitle={page.subtitle}
+    title={page.title}
+    description={page.description}
     ctaText="Schedule a Visit"
     ctaUrl="/schedule"
     decorationLeft="/images/cloud-watermark.svg"
@@ -32,37 +40,9 @@ import '../styles/theme.root.css';
 
   <ColorDividerShort />
 
-  <PricingSection
-    title="Types of Services We Offer"
-    decorationLeft="/images/star-watermark-dark.svg"
-    decorationRight="/images/wave-watermark-dark.svg"
-    cards={[
-      {
-        title: "Available Service Types",
-        features: [
-          "Supervised visitation (on-site, in-home, and community-based)",
-          "Monitored exchange",
-          "Virtual and telephonic visits",
-          "Transportation support for pickups and drop-offs",
-          "Objective reports and court testimony when requested",
-          "Bilingual support in English and Spanish",
-        ],
-        buttonText: "View All Services",
-        buttonUrl: "/services",
-      },
-    ]}
-    disclaimer="Need help choosing the right option for your family? Contact our team at contact@azfamilyconnections.com and we will help guide you."
-    ctaButtons={[
-      { text: "Schedule a Visit", variant: "primary", url: "/schedule" },
-      { text: "About Our Services", variant: "text", url: "/services" },
-    ]}
-  />
-
-  <PageBreakCloud bgColor="#f8faff" flip={true} />
-
   <ServicesGrid
-    title="Our Visitation Services"
-    description="Every family’s needs are different. We offer a range of supervised visitation options designed to ensure safety, comfort, and meaningful connection during every visit."
+    title={`Services in ${page.city}`}
+    description={page.intro}
     services={[
       {
         icon: "/images/home-icon.svg",
@@ -114,10 +94,9 @@ import '../styles/theme.root.css';
 
       <AccordionItem title="How much do you charge?">
         <p>
-          Our supervised visitation and monitored exchange fees are billed hourly and are based on the number
-          of children and the type of service provided. You can view current rates in our
-          <a href="/#pricing" class="link-inline">pricing section</a>. If you have questions about your
-          specific situation, please reach out and we’ll be happy to walk through costs with you.
+          Pricing varies case by case based on service type, travel, and case requirements.
+          If you have questions about your specific situation, please
+          <a href="/contact" class="link-inline">contact our team</a> and we will walk through expected costs with you.
         </p>
       </AccordionItem>
 
@@ -146,15 +125,11 @@ import '../styles/theme.root.css';
         </p>
       </AccordionItem>
 
-      <AccordionItem title="Where do visits take place?">
+      <AccordionItem title="Where do you provide services?">
         <p>
-          Visits can occur in a variety of settings depending on the case, including our office, approved
-          community locations, or other arrangements that support the safety and well-being of the child.
-        </p>
-        <p>
-          Specific locations are determined during the intake and scheduling process. For a full overview of
-          our supervised visitation and exchange settings, please visit our
-          <a href="/services" class="link-inline">Services page</a>.
+          We provide services across Arizona, including the Phoenix metro area, Flagstaff, Prescott,
+          and Kingman. We also provide services in Portland, and we continue adding new locations.
+          For location availability in your area, please <a href="/contact" class="link-inline">contact us</a>.
         </p>
       </AccordionItem>
 
@@ -186,15 +161,17 @@ import '../styles/theme.root.css';
   </FAQSection>
 
   <MainCTA
-    title="Ready to Take the Next Step Together?"
+    title={`Need Services in ${page.city}?`}
+    description="Our team is here to help you choose the right visitation option for your case."
     primaryCta={{
       text: "Schedule a Visit",
       url: "/schedule",
     }}
     secondaryCta={{
-      text: "About Our Company",
-      url: "/about",
+      text: "Contact Us",
+      url: "/contact",
     }}
     decorationRight="/images/starFilled-watermark.svg"
   />
+  
 </BaseLayout>

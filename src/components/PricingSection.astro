@@ -1,10 +1,10 @@
 ---
 interface Card {
   title: string;
-  price: string;
-  subtitle: string;
+  price?: string;
+  subtitle?: string;
   features: string[];
-  buttonText: string;
+  buttonText?: string;
   buttonUrl?: string;
 }
 
@@ -33,6 +33,7 @@ const {
 } = Astro.props;
 
 const headingId = `pricing-title-${Math.random().toString(36).slice(2, 10)}`;
+const isSingleCard = cards.length === 1;
 ---
 
 <section class="pricing-section" aria-labelledby={headingId} id="pricing">
@@ -65,15 +66,17 @@ const headingId = `pricing-title-${Math.random().toString(36).slice(2, 10)}`;
       {title}
     </h2>
 
-    <div class="pricing-cards" role="list">
+    <div class={`pricing-cards ${isSingleCard ? "single-card" : ""}`} role="list">
       {cards.map((card, index) => (
-        <div class={`pricing-card card-${index}`} role="listitem">
+        <div class={`pricing-card card-${index} ${!card.buttonText ? "no-button" : ""}`} role="listitem">
           <h3 class="card-title">{card.title}</h3>
 
-          <div class="card-price">
-            <span class="price-amount">{card.price}</span>
-            <span class="price-label">{card.subtitle}</span>
-          </div>
+          {(card.price || card.subtitle) && (
+            <div class="card-price">
+              {card.price && <span class="price-amount">{card.price}</span>}
+              {card.subtitle && <span class="price-label">{card.subtitle}</span>}
+            </div>
+          )}
 
           <ul class="card-features">
             {card.features.map((feature) => (
@@ -81,12 +84,14 @@ const headingId = `pricing-title-${Math.random().toString(36).slice(2, 10)}`;
             ))}
           </ul>
 
-          <a
-            href={card.buttonUrl || "/schedule"}
-            class="card-button"
-          >
-            {card.buttonText}
-          </a>
+          {card.buttonText && (
+            <a
+              href={card.buttonUrl || "/schedule"}
+              class="card-button"
+            >
+              {card.buttonText}
+            </a>
+          )}
         </div>
       ))}
     </div>
@@ -177,10 +182,15 @@ const headingId = `pricing-title-${Math.random().toString(36).slice(2, 10)}`;
 
   .pricing-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-7);
     margin-bottom: var(--space-6);
     align-items: flex-start;
+  }
+
+  .pricing-cards.single-card {
+    grid-template-columns: minmax(300px, 100%);
+    justify-content: center;
   }
 
   .pricing-card {
@@ -308,6 +318,10 @@ const headingId = `pricing-title-${Math.random().toString(36).slice(2, 10)}`;
     margin: 0 0 var(--space-5);
     padding: 0;
     flex-grow: 1;
+  }
+
+  .pricing-card.no-button .card-features {
+    margin-bottom: 0;
   }
 
   .card-features li {

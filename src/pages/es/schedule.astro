@@ -64,26 +64,6 @@ import '../../styles/theme.root.css';
           <legend class="form-legend">Información del servicio</legend>
 
           <div class="form-group">
-            <label for="service" class="form-label">Servicio de interés: *</label>
-            <select 
-              id="service" 
-              name="service" 
-              class="form-select" 
-              required
-              data-service-param={serviceParam}
-            >
-              <option value="">-- Seleccione un servicio --</option>
-              {
-                services.map((service) => (
-                  <option value={service}>
-                    {service}
-                  </option>
-                ))
-              }
-            </select>
-          </div>
-
-          <div class="form-group">
             <label class="form-label">Tipo de servicio: *</label>
             <div class="form-checkboxes">
               <label class="form-checkbox">
@@ -178,120 +158,6 @@ import '../../styles/theme.root.css';
           </div>
         </fieldset>
 
-        <!-- Children Information -->
-        <fieldset class="form-fieldset">
-          <legend class="form-legend">Información de los niños</legend>
-
-          <div class="form-group">
-            <p class="form-note">Proporcione información para cada niño</p>
-          </div>
-
-          {[1, 2, 3].map((index) => (
-            <div class="form-child-section">
-              <h4 class="form-subheading">Niño {index}</h4>
-              
-              <div class="form-row">
-                <div class="form-group">
-                  <label for={`childName${index}`} class="form-label">Nombre:</label>
-                  <input type="text" id={`childName${index}`} name={`childName${index}`} class="form-input" />
-                </div>
-                <div class="form-group">
-                  <label for={`childAge${index}`} class="form-label">Edad:</label>
-                  <input type="number" id={`childAge${index}`} name={`childAge${index}`} class="form-input" min="0" max="18" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for={`childNeeds${index}`} class="form-label">Necesidades especiales o consideraciones:</label>
-                <textarea
-                  id={`childNeeds${index}`}
-                  name={`childNeeds${index}`}
-                  class="form-textarea"
-                  rows="2"
-                  placeholder="Cualquier información relevante que debamos saber..."
-                ></textarea>
-              </div>
-            </div>
-          ))}
-        </fieldset>
-
-        <!-- Safety & Concerns -->
-        <fieldset class="form-fieldset">
-          <legend class="form-legend">Seguridad y consideraciones especiales</legend>
-
-          <div class="form-group">
-            <label class="form-label">¿Existen preocupaciones sobre violencia familiar o doméstica?</label>
-            <div class="form-radios">
-              <label class="form-radio">
-                <input type="radio" name="violenceConcerns" value="yes" />
-                Sí
-              </label>
-              <label class="form-radio">
-                <input type="radio" name="violenceConcerns" value="no" />
-                No
-              </label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">¿Existe actualmente una orden de protección o restricción?</label>
-            <div class="form-radios">
-              <label class="form-radio">
-                <input type="radio" name="protectiveOrder" value="yes" />
-                Sí
-              </label>
-              <label class="form-radio">
-                <input type="radio" name="protectiveOrder" value="no" />
-                No
-              </label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="childSafety" class="form-label">¿Tiene preocupaciones sobre la seguridad del/de los niño(s)?</label>
-            <textarea
-              id="childSafety"
-              name="childSafety"
-              class="form-textarea"
-              rows="3"
-              placeholder="Describa cualquier preocupación de seguridad..."
-            ></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="parentSafety" class="form-label">¿Tiene preocupaciones sobre su seguridad al estar cerca del otro padre/madre?</label>
-            <textarea
-              id="parentSafety"
-              name="parentSafety"
-              class="form-textarea"
-              rows="3"
-              placeholder="Describa cualquier preocupación de seguridad..."
-            ></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="healthIssues" class="form-label">¿Usted o sus hijos tienen problemas de salud que debamos conocer?</label>
-            <textarea
-              id="healthIssues"
-              name="healthIssues"
-              class="form-textarea"
-              rows="3"
-              placeholder="Comparta información médica relevante..."
-            ></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="additionalInfo" class="form-label">Información adicional:</label>
-            <textarea
-              id="additionalInfo"
-              name="additionalInfo"
-              class="form-textarea"
-              rows="4"
-              placeholder="Cualquier información adicional que considere importante..."
-            ></textarea>
-          </div>
-        </fieldset>
-
         <!-- Attorney Information -->
         <fieldset class="form-fieldset">
           <legend class="form-legend">Representación legal</legend>
@@ -321,17 +187,21 @@ import '../../styles/theme.root.css';
           <legend class="form-legend">Preferencia de idioma</legend>
 
           <div class="form-group">
-            <label class="form-label">¿Puede recibir servicios en inglés?</label>
-            <div class="form-radios">
-              <label class="form-radio">
-                <input type="radio" name="englishServices" value="yes" required />
-                Sí
-              </label>
-              <label class="form-radio">
-                <input type="radio" name="englishServices" value="no" required />
-                No
-              </label>
-            </div>
+            <label for="languagePreference" class="form-label">Idioma de preferencia: *</label>
+            <select id="languagePreference" name="languagePreference" class="form-select" required>
+              <option value="">-- Seleccione un idioma --</option>
+              <option value="English">Inglés</option>
+              <option value="Spanish">Español</option>
+              <option value="Chinese">Chino</option>
+              <option value="Tagalog">Tagalo</option>
+              <option value="Vietnamese">Vietnamita</option>
+              <option value="Arabic">Árabe</option>
+              <option value="French">Francés</option>
+              <option value="Korean">Coreano</option>
+              <option value="Russian">Ruso</option>
+              <option value="Portuguese">Portugués</option>
+              <option value="Other">Otro</option>
+            </select>
           </div>
         </fieldset>
 

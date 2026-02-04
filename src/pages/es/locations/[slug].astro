@@ -1,0 +1,185 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SubpageHero from "../../../components/SubpageHero.astro";
+import ColorDividerShort from "../../../components/ColorDividerShort.astro";
+import ServicesGrid from "../../../components/ServicesGrid.astro";
+import MainCTA from "../../../components/MainCTA.astro";
+import { locationPagesEs } from "../../../data/locationPages";
+import FAQSection from "../../../components/FAQSection.astro";
+import Accordion from "../../../components/Accordion.astro";
+import AccordionItem from "../../../components/AccordionItem.astro";
+
+import "../../../styles/base.css";
+import "../../../styles/theme.root.css";
+
+export function getStaticPaths() {
+  return locationPagesEs.map((page) => ({
+    params: { slug: page.slug },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout
+  title={`${page.city} Visitas Supervisadas | Arizona Family Connections`}
+  description={page.description}
+  language="es"
+  canonical={`/es/locations/${page.slug}`}
+>
+  <SubpageHero
+    subtitle={page.subtitle}
+    title={page.title}
+    description={page.description}
+    ctaText="Programar una visita"
+    ctaUrl="/es/schedule"
+    decorationLeft="/images/cloud-watermark.svg"
+    decorationRight="/images/flower-watermark.svg"
+  />
+
+  <ColorDividerShort />
+
+  <ServicesGrid
+    title={`Apoyo familiar en ${page.city}`}
+    description={page.intro}
+    services={[
+      {
+        icon: "/images/home-icon.svg",
+        title: "Visitas supervisadas",
+        description: "Visitas supervisadas seguras y estructuradas en un entorno neutral para apoyar una conexion saludable entre padres e hijos.",
+      },
+      {
+        icon: "/images/cactus-icon.svg",
+        title: "Visitas publicas y en el hogar",
+        description: "Visitas monitoreadas en lugares comunitarios aprobados o en el hogar cuando sea apropiado segun el plan familiar.",
+      },
+      {
+        icon: "/images/sheild-icon-blue.svg",
+        title: "Intercambio seguro",
+        description: "Intercambios en un lugar seguro y neutral para proteger al nino durante las transiciones.",
+      },
+      {
+        icon: "/images/webcam-icon.svg",
+        title: "Telefono / Video",
+        description: "Visitas supervisadas por telefono y video para ayudar a las familias a mantenerse conectadas cuando no es posible reunirse en persona.",
+      },
+      {
+        icon: "/images/pen-icon.svg",
+        title: "Informes",
+        description: "Informes detallados y objetivos que documentan observaciones e interacciones durante las visitas.",
+      },
+      {
+        icon: "/images/az81-icon.svg",
+        title: "Regla 81",
+        description: "Servicios que cumplen con los estandares de la Regla 81 de Arizona para la supervision de visitas ordenadas por la corte.",
+      },
+    ]}
+    decorationLeft="/images/sun-watermark.svg"
+    decorationRight="/images/pinkDots-watermark.svg"
+  />
+
+  <FAQSection
+    title="Preguntas frecuentes"
+    description="Encuentre respuestas rapidas sobre visitas supervisadas, intercambios, transporte y como comenzar con Arizona Family Connections."
+  >
+    <Accordion label="Preguntas frecuentes">
+      <AccordionItem title="Son miembros de alguna organizacion profesional?">
+        <p>
+          Si. Arizona Family Connections esta registrada en SV Directory y en la
+          Supervised Visitation Network. Tambien aparecemos en las bases de datos de
+          recursos de RSAT y Second Chance, y somos un miembro activo de la Camara
+          de Comercio de Peoria.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Cuanto cuestan los servicios?">
+        <p>
+          Los costos varian segun cada caso, de acuerdo con el tipo de servicio,
+          necesidades de traslado y requisitos del caso. Si tiene preguntas sobre su
+          situacion especifica, por favor
+          <a href="/es/contact" class="link-inline">contacte a nuestro equipo</a> y con gusto le orientamos.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Proporcionan transporte para los ninos?">
+        <p>
+          Si. Un miembro de nuestro equipo puede recoger y llevar a su hijo cuando se
+          necesite transporte para una visita o intercambio. Hay una tarifa de
+          transporte, y nuestro personal puede proporcionar asientos de seguridad
+          para ninos cuando sea necesario.
+        </p>
+        <p>
+          Si el transporte formara parte de su plan, le recomendamos mencionarlo durante
+          el proceso de admision para que podamos organizarlo con anticipacion.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Que tipo de servicios ofrecen?">
+        <p>
+          Ofrecemos una variedad de servicios para apoyar un contacto seguro y estructurado
+          entre padres e hijos, incluyendo visitas supervisadas, intercambios monitoreados,
+          visitas virtuales o telefonicas, apoyo en transporte y documentacion relacionada
+          como informes objetivos y testimonio en la corte cuando corresponde.
+        </p>
+        <p>
+          Puede conocer mas sobre cada opcion en nuestra
+          <a href="/es/services" class="link-inline">pagina de Servicios</a>.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Donde brindan servicios?">
+        <p>
+          Brindamos servicios en todo Arizona, incluyendo el area metropolitana de
+          Phoenix, Flagstaff, Prescott y Kingman. Tambien ofrecemos servicios en
+          Portland y seguimos agregando nuevas ubicaciones.
+          Para confirmar disponibilidad en su area, <a href="/es/contact" class="link-inline">contactenos</a>.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Como empiezo o programo una visita?">
+        <p>
+          Para comenzar, complete nuestro formulario seguro de admision para que podamos
+          revisar los detalles de su caso, las ordenes de la corte y cualquier consideracion
+          de seguridad. Una vez que recibamos su informacion, nuestro equipo se pondra en
+          contacto con usted para confirmar elegibilidad, revisar los servicios disponibles
+          y programar su primera visita.
+        </p>
+        <p>
+          Puede iniciar el proceso en cualquier momento desde nuestra
+          <a href="/es/schedule" class="link-inline">pagina de Programacion</a>.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Ofrecen servicios en espanol?">
+        <p>
+          Si. Podemos brindar servicios y comunicacion tanto en ingles como en espanol
+          segun sea necesario. Si usted o algun miembro de su familia prefiere el espanol,
+          por favor indiquelo durante la admision para que podamos planear el apoyo
+          adecuado.
+        </p>
+        <p>
+          Para revisar los servicios disponibles, visite nuestra
+          <a href="/es/services" class="link-inline">pagina de Servicios</a>, o comience el
+          proceso de admision desde nuestra
+          <a href="/es/schedule" class="link-inline">pagina de Programacion</a>.
+        </p>
+      </AccordionItem>
+    </Accordion>
+  </FAQSection>
+
+  <MainCTA
+    title={`Necesita servicios en ${page.city}?`}
+    description="Nuestro equipo puede ayudarle a elegir la mejor opcion de visita para su caso."
+    primaryCta={{
+      text: "Programar una visita",
+      url: "/es/schedule",
+    }}
+    secondaryCta={{
+      text: "Contactenos",
+      url: "/es/contact",
+    }}
+    decorationLeft="/images/pinkDots-watermark.svg"
+    decorationRight="/images/starFilled-watermark.svg"
+  />
+</BaseLayout>

@@ -62,9 +62,10 @@ import AccordionItem from '../components/AccordionItem.astro';
             />
           </div>
           <h3 class="contact-card-title">Give us a Call</h3>
-          <a href="tel:+14807646689" class="contact-link">
-            (480) 764-6689
-          </a>
+          <div class="contact-phone-links">
+            <a href="tel:+14807646689" class="contact-link">Arizona: (480) 764-6689</a>
+            <a href="tel:+19712263820" class="contact-link">Portland: (971) 226-3820</a>
+          </div>
           <p class="contact-card-response">Monday-Friday, 9am-6pm</p>
           <p class="contact-card-response">Saturday-Sunday, By Appointment</p>
         </div>
@@ -340,6 +341,18 @@ import AccordionItem from '../components/AccordionItem.astro';
 
   .contact-link:hover {
     color: var(--brand-primary-600);
+  }
+
+  .contact-phone-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin-bottom: var(--space-2);
+  }
+
+  .contact-phone-links .contact-link {
+    display: block;
+    margin-bottom: 0;
   }
 
   .contact-card-text {

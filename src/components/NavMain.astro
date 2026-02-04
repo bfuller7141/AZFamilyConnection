@@ -49,16 +49,24 @@ const currentLogoUrl = isHomePage ? logoUrl : "/images/logo-dark.svg";
 // Logo should always go to the language specific home page
 const logoHomePath = currentLanguage === "es" ? "/es/" : "/";
 
+const normalizeForActiveMatch = (path: string) => {
+  let normalized = path.trim();
+  if (!normalized.startsWith("/")) normalized = `/${normalized}`;
+
+  normalized = normalized
+    .replace(/^\/(en|es)(\/|$)/, "/")
+    .replace(/\/+$/, "");
+
+  return normalized || "/";
+};
+
 // Determine active menu item
 const getIsActive = (url: string) => {
-  let normalizedUrl = url.replace(/\/+$/, "");
-  if (!normalizedUrl.startsWith("/")) normalizedUrl = `/${normalizedUrl}`;
-  if (normalizedUrl === "") normalizedUrl = "/";
+  const normalizedUrl = normalizeForActiveMatch(url);
+  const normalizedPath = normalizeForActiveMatch(cleanPath);
 
-  const normalizedPath = cleanPath || "/";
-
-  if (normalizedUrl === "/" || normalizedUrl === "") {
-    return normalizedPath === "/" || normalizedPath === "";
+  if (normalizedUrl === "/") {
+    return normalizedPath === "/";
   }
 
   return normalizedPath === normalizedUrl;

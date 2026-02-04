@@ -10,9 +10,28 @@ interface Props {
 const { language = "en", canonical } = Astro.props;
 const i18n = getI18n(language);
 const currentYear = new Date().getFullYear();
+const officeLocationTitle = language === "es" ? "Ubicaciones" : "Locations";
+const officeLocations = [
+  { label: "Phoenix", slug: "phoenix" },
+  { label: "Kingman", slug: "kingman" },
+  { label: "Prescott", slug: "prescott" },
+  { label: "Portland", slug: "portland" },
+];
+const legalBasePath = language === "es" ? "/es/legal" : "/legal";
+const locationBasePath = language === "es" ? "/es/locations" : "/locations";
 
 // Generate language URLs
-const currentPath = canonical ?? Astro.url.pathname;
+const rawPath = canonical ?? Astro.url.pathname;
+let currentPath = rawPath;
+
+// Canonical can be absolute (e.g. https://domain.com/schedule); normalize to pathname.
+if (/^https?:\/\//i.test(rawPath)) {
+  try {
+    currentPath = new URL(rawPath).pathname;
+  } catch {
+    currentPath = Astro.url.pathname;
+  }
+}
 
 // Remove language prefix if present
 const basePath = currentPath.replace(/^\/(en|es)/, "");
@@ -87,10 +106,30 @@ const esUrl = normalizedBasePath === "/" ? "/es/" : `/es${normalizedBasePath}`;
             </svg>
           </a>
         </div>
+
+        <div class="footer-language">
+          <p class="setting-label">{i18n.language}</p>
+          <div class="language-switcher" aria-label="Language selection">
+            <a
+              href={enUrl}
+              class={`lang-link ${language === "en" ? "active" : ""}`}
+              aria-current={language === "en" ? "page" : undefined}
+            >
+              EN
+            </a>
+            <a
+              href={esUrl}
+              class={`lang-link ${language === "es" ? "active" : ""}`}
+              aria-current={language === "es" ? "page" : undefined}
+            >
+              ES
+            </a>
+          </div>
+        </div>
       </div>
 
       <!-- Quick Links -->
-      <div class="footer-section">
+      <div class="footer-section footer-section-links">
         <h3 class="footer-section-title">Quick Links</h3>
         <nav aria-label="Footer navigation">
           <ul class="footer-links">
@@ -113,8 +152,8 @@ const esUrl = normalizedBasePath === "/" ? "/es/" : `/es${normalizedBasePath}`;
           </div>
           <div class="contact-item">
             <p class="contact-label">Email</p>
-            <a href="mailto:contact@arizonafamilyconnections.org">
-              contact@arizonafamilyconnections.org
+            <a href="mailto:contact@arizonafamilyconnections.com">
+              contact@arizonafamilyconnections.com
             </a>
           </div>
           <div class="contact-item">
@@ -125,33 +164,16 @@ const esUrl = normalizedBasePath === "/" ? "/es/" : `/es${normalizedBasePath}`;
         </div>
       </div>
 
-      <!-- Language & Accessibility -->
+      <!-- Office Locations -->
       <div class="footer-section">
-        <h3 class="footer-section-title">Settings</h3>
-        <div class="footer-settings">
-          <div class="setting-group">
-            <p class="setting-label">Language</p>
-            <div
-              class="language-switcher"
-              aria-label="Language selection"
-            >
-              <a
-                href={enUrl}
-                class={`lang-link ${language === "en" ? "active" : ""}`}
-                aria-current={language === "en" ? "page" : undefined}
-              >
-                EN
-              </a>
-              <a
-                href={esUrl}
-                class={`lang-link ${language === "es" ? "active" : ""}`}
-                aria-current={language === "es" ? "page" : undefined}
-              >
-                ES
-              </a>
-            </div>
-          </div>
-        </div>
+        <h3 class="footer-section-title">{officeLocationTitle}</h3>
+        <ul class="footer-links">
+          {officeLocations.map((location) => (
+            <li>
+              <a href={`${locationBasePath}/${location.slug}`}>{location.label}</a>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
 
@@ -163,9 +185,9 @@ const esUrl = normalizedBasePath === "/" ? "/es/" : `/es${normalizedBasePath}`;
           reserved.
         </p>
         <nav class="legal-links" aria-label="Legal links">
-          <a href="/accessibility">Accessibility</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms &amp; Conditions</a>
+          <a href={`${legalBasePath}/accessibility`}>Accessibility</a>
+          <a href={`${legalBasePath}/privacy`}>Privacy Policy</a>
+          <a href={`${legalBasePath}/terms`}>Terms &amp; Conditions</a>
         </nav>
       </div>
     </div>
@@ -315,19 +337,6 @@ const esUrl = normalizedBasePath === "/" ? "/es/" : `/es${normalizedBasePath}`;
     color: var(--brand-primary-500);
   }
 
-  /* Settings */
-  .footer-settings {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .setting-group {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-  }
-
   .setting-label {
     margin: 0;
     font-size: var(--text-xs);
@@ -340,6 +349,8 @@ const esUrl = normalizedBasePath === "/" ? "/es/" : `/es${normalizedBasePath}`;
   .language-switcher {
     display: flex;
     gap: var(--space-2);
+    justify-content: flex-start;
+    width: 100%;
   }
 
   .lang-link {
@@ -376,6 +387,15 @@ const esUrl = normalizedBasePath === "/" ? "/es/" : `/es${normalizedBasePath}`;
     gap: var(--space-4);
     align-items: center;
     text-align: center;
+  }
+
+  .footer-language {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    width: 100%;
+    text-align: left;
   }
 
   .copyright {
@@ -419,6 +439,10 @@ const esUrl = normalizedBasePath === "/" ? "/es/" : `/es${normalizedBasePath}`;
   @media (min-width: 1024px) {
     .footer-content {
       grid-template-columns: repeat(4, 1fr);
+    }
+
+    .footer-section-links {
+      justify-self: end;
     }
   }
 

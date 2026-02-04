@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SubpageHero from '../../components/SubpageHero.astro';
 import ColorDividerShort from '../../components/ColorDividerShort.astro';
@@ -16,14 +16,14 @@ import '../../styles/theme.root.css';
 
 <BaseLayout
   title="Servicios de visitas supervisadas | AZ Family Connections"
-  description="Conozca los servicios de visitas supervisadas, intercambio seguro y apoyo familiar de Arizona Family Connections. Obtenga apoyo que protege a los niños y fortalece los vínculos."
+  description="Conozca los servicios de visitas supervisadas, intercambio seguro y apoyo familiar de Arizona Family Connections. Obtenga apoyo que protege a los niÃ±os y fortalece los vÃ­nculos."
   language="es"
   canonical="https://arizonafamilyconnections.com/es/services"
 >
   <SubpageHero
     subtitle="Servicios de Arizona Family Connections"
     title="Servicios de visita pensados para la familia"
-    description="Ofrecemos opciones de visitas seguras y estructuradas que apoyan las necesidades únicas de cada familia. Con compasión y experiencia, nuestros supervisores crean entornos donde los padres y los niños pueden reconectarse, reconstruir la confianza y crecer juntos."
+    description="Ofrecemos opciones de visitas seguras y estructuradas que apoyan las necesidades Ãºnicas de cada familia. Con compasiÃ³n y experiencia, nuestros supervisores crean entornos donde los padres y los niÃ±os pueden reconectarse, reconstruir la confianza y crecer juntos."
     ctaText="Programar una visita"
     ctaUrl="/es/schedule"
     decorationLeft="/images/cloud-watermark.svg"
@@ -33,55 +33,25 @@ import '../../styles/theme.root.css';
   <ColorDividerShort />
 
   <PricingSection
-    title="Tarifas de Visitas Supervisadas y Entregas Monitoreadas"
+    title="Tipos de servicios que ofrecemos"
     decorationLeft="/images/star-watermark-dark.svg"
     decorationRight="/images/wave-watermark-dark.svg"
     cards={[
       {
-        title: "1–2 Niños",
-        price: "$60/hr",
-        subtitle: "Por Niño",
+        title: "Tipos de servicios disponibles",
         features: [
-          "Intercambio Monitoreado disponible (ver tarifas abajo)",
-          "$40 por cada 15 minutos dentro de 5 millas de la oficina de AFC",
-          "$60 por cada 15 minutos fuera del radio de 5 millas",
-          "No se otorga crédito de tiempo por llegadas tarde de cualquiera de las partes",
-          "$120 tarifa única del padre solicitante, requerida antes de comenzar las visitas",
+          "Visitas supervisadas (en oficina, en casa y en la comunidad)",
+          "Intercambio monitoreado",
+          "Visitas virtuales y telefÃ³nicas",
+          "Apoyo de transporte para recoger y dejar a los menores",
+          "Reportes objetivos y testimonio en corte cuando se solicita",
+          "AtenciÃ³n bilingÃ¼e en inglÃ©s y espaÃ±ol",
         ],
-        buttonText: "Programar una Visita",
-        buttonUrl: "/schedule",
-      },
-      {
-        title: "3–4 Niños",
-        price: "$80/hr",
-        subtitle: "Por Niño",
-        features: [
-          "Intercambio Monitoreado disponible (ver tarifas abajo)",
-          "$40 por cada 15 minutos dentro de 5 millas de la oficina de AFC",
-          "$60 por cada 15 minutos fuera del radio de 5 millas",
-          "Coordinación adicional requerida para visitas con múltiples niños",
-          "$120 tarifa única del padre solicitante, requerida antes de comenzar las visitas",
-        ],
-        buttonText: "Programar una Visita",
-        buttonUrl: "/schedule",
-      },
-      {
-        title: "4+ Niños",
-        price: "$100/hr",
-        subtitle: "Por Niño",
-        features: [
-          "Intercambio Monitoreado disponible (ver tarifas abajo)",
-          "$40 por cada 15 minutos dentro de 5 millas de la oficina de AFC",
-          "$60 por cada 15 minutos fuera del radio de 5 millas",
-          "Puede requerir personal adicional o apoyo de seguridad",
-          "$120 tarifa única del padre solicitante, requerida antes de comenzar las visitas",
-        ],
-        buttonText: "Programar una Visita",
-        buttonUrl: "/schedule",
+        buttonText: "Ver todos los servicios",
+        buttonUrl: "/es/services",
       },
     ]}
-    disclaimer="Para obtener más información sobre tarifas, políticas y términos, revise nuestro Acuerdo de Visitas Supervisadas y Entregas Monitoreadas o comuníquese con nosotros al correo contact@azfamilyconnections.com."
-    disclaimerLinkUrl="/uploads/agreement-es.pdf"
+    disclaimer="Â¿Necesita ayuda para elegir la mejor opciÃ³n para su familia? ComunÃ­quese con nuestro equipo en contact@azfamilyconnections.com y con gusto le orientamos."
     ctaButtons={[
       { text: "Programar una Visita", variant: "primary", url: "/schedule" },
       { text: "Sobre Nuestros Servicios", variant: "text", url: "/services" },
@@ -92,47 +62,37 @@ import '../../styles/theme.root.css';
 
   <ServicesGrid
     title="Nuestros servicios de visita"
-    description="Cada familia tiene necesidades diferentes. Ofrecemos una variedad de opciones de visitas supervisadas diseñadas para asegurar seguridad, comodidad y una conexión significativa en cada visita."
+    description="Cada familia tiene necesidades diferentes. Ofrecemos una variedad de opciones de visitas supervisadas diseÃ±adas para asegurar seguridad, comodidad y una conexiÃ³n significativa en cada visita."
     services={[
       {
         icon: "/images/home-icon.svg",
-        title: "Visitas supervisadas fuera del sitio",
-        description: "Visitas seguras y monitoreadas en nuestro entorno neutral de oficina, diseñadas para apoyar conexiones positivas entre padres e hijos.",
-      },
-      {
-        icon: "/images/pins-icon.svg",
-        title: "Intercambio supervisado",
-        description: "Intercambios monitoreados entre padres en un entorno seguro y neutral.",
-      },
-      {
-        icon: "/images/webcam-icon.svg",
-        title: "Visitas supervisadas virtuales",
-        description: "Videollamadas seguras entre padres y niños bajo supervisión profesional.",
-      },
-      {
-        icon: "/images/gavel-icon.svg",
-        title: "Testimonio en la corte",
-        description: "Documentación profesional y testimonio experto sobre las visitas supervisadas.",
-      },
-      {
-        icon: "/images/pen-icon.svg",
-        title: "Informes objetivos",
-        description: "Informes detallados e imparciales que documentan observaciones e interacciones durante las visitas.",
+        title: "Visitas supervisadas",
+        description: "Visitas supervisadas seguras y estructuradas en un entorno neutral para apoyar una conexion saludable entre padres e hijos.",
       },
       {
         icon: "/images/cactus-icon.svg",
-        title: "Visitas supervisadas (East Valley)",
-        description: "Servicios convenientes de visitas supervisadas en nuestra ubicación de East Valley.",
+        title: "Visitas publicas y en el hogar",
+        description: "Visitas monitoreadas en lugares comunitarios aprobados o en el hogar cuando sea apropiado segun el plan familiar.",
       },
       {
         icon: "/images/sheild-icon-blue.svg",
         title: "Intercambio seguro",
-        description: "Intercambios en un lugar seguro y neutral para proteger al niño durante las transiciones.",
+        description: "Intercambios en un lugar seguro y neutral para proteger al nino durante las transiciones.",
+      },
+      {
+        icon: "/images/webcam-icon.svg",
+        title: "Telefono / Video",
+        description: "Visitas supervisadas por telefono y video para ayudar a las familias a mantenerse conectadas cuando no es posible reunirse en persona.",
+      },
+      {
+        icon: "/images/pen-icon.svg",
+        title: "Informes",
+        description: "Informes detallados y objetivos que documentan observaciones e interacciones durante las visitas.",
       },
       {
         icon: "/images/az81-icon.svg",
-        title: "Cumplimiento de la Regla 81",
-        description: "Servicios que cumplen con los estándares de la Regla 81 de Arizona para la supervisión de visitas ordenadas por la corte.",
+        title: "Regla 81",
+        description: "Servicios que cumplen con los estandares de la Regla 81 de Arizona para la supervision de visitas ordenadas por la corte.",
       },
     ]}
     decorationLeft="/images/sun-watermark.svg"
@@ -141,110 +101,111 @@ import '../../styles/theme.root.css';
 
   <FAQSection
     title="Preguntas frecuentes"
-    description="Encuentre respuestas rápidas sobre visitas supervisadas, intercambios, transporte y cómo comenzar con Arizona Family Connections."
+    description="Encuentre respuestas rÃ¡pidas sobre visitas supervisadas, intercambios, transporte y cÃ³mo comenzar con Arizona Family Connections."
   >
     <Accordion label="Preguntas frecuentes">
-      <AccordionItem title="¿Son miembros de alguna organización profesional?">
+      <AccordionItem title="Â¿Son miembros de alguna organizaciÃ³n profesional?">
         <p>
-          Sí. Arizona Family Connections está registrada en SV Directory y en la
-          Supervised Visitation Network. También aparecemos en las bases de datos de
-          recursos de RSAT y Second Chance, y somos un miembro activo de la Cámara
+          SÃ­. Arizona Family Connections estÃ¡ registrada en SV Directory y en la
+          Supervised Visitation Network. TambiÃ©n aparecemos en las bases de datos de
+          recursos de RSAT y Second Chance, y somos un miembro activo de la CÃ¡mara
           de Comercio de Peoria.
         </p>
       </AccordionItem>
 
-      <AccordionItem title="¿Cuánto cuestan los servicios?">
+      <AccordionItem title="Â¿CuÃ¡nto cuestan los servicios?">
         <p>
           Nuestras tarifas por visitas supervisadas e intercambios monitoreados se
-          cobran por hora y se basan en el número de niños y el tipo de servicio
+          cobran por hora y se basan en el nÃºmero de niÃ±os y el tipo de servicio
           proporcionado. Puede revisar las tarifas actuales en nuestra
-          <a href="/es/#pricing" class="link-inline">sección de precios</a>. Si tiene
-          preguntas sobre su situación específica, con gusto le ayudaremos a revisar
+          <a href="/es/#pricing" class="link-inline">secciÃ³n de precios</a>. Si tiene
+          preguntas sobre su situaciÃ³n especÃ­fica, con gusto le ayudaremos a revisar
           los costos.
         </p>
       </AccordionItem>
 
-      <AccordionItem title="¿Proporcionan transporte para los niños?">
+      <AccordionItem title="Â¿Proporcionan transporte para los niÃ±os?">
         <p>
-          Sí. Un miembro de nuestro equipo puede recoger y llevar a su hijo cuando se
+          SÃ­. Un miembro de nuestro equipo puede recoger y llevar a su hijo cuando se
           necesite transporte para una visita o intercambio. Hay una tarifa de
           transporte, y nuestro personal puede proporcionar asientos de seguridad
-          para niños cuando sea necesario.
+          para niÃ±os cuando sea necesario.
         </p>
         <p>
-          Si el transporte formará parte de su plan, le recomendamos mencionarlo durante
-          el proceso de admisión para que podamos organizarlo con anticipación.
+          Si el transporte formarÃ¡ parte de su plan, le recomendamos mencionarlo durante
+          el proceso de admisiÃ³n para que podamos organizarlo con anticipaciÃ³n.
         </p>
       </AccordionItem>
 
-      <AccordionItem title="¿Qué tipo de servicios ofrecen?">
+      <AccordionItem title="Â¿QuÃ© tipo de servicios ofrecen?">
         <p>
           Ofrecemos una variedad de servicios para apoyar un contacto seguro y estructurado
           entre padres e hijos, incluyendo visitas supervisadas, intercambios monitoreados,
-          visitas virtuales o telefónicas, apoyo en transporte y documentación relacionada
+          visitas virtuales o telefÃ³nicas, apoyo en transporte y documentaciÃ³n relacionada
           como informes objetivos y testimonio en la corte cuando corresponde.
         </p>
         <p>
-          Puede conocer más sobre cada opción en nuestra
-          <a href="/es/services" class="link-inline">página de Servicios</a>.
+          Puede conocer mÃ¡s sobre cada opciÃ³n en nuestra
+          <a href="/es/services" class="link-inline">pÃ¡gina de Servicios</a>.
         </p>
       </AccordionItem>
 
-      <AccordionItem title="¿Dónde se llevan a cabo las visitas?">
+      <AccordionItem title="Â¿DÃ³nde se llevan a cabo las visitas?">
         <p>
-          Las visitas pueden realizarse en diferentes lugares según el caso, incluyendo
+          Las visitas pueden realizarse en diferentes lugares segÃºn el caso, incluyendo
           nuestra oficina, ciertos lugares comunitarios aprobados u otros entornos que
-          promuevan la seguridad y el bienestar del niño.
+          promuevan la seguridad y el bienestar del niÃ±o.
         </p>
         <p>
-          Los lugares específicos se determinan durante el proceso de admisión y
-          programación. Para ver una explicación más detallada sobre los entornos de
+          Los lugares especÃ­ficos se determinan durante el proceso de admisiÃ³n y
+          programaciÃ³n. Para ver una explicaciÃ³n mÃ¡s detallada sobre los entornos de
           visita e intercambio supervisado, visite nuestra
-          <a href="/es/services" class="link-inline">página de Servicios</a>.
+          <a href="/es/services" class="link-inline">pÃ¡gina de Servicios</a>.
         </p>
       </AccordionItem>
 
-      <AccordionItem title="¿Cómo empiezo o programo una visita?">
+      <AccordionItem title="Â¿CÃ³mo empiezo o programo una visita?">
         <p>
-          Para comenzar, complete nuestro formulario seguro de admisión para que podamos
-          revisar los detalles de su caso, las órdenes de la corte y cualquier consideración
-          de seguridad. Una vez que recibamos su información, nuestro equipo se pondrá en
+          Para comenzar, complete nuestro formulario seguro de admisiÃ³n para que podamos
+          revisar los detalles de su caso, las Ã³rdenes de la corte y cualquier consideraciÃ³n
+          de seguridad. Una vez que recibamos su informaciÃ³n, nuestro equipo se pondrÃ¡ en
           contacto con usted para confirmar elegibilidad, revisar los servicios disponibles
           y programar su primera visita.
         </p>
         <p>
           Puede iniciar el proceso en cualquier momento desde nuestra
-          <a href="/es/schedule" class="link-inline">página de Programación</a>.
+          <a href="/es/schedule" class="link-inline">pÃ¡gina de ProgramaciÃ³n</a>.
         </p>
       </AccordionItem>
 
-      <AccordionItem title="¿Ofrecen servicios en español?">
+      <AccordionItem title="Â¿Ofrecen servicios en espaÃ±ol?">
         <p>
-          Sí. Podemos brindar servicios y comunicación tanto en inglés como en español
-          según sea necesario. Si usted o algún miembro de su familia prefiere el español,
-          por favor indíquelo durante la admisión para que podamos planear el apoyo
+          SÃ­. Podemos brindar servicios y comunicaciÃ³n tanto en inglÃ©s como en espaÃ±ol
+          segÃºn sea necesario. Si usted o algÃºn miembro de su familia prefiere el espaÃ±ol,
+          por favor indÃ­quelo durante la admisiÃ³n para que podamos planear el apoyo
           adecuado.
         </p>
         <p>
           Para revisar los servicios disponibles, visite nuestra
-          <a href="/es/services" class="link-inline">página de Servicios</a>, o comience el
-          proceso de admisión desde nuestra
-          <a href="/es/schedule" class="link-inline">página de Programación</a>.
+          <a href="/es/services" class="link-inline">pÃ¡gina de Servicios</a>, o comience el
+          proceso de admisiÃ³n desde nuestra
+          <a href="/es/schedule" class="link-inline">pÃ¡gina de ProgramaciÃ³n</a>.
         </p>
       </AccordionItem>
     </Accordion>
   </FAQSection>
 
   <MainCTA
-    title="¿Listos para dar el siguiente paso juntos?"
+    title="Â¿Listos para dar el siguiente paso juntos?"
     primaryCta={{
       text: "Programar una visita",
       url: "/es/schedule",
     }}
     secondaryCta={{
-      text: "Sobre nuestra organización",
+      text: "Sobre nuestra organizaciÃ³n",
       url: "/es/about",
     }}
     decorationRight="/images/starFilled-watermark.svg"
   />
 </BaseLayout>
+

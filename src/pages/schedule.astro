@@ -64,26 +64,6 @@ import '../styles/theme.root.css';
           <legend class="form-legend">Service Information</legend>
 
           <div class="form-group">
-            <label for="service" class="form-label">Interested in Service: *</label>
-            <select 
-              id="service" 
-              name="service" 
-              class="form-select" 
-              required
-              data-service-param={serviceParam}
-            >
-              <option value="">-- Select a Service --</option>
-              {
-                services.map((service) => (
-                  <option value={service}>
-                    {service}
-                  </option>
-                ))
-              }
-            </select>
-          </div>
-
-          <div class="form-group">
             <label class="form-label">Service Type: *</label>
             <div class="form-checkboxes">
               <label class="form-checkbox">
@@ -178,90 +158,6 @@ import '../styles/theme.root.css';
           </div>
         </fieldset>
 
-        <!-- Children Information -->
-        <fieldset class="form-fieldset">
-          <legend class="form-legend">Children Information</legend>
-
-          <div class="form-group">
-            <p class="form-note">Please provide information for each child</p>
-          </div>
-
-          {[1, 2, 3].map((index) => (
-            <div class="form-child-section">
-              <h4 class="form-subheading">Child {index}</h4>
-              
-              <div class="form-row">
-                <div class="form-group">
-                  <label for={`childName${index}`} class="form-label">Name:</label>
-                  <input type="text" id={`childName${index}`} name={`childName${index}`} class="form-input" />
-                </div>
-                <div class="form-group">
-                  <label for={`childAge${index}`} class="form-label">Age:</label>
-                  <input type="number" id={`childAge${index}`} name={`childAge${index}`} class="form-input" min="0" max="18" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for={`childNeeds${index}`} class="form-label">Special Needs or Considerations:</label>
-                <textarea id={`childNeeds${index}`} name={`childNeeds${index}`} class="form-textarea" rows="2" placeholder="Any relevant information we should know..."></textarea>
-              </div>
-            </div>
-          ))}
-        </fieldset>
-
-        <!-- Safety & Concerns -->
-        <fieldset class="form-fieldset">
-          <legend class="form-legend">Safety & Special Considerations</legend>
-
-          <div class="form-group">
-            <label class="form-label">Are there any concerns about family violence or domestic violence?</label>
-            <div class="form-radios">
-              <label class="form-radio">
-                <input type="radio" name="violenceConcerns" value="yes" />
-                Yes
-              </label>
-              <label class="form-radio">
-                <input type="radio" name="violenceConcerns" value="no" />
-                No
-              </label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Is there a current protective (restraining) order?</label>
-            <div class="form-radios">
-              <label class="form-radio">
-                <input type="radio" name="protectiveOrder" value="yes" />
-                Yes
-              </label>
-              <label class="form-radio">
-                <input type="radio" name="protectiveOrder" value="no" />
-                No
-              </label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="childSafety" class="form-label">Do you have any concerns about the safety of the child/children?</label>
-            <textarea id="childSafety" name="childSafety" class="form-textarea" rows="3" placeholder="Please describe any safety concerns..."></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="parentSafety" class="form-label">Do you have any concerns about your safety when around the other parent?</label>
-            <textarea id="parentSafety" name="parentSafety" class="form-textarea" rows="3" placeholder="Please describe any safety concerns..."></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="healthIssues" class="form-label">Do you or your child/children have any health issues we should know about?</label>
-            <textarea id="healthIssues" name="healthIssues" class="form-textarea" rows="3" placeholder="Please share relevant health information..."></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="additionalInfo" class="form-label">Additional Information:</label>
-            <textarea id="additionalInfo" name="additionalInfo" class="form-textarea" rows="4" placeholder="Please share any additional information you think we should know..."></textarea>
-          </div>
-        </fieldset>
-
         <!-- Attorney Information -->
         <fieldset class="form-fieldset">
           <legend class="form-legend">Legal Representation</legend>
@@ -291,17 +187,21 @@ import '../styles/theme.root.css';
           <legend class="form-legend">Language Preference</legend>
 
           <div class="form-group">
-            <label class="form-label">Can you receive services in English?</label>
-            <div class="form-radios">
-              <label class="form-radio">
-                <input type="radio" name="englishServices" value="yes" required />
-                Yes
-              </label>
-              <label class="form-radio">
-                <input type="radio" name="englishServices" value="no" required />
-                No
-              </label>
-            </div>
+            <label for="languagePreference" class="form-label">Preferred Language: *</label>
+            <select id="languagePreference" name="languagePreference" class="form-select" required>
+              <option value="">-- Select a language --</option>
+              <option value="English">English</option>
+              <option value="Spanish">Spanish</option>
+              <option value="Chinese">Chinese</option>
+              <option value="Tagalog">Tagalog</option>
+              <option value="Vietnamese">Vietnamese</option>
+              <option value="Arabic">Arabic</option>
+              <option value="French">French</option>
+              <option value="Korean">Korean</option>
+              <option value="Russian">Russian</option>
+              <option value="Portuguese">Portuguese</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
         </fieldset>
 

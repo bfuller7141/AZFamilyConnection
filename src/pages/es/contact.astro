@@ -14,14 +14,14 @@ import AccordionItem from '../../components/AccordionItem.astro';
   title="Contacto | Arizona Family Connections"
   description="Póngase en contacto con Arizona Family Connections si tiene preguntas sobre visitas supervisadas o servicios de apoyo familiar. Nuestro equipo está aquí para ayudarle y responderá con prontitud."
   language="es"
-  canonical="/es/contact"
+  canonical="/es/contact/"
 >
   <SubpageHero
     subtitle="Contacto de Arizona Family Connections"
     title="Estamos aquí para ayudarle en cada paso"
     description="¿Tiene preguntas o necesita Comenzar? Comuníquese con nuestro equipo para recibir apoyo atento y orientación clara."
     ctaText="Envíenos un mensaje"
-    ctaUrl="/es/contact#contact-form"
+    ctaUrl="/es/contact/#contact-form"
     decorationLeft="/images/email-watermark.svg"
     decorationRight="/images/phone-watermark.svg"
   />
@@ -224,7 +224,7 @@ import AccordionItem from '../../components/AccordionItem.astro';
         </p>
         <p>
           Puede conocer más sobre cada opción en nuestra
-          <a href="/es/services" class="link-inline">página de Servicios</a>.
+          <a href="/es/services/" class="link-inline">página de Servicios</a>.
         </p>
       </AccordionItem>
 
@@ -238,7 +238,7 @@ import AccordionItem from '../../components/AccordionItem.astro';
           Los lugares específicos se determinan durante el proceso de admisión y
           programación. Para ver una explicación más detallada sobre los entornos de
           visita e intercambio supervisado, visite nuestra
-          <a href="/es/services" class="link-inline">página de Servicios</a>.
+          <a href="/es/services/" class="link-inline">página de Servicios</a>.
         </p>
       </AccordionItem>
 
@@ -252,7 +252,7 @@ import AccordionItem from '../../components/AccordionItem.astro';
         </p>
         <p>
           Puede iniciar el proceso en cualquier momento desde nuestra
-          <a href="/es/schedule" class="link-inline">página de Programación</a>.
+          <a href="/es/schedule/" class="link-inline">página de Programación</a>.
         </p>
       </AccordionItem>
 
@@ -265,9 +265,9 @@ import AccordionItem from '../../components/AccordionItem.astro';
         </p>
         <p>
           Para revisar los servicios disponibles, visite nuestra
-          <a href="/es/services" class="link-inline">página de Servicios</a>, o comience el
+          <a href="/es/services/" class="link-inline">página de Servicios</a>, o comience el
           proceso de admisión desde nuestra
-          <a href="/es/schedule" class="link-inline">página de Programación</a>.
+          <a href="/es/schedule/" class="link-inline">página de Programación</a>.
         </p>
       </AccordionItem>
     </Accordion>
@@ -511,7 +511,7 @@ import AccordionItem from '../../components/AccordionItem.astro';
   }
 </style>
 
-<script is:inline>
+<script is:inline type="module">
   function encode(data) {
     return Object.keys(data)
       .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
@@ -589,3 +589,5 @@ import AccordionItem from '../../components/AccordionItem.astro';
     });
   }
 </script>
+
+

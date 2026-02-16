@@ -33,14 +33,14 @@ const teamLocations = teamLocationsBySlug[page.slug] ?? [page.city];
   title={`${page.city} Supervised Visitation | Arizona Family Connections`}
   description={page.description}
   language="en"
-  canonical={`/locations/${page.slug}`}
+  canonical={`/locations/${page.slug}/`}
 >
   <SubpageHero
     subtitle={page.subtitle}
     title={page.title}
     description={page.description}
     ctaText="Get Started"
-    ctaUrl="/schedule"
+    ctaUrl="/schedule/"
     decorationLeft="/images/cloud-watermark.svg"
     decorationRight="/images/flower-watermark.svg"
   />
@@ -109,7 +109,7 @@ const teamLocations = teamLocationsBySlug[page.slug] ?? [page.city];
         <p>
           Pricing varies case by case based on service type, travel, and case requirements.
           If you have questions about your specific situation, please
-          <a href="/contact" class="link-inline">contact our team</a> and we will walk through expected costs with you.
+          <a href="/contact/" class="link-inline">contact our team</a> and we will walk through expected costs with you.
         </p>
       </AccordionItem>
 
@@ -134,7 +134,7 @@ const teamLocations = teamLocationsBySlug[page.slug] ?? [page.city];
         </p>
         <p>
           You can learn more about each option on our
-          <a href="/services" class="link-inline">Services page</a>.
+          <a href="/services/" class="link-inline">Services page</a>.
         </p>
       </AccordionItem>
 
@@ -142,7 +142,7 @@ const teamLocations = teamLocationsBySlug[page.slug] ?? [page.city];
         <p>
           We provide services across Arizona, including the Phoenix metro area, Flagstaff, Prescott,
           and Kingman. We also provide services in Portland, and we continue adding new locations.
-          For location availability in your area, please <a href="/contact" class="link-inline">contact us</a>.
+          For location availability in your area, please <a href="/contact/" class="link-inline">contact us</a>.
         </p>
       </AccordionItem>
 
@@ -154,7 +154,7 @@ const teamLocations = teamLocationsBySlug[page.slug] ?? [page.city];
         </p>
         <p>
           You can start the process at any time on our
-          <a href="/schedule" class="link-inline">Schedule page</a>.
+          <a href="/schedule/" class="link-inline">Schedule page</a>.
         </p>
       </AccordionItem>
 
@@ -166,8 +166,8 @@ const teamLocations = teamLocationsBySlug[page.slug] ?? [page.city];
         </p>
         <p>
           To review available services, visit our
-          <a href="/services" class="link-inline">Services page</a>, or begin the intake process on our
-          <a href="/schedule" class="link-inline">Schedule page</a>.
+          <a href="/services/" class="link-inline">Services page</a>, or begin the intake process on our
+          <a href="/schedule/" class="link-inline">Schedule page</a>.
         </p>
       </AccordionItem>
     </Accordion>
@@ -178,11 +178,11 @@ const teamLocations = teamLocationsBySlug[page.slug] ?? [page.city];
     description="Our team is here to help you choose the right visitation option for your case."
     primaryCta={{
       text: "Get Started",
-      url: "/schedule",
+      url: "/schedule/",
     }}
     secondaryCta={{
       text: "Contact Us",
-      url: "/contact",
+      url: "/contact/",
     }}
     decorationRight="/images/starFilled-watermark.svg"
   />

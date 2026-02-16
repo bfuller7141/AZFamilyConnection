@@ -1,12 +1,7 @@
 ---
-interface Props {
-  label?: string;
-}
-
-const { label = "Accordion" } = Astro.props;
 ---
 
-<div class="accordion" role="region" aria-label={label}>
+<div class="accordion">
   <slot />
 </div>
 
@@ -18,7 +13,7 @@ const { label = "Accordion" } = Astro.props;
   }
 </style>
 
-<script is:inline>
+<script is:inline type="module">
   document.addEventListener("click", (e) => {
     const button = e.target?.closest(".accordion-trigger");
     if (!button) return;

@@ -169,7 +169,7 @@ const headingId = `accordion-section-title-${Math.random()
   }
 </style>
 
-<script is:inline>
+<script is:inline type="module">
   document.addEventListener("click", (e) => {
     const button = e.target?.closest(".accordion-trigger");
     if (!button) return;

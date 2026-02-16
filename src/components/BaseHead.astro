@@ -53,12 +53,39 @@ if (ogImage) {
 }
 
 const SITE_URL =
-  import.meta.env.SITE ?? "https://arizonafamilyconnections.org";
+  import.meta.env.SITE ?? "https://arizonafamilyconnections.com";
 const SITE_NAME =
   import.meta.env.SITE_NAME ?? "Arizona Family Connections";
 const SITE_LOCALE = language;
 
-const canonicalUrl = canonical ? `${SITE_URL}${canonical}` : undefined;
+const ensureTrailingSlash = (pathname: string) => {
+  if (pathname === "/") return pathname;
+  if (/\.[a-z0-9]+$/i.test(pathname)) return pathname;
+  return pathname.endsWith("/") ? pathname : `${pathname}/`;
+};
+
+const toAbsoluteCanonical = (value: string) => {
+  try {
+    const parsed = new URL(value);
+    parsed.pathname = ensureTrailingSlash(parsed.pathname);
+    parsed.search = "";
+    parsed.hash = "";
+    return parsed.toString();
+  } catch {
+    const normalizedPath =
+      ensureTrailingSlash(value.startsWith("/") ? value : `/${value}`);
+    return new URL(normalizedPath, SITE_URL).toString();
+  }
+};
+
+const fallbackCanonicalUrl = new URL(
+  ensureTrailingSlash(Astro.url.pathname),
+  SITE_URL
+).toString();
+
+const canonicalUrl = canonical
+  ? toAbsoluteCanonical(canonical)
+  : fallbackCanonicalUrl;
 
 const fullOgImageUrl = ogImageUrl
   ? ogImageUrl.startsWith("http")

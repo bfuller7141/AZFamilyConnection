@@ -2,21 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SubpageHero from '../components/SubpageHero.astro';
 
-const serviceParam = Astro.url.searchParams.get('service') || '';
-
-const services = [
-  "Off-Site Supervised Visitation",
-  "Supervised Exchange",
-  "Virtual Supervised Visitation",
-  "Court Testimony",
-  "Objective Reports",
-  "Supervised Visitation (East Valley)",
-  "Therapeutic Visitation",
-  "Supervised Video/Telephonic Visitation",
-  "Safe Exchange",
-  "Rule 81 Compliance",
-];
-
 import '../styles/base.css';
 import '../styles/theme.root.css';
 ---
@@ -32,7 +17,7 @@ import '../styles/theme.root.css';
     title="Start Your Visitation Journey"
     description="Fill out the form below to begin the intake process. Our team will review your information and contact you to discuss the next steps."
     ctaText="Complete Form"
-    ctaUrl="/schedule#intake-form"
+    ctaUrl="/schedule/#intake-form"
     decorationLeft="/images/calendar-watermark.svg"
     decorationRight="/images/checkbox-watermark.svg"
   />
@@ -377,17 +362,7 @@ import '../styles/theme.root.css';
   }
 </style>
 
-<script is:inline>
-  // Preserve service pre-selection from query string
-  (function () {
-    const params = new URLSearchParams(window.location.search);
-    const serviceParam = params.get("service");
-    const serviceSelect = document.getElementById("service");
-    if (serviceParam && serviceSelect) {
-      serviceSelect.value = decodeURIComponent(serviceParam);
-    }
-  })();
-
+<script is:inline type="module">
   function encodeFormData(data) {
     const pairs = [];
     for (const [key, value] of data.entries()) {
@@ -454,13 +429,6 @@ import '../styles/theme.root.css';
             }
           }, 500);
           scheduleForm.reset();
-          // Re-apply service preselect from URL after reset (optional)
-          const params = new URLSearchParams(window.location.search);
-          const serviceParam = params.get("service");
-          const serviceSelect = document.getElementById("service");
-          if (serviceParam && serviceSelect) {
-            serviceSelect.value = decodeURIComponent(serviceParam);
-          }
         })
         .catch((error) => {
           console.error('Schedule form submission error:', error);
@@ -475,3 +443,4 @@ import '../styles/theme.root.css';
     });
   }
 </script>
+

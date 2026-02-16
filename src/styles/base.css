@@ -438,7 +438,7 @@ button,
   border: 1px solid transparent;
   background: var(--color-primary);
   color: var(--color-primary-contrast);
-  font-weight: var(--weight-medium, 700);
+  font-weight: var(--weight-bold, 700);
   box-shadow: var(--shadow-elev-1);
   cursor: pointer;
   text-decoration: none;
@@ -586,7 +586,7 @@ button.btn-text,
 .btn.btn-text {
   background: transparent;
   color: var(--color-accent);
-  font-weight: 500;
+  font-weight: var(--weight-bold, 700);
   box-shadow: none;
   transition: all var(--duration-std) var(--ease-emphasized);
 }
@@ -602,6 +602,7 @@ button.btn-text-inverse,
 .btn.btn-text-inverse {
   background: transparent;
   color: var(--color-primary-contrast);
+  font-weight: var(--weight-bold, 700);
   box-shadow: none;
   transition:
     color var(--duration-std) var(--ease-emphasized),

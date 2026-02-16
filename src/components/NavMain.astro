@@ -15,13 +15,13 @@ const {
   logoUrl = "/images/logo.svg",
   logoAlt = "Arizona Family Connections",
   ctaText = "Get Started",
-  ctaUrl = "/schedule",
+  ctaUrl = "/schedule/",
   menuItems = [
     { label: "Home", url: "/" },
-    { label: "About", url: "/about" },
-    { label: "Services", url: "/services" },
-    { label: "Resources", url: "/resources" },
-    { label: "Contact", url: "/contact" },
+    { label: "About", url: "/about/" },
+    { label: "Services", url: "/services/" },
+    { label: "Resources", url: "/resources/" },
+    { label: "Contact", url: "/contact/" },
   ],
   currentLanguage = "en",
 } = Astro.props;
@@ -36,9 +36,15 @@ const basePath =
 
 const cleanPath = basePath === "" ? "/" : basePath;
 
+const withTrailingSlash = (path: string) => {
+  const normalized = path.replace(/\/+$/, "");
+  return normalized === "" || normalized === "/" ? "/" : `${normalized}/`;
+};
+
 // Language paths for the toggle (preserve current route)
-const englishPath = cleanPath;
-const spanishPath = cleanPath === "/" ? "/es/" : `/es${cleanPath}`;
+const englishPath = withTrailingSlash(cleanPath);
+const spanishPath =
+  cleanPath === "/" ? "/es/" : withTrailingSlash(`/es${cleanPath}`);
 
 // Determine if on home page
 const isHomePage = cleanPath === "/";
@@ -522,7 +528,7 @@ const getIsActive = (url: string) => {
   }
 </style>
 
-<script is:inline>
+<script is:inline type="module">
   function setupNavbar() {
     const hamburgerBtn = document.getElementById("hamburgerBtn");
     const mobileMenu = document.getElementById("mobileMenu");
@@ -592,3 +598,4 @@ const getIsActive = (url: string) => {
 
   document.addEventListener("astro:after-swap", setupNavbar);
 </script>
+

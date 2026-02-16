@@ -24,7 +24,7 @@ const {
   filterCategories,
   decorationLeft,
   decorationRight,
-  allResourcesUrl = "/resources",
+  allResourcesUrl = "/resources/",
   allResourcesText = "View All Resources",
   showDivider = false,
   headerPadding = "md",
@@ -175,6 +175,13 @@ const descriptionId = description
                 class="resource-link"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`${link.label} - ${doc.data.title}${
+                  link.language === "es"
+                    ? " (Spanish)"
+                    : link.language === "en"
+                      ? " (English)"
+                      : ""
+                } (opens in a new tab)`}
               >
                 <span class="link-text">
                   {link.label}
@@ -539,3 +546,4 @@ const descriptionId = description
     }
   }
 </style>
+

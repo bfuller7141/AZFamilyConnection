@@ -10,10 +10,10 @@ const translations: Record<Language, I18nStrings> = {
     language: 'Language',
     menuItems: [
       { label: 'Home', url: '/' },
-      { label: 'About', url: '/about' },
-      { label: 'Services', url: '/services' },
-      { label: 'Resources', url: '/resources' },
-      { label: 'Contact', url: '/contact' },
+      { label: 'About', url: '/about/' },
+      { label: 'Services', url: '/services/' },
+      { label: 'Resources', url: '/resources/' },
+      { label: 'Contact', url: '/contact/' },
     ],
   },
   es: {
@@ -25,12 +25,13 @@ const translations: Record<Language, I18nStrings> = {
     language: 'Idioma',
     menuItems: [
       { label: 'Inicio', url: '/es/' },
-      { label: 'Acerca de', url: '/es/about' },
-      { label: 'Servicios', url: '/es/services' },
-      { label: 'Recursos', url: '/es/resources' },
-      { label: 'Contacto', url: '/es/contact' },
+      { label: 'Acerca de', url: '/es/about/' },
+      { label: 'Servicios', url: '/es/services/' },
+      { label: 'Recursos', url: '/es/resources/' },
+      { label: 'Contacto', url: '/es/contact/' },
     ],
   },
 };
 
 export default translations;
+

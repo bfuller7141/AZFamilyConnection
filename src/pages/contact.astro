@@ -14,14 +14,14 @@ import AccordionItem from '../components/AccordionItem.astro';
   title="Contact Arizona Family Connections | Reach Our Team"
   description="Contact Arizona Family Connections with questions about supervised visitation or family support services. Our team is here to help and will respond promptly."
   language="en"
-  canonical="/contact"
+  canonical="/contact/"
 >
   <SubpageHero
     subtitle="Contact Arizona Family Connections"
     title="We’re Here to Help Every Step of the Way"
     description="Have questions or need to get started with services? Reach out to our team for caring support and clear guidance."
     ctaText="Send us a Message"
-    ctaUrl="/contact#contact-form"
+    ctaUrl="/contact/#contact-form"
     decorationLeft="/images/email-watermark.svg"
     decorationRight="/images/phone-watermark.svg"
   />
@@ -214,7 +214,7 @@ import AccordionItem from '../components/AccordionItem.astro';
         </p>
         <p>
           You can learn more about each option on our
-          <a href="/services" class="link-inline">Services page</a>.
+          <a href="/services/" class="link-inline">Services page</a>.
         </p>
       </AccordionItem>
 
@@ -226,7 +226,7 @@ import AccordionItem from '../components/AccordionItem.astro';
         <p>
           Specific locations are determined during the intake and scheduling process. For a full overview of
           our supervised visitation and exchange settings, please visit our
-          <a href="/services" class="link-inline">Services page</a>.
+          <a href="/services/" class="link-inline">Services page</a>.
         </p>
       </AccordionItem>
 
@@ -238,7 +238,7 @@ import AccordionItem from '../components/AccordionItem.astro';
         </p>
         <p>
           You can start the process at any time on our
-          <a href="/schedule" class="link-inline">Schedule page</a>.
+          <a href="/schedule/" class="link-inline">Schedule page</a>.
         </p>
       </AccordionItem>
 
@@ -250,8 +250,8 @@ import AccordionItem from '../components/AccordionItem.astro';
         </p>
         <p>
           To review available services, visit our
-          <a href="/services" class="link-inline">Services page</a>, or begin the intake process on our
-          <a href="/schedule" class="link-inline">Schedule page</a>.
+          <a href="/services/" class="link-inline">Services page</a>, or begin the intake process on our
+          <a href="/schedule/" class="link-inline">Schedule page</a>.
         </p>
       </AccordionItem>
     </Accordion>
@@ -495,7 +495,7 @@ import AccordionItem from '../components/AccordionItem.astro';
   }
 </style>
 
-<script is:inline>
+<script is:inline type="module">
   function encode(data) {
     return Object.keys(data)
       .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
@@ -573,3 +573,5 @@ import AccordionItem from '../components/AccordionItem.astro';
     });
   }
 </script>
+
+

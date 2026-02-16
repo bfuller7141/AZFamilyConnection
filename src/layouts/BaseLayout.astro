@@ -46,7 +46,7 @@ const i18n = getI18n(currentLanguage);
       logoUrl="/images/logo.svg"
       logoAlt={i18n.logoAlt}
       ctaText={i18n.cta}
-      ctaUrl={currentLanguage === 'en' ? 'schedule' : '/es/schedule'}
+      ctaUrl={currentLanguage === 'en' ? '/schedule/' : '/es/schedule/'}
       menuItems={i18n.menuItems}
       currentLanguage={currentLanguage}
     />
@@ -101,3 +101,5 @@ const i18n = getI18n(currentLanguage);
     box-shadow: var(--focus-ring);
   }
 </style>
+
+

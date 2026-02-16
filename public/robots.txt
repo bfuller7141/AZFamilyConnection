@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://azfamilyconnections.com/sitemap-index.xml
 

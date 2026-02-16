@@ -1,0 +1,214 @@
+---
+import { getCollection } from "astro:content";
+
+interface Props {
+  title?: string;
+  description?: string;
+  language?: "en" | "es";
+  locations?: string[];
+  sectionId?: string;
+}
+
+const {
+  title = "Meet Our Team",
+  description = "Get to know the people behind our family support services.",
+  language = "en",
+  locations,
+  sectionId = "team-members",
+} = Astro.props;
+
+const allTeamMembers = (await getCollection("team"))
+  .filter((entry) => entry.data.language === language || entry.data.language === "both")
+  .filter((entry) => (locations && locations.length > 0 ? locations.includes(entry.data.location) : true))
+  .sort((a, b) => {
+    const orderDiff = a.data.order - b.data.order;
+    if (orderDiff !== 0) return orderDiff;
+    return a.data.name.localeCompare(b.data.name);
+  });
+
+const toLocationKey = (location: string) =>
+  location.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+const locationOrder: string[] = [];
+const membersByLocation = new Map<string, typeof allTeamMembers>();
+
+for (const member of allTeamMembers) {
+  const location = member.data.location;
+  if (!membersByLocation.has(location)) {
+    membersByLocation.set(location, []);
+    if (!locations || locations.length === 0) {
+      locationOrder.push(location);
+    }
+  }
+  membersByLocation.get(location)!.push(member);
+}
+
+if (locations && locations.length > 0) {
+  locationOrder.push(...locations.filter((location) => membersByLocation.has(location)));
+}
+---
+
+{locationOrder.length > 0 && (
+  <section id={sectionId} class="team-members section-y-lg" aria-labelledby="team-members-title">
+  <div class="container team-members__container">
+    <header class="team-members__header">
+      <h2 id="team-members-title">{title}</h2>
+      <p>{description}</p>
+    </header>
+
+    {locationOrder.map((location) => (
+      <section class={`team-location team-location--${toLocationKey(location)}`} aria-label={`Team members in ${location}`}>
+        <h3 class="team-location__title">{location}</h3>
+        <div class="team-members__list">
+          {membersByLocation.get(location)?.map((member) => (
+            <details class="team-accordion-item">
+              <summary class="team-accordion-trigger">{member.data.name}</summary>
+              <div class="team-accordion-content">
+                <p class="team-card__bio">{member.data.bio}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+  </section>
+)}
+
+<style>
+  .team-members {
+    background: var(--color-surface, #ffffff);
+  }
+
+  .team-members__container {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .team-members__header {
+    max-width: 70ch;
+    text-align: center;
+    margin-inline: auto;
+  }
+
+  .team-members__header p {
+    margin-bottom: 0;
+    color: var(--color-text-secondary);
+  }
+
+  .team-location {
+    border-top: 2px solid var(--team-accent, var(--color-accent));
+    padding-top: var(--space-4);
+  }
+
+  .team-location__title {
+    margin: 0 0 var(--space-4);
+    color: var(--team-accent, var(--color-accent));
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: var(--text-h5);
+  }
+
+  .team-members__list {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: var(--space-4);
+  }
+
+  .team-card__bio {
+    margin: 0;
+    color: var(--color-text);
+  }
+
+  .team-accordion-item {
+    border: 1px solid color-mix(in srgb, var(--team-accent, var(--color-accent)) 45%, var(--color-border));
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--team-accent, var(--color-accent)) 8%, var(--color-surface));
+    overflow: hidden;
+    align-self: start;
+  }
+
+  .team-accordion-item[open] {
+    border-color: var(--team-accent, var(--color-accent));
+  }
+
+  .team-accordion-trigger {
+    list-style: none;
+    cursor: pointer;
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-base);
+    font-weight: var(--weight-bold);
+    color: var(--team-accent, var(--color-primary));
+    background: transparent;
+  }
+
+  .team-accordion-trigger::-webkit-details-marker {
+    display: none;
+  }
+
+  .team-accordion-trigger::after {
+    content: "+";
+    float: right;
+    font-weight: var(--weight-bold);
+  }
+
+  .team-accordion-item[open] .team-accordion-trigger::after {
+    content: "-";
+  }
+
+  .team-accordion-trigger:hover {
+    background: color-mix(in srgb, var(--team-accent, var(--color-accent)) 12%, var(--color-surface));
+  }
+
+  .team-accordion-content {
+    padding: 0 var(--space-4) var(--space-4);
+  }
+
+  .team-location--phoenix {
+    --team-accent: var(--color-primary);
+  }
+
+  .team-location--east-valley {
+    --team-accent: var(--color-accent);
+  }
+
+  .team-location--west-valley {
+    --team-accent: var(--color-success);
+  }
+
+  .team-location--navajo-county-snowflake-pinetop {
+    --team-accent: var(--color-warning);
+  }
+
+  .team-location--portland {
+    --team-accent: var(--color-tertiary);
+  }
+
+  @media (min-width: 1024px) {
+    .team-members__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
+
+<script is:inline>
+  const teamSections = document.querySelectorAll(".team-members");
+
+  teamSections.forEach((section) => {
+    const items = Array.from(section.querySelectorAll(".team-accordion-item"));
+
+    items.forEach((item) => {
+      item.addEventListener("toggle", () => {
+        if (!(item instanceof HTMLDetailsElement) || !item.open) return;
+
+        items.forEach((other) => {
+          if (other !== item && other instanceof HTMLDetailsElement) {
+            other.open = false;
+          }
+        });
+      });
+    });
+  });
+</script>

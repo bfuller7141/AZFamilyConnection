@@ -8,6 +8,7 @@ import { locationPagesEs } from "../../../data/locationPages";
 import FAQSection from "../../../components/FAQSection.astro";
 import Accordion from "../../../components/Accordion.astro";
 import AccordionItem from "../../../components/AccordionItem.astro";
+import TeamMembersSection from "../../../components/TeamMembersSection.astro";
 
 import "../../../styles/base.css";
 import "../../../styles/theme.root.css";
@@ -20,6 +21,12 @@ export function getStaticPaths() {
 }
 
 const { page } = Astro.props;
+const teamLocationsBySlug: Record<string, string[]> = {
+  phoenix: ["Phoenix", "East Valley", "West Valley", "Navajo County - Snowflake / Pinetop"],
+  kingman: ["Kingman"],
+  prescott: ["Prescott"],
+};
+const teamLocations = teamLocationsBySlug[page.slug] ?? [page.city];
 ---
 
 <BaseLayout
@@ -32,7 +39,7 @@ const { page } = Astro.props;
     subtitle={page.subtitle}
     title={page.title}
     description={page.description}
-    ctaText="Programar una visita"
+    ctaText="Comenzar"
     ctaUrl="/es/schedule"
     decorationLeft="/images/cloud-watermark.svg"
     decorationRight="/images/flower-watermark.svg"
@@ -77,6 +84,12 @@ const { page } = Astro.props;
     ]}
     decorationLeft="/images/sun-watermark.svg"
     decorationRight="/images/pinkDots-watermark.svg"
+  />
+  <TeamMembersSection
+    title={`Conozca al equipo de ${page.city}`}
+    description="Conozca a los miembros del equipo que apoyan a las familias en su area."
+    language="es"
+    locations={teamLocations}
   />
 
   <FAQSection
@@ -137,13 +150,13 @@ const { page } = Astro.props;
         </p>
       </AccordionItem>
 
-      <AccordionItem title="Como empiezo o programo una visita?">
+      <AccordionItem title="Como empiezo?">
         <p>
           Para comenzar, complete nuestro formulario seguro de admision para que podamos
           revisar los detalles de su caso, las ordenes de la corte y cualquier consideracion
           de seguridad. Una vez que recibamos su informacion, nuestro equipo se pondra en
           contacto con usted para confirmar elegibilidad, revisar los servicios disponibles
-          y programar su primera visita.
+          y comenzar con su primera visita.
         </p>
         <p>
           Puede iniciar el proceso en cualquier momento desde nuestra
@@ -172,7 +185,7 @@ const { page } = Astro.props;
     title={`Necesita servicios en ${page.city}?`}
     description="Nuestro equipo puede ayudarle a elegir la mejor opcion de visita para su caso."
     primaryCta={{
-      text: "Programar una visita",
+      text: "Comenzar",
       url: "/es/schedule",
     }}
     secondaryCta={{

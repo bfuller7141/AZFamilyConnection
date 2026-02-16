@@ -11,12 +11,31 @@ const { language = "en", canonical } = Astro.props;
 const i18n = getI18n(language);
 const currentYear = new Date().getFullYear();
 const officeLocationTitle = language === "es" ? "Ubicaciones" : "Locations";
+const quickLinksTitle = language === "es" ? "Enlaces rápidos" : "Quick Links";
+const contactTitle = language === "es" ? "Contacto" : "Contact";
+const phoneLabel = language === "es" ? "Teléfono" : "Phone";
+const emailLabel = "Email";
+const officeHoursLabel = language === "es" ? "Horario de oficina" : "Office Hours";
+const weekdayHours = language === "es" ? "Lun - Vie: 9:00 AM - 6:00 PM" : "Mon - Fri: 9:00 AM - 6:00 PM";
+const weekendHours = language === "es" ? "Sáb - Dom: Con cita previa" : "Sat - Sun: By Appointment";
+const googleReviewsText = language === "es" ? "Reseñas de Google" : "Google reviews";
+const accessibilityText = language === "es" ? "Accesibilidad" : "Accessibility";
+const privacyText = language === "es" ? "Política de privacidad" : "Privacy Policy";
+const termsText = language === "es" ? "Términos y condiciones" : "Terms & Conditions";
+const rightsReservedText =
+  language === "es"
+    ? "Arizona Family Connections. Todos los derechos reservados."
+    : "Arizona Family Connections. All rights reserved.";
+const footerAriaLabel = language === "es" ? "Pie del sitio" : "Site footer";
+const footerNavAriaLabel = language === "es" ? "Navegación del pie de página" : "Footer navigation";
+const legalAriaLabel = language === "es" ? "Enlaces legales" : "Legal links";
 const officeLocations = [
   { label: "Phoenix", slug: "phoenix" },
   { label: "Kingman", slug: "kingman" },
   { label: "Prescott", slug: "prescott" },
   { label: "Portland", slug: "portland" },
 ];
+const googleReviewsUrl = "https://www.google.com/search?q=Arizona+Family+Connections+Reviews";
 const legalBasePath = language === "es" ? "/es/legal" : "/legal";
 const locationBasePath = language === "es" ? "/es/locations" : "/locations";
 
@@ -44,7 +63,7 @@ const normalizedBasePath = basePath === "" ? "/" : basePath;
 const esUrl = normalizedBasePath === "/" ? "/es/" : `/es${normalizedBasePath}`;
 ---
 
-<footer class="footer" aria-label="Site footer">
+<footer class="footer" aria-label={footerAriaLabel}>
   <div class="footer-container">
     <!-- Main Footer Content -->
     <div class="footer-content">
@@ -106,6 +125,9 @@ const esUrl = normalizedBasePath === "/" ? "/es/" : `/es${normalizedBasePath}`;
             </svg>
           </a>
         </div>
+        <a href={googleReviewsUrl} class="reviews-link" target="_blank" rel="noopener noreferrer">
+          {googleReviewsText}
+        </a>
 
         <div class="footer-language">
           <p class="setting-label">{i18n.language}</p>
@@ -130,8 +152,8 @@ const esUrl = normalizedBasePath === "/" ? "/es/" : `/es${normalizedBasePath}`;
 
       <!-- Quick Links -->
       <div class="footer-section footer-section-links">
-        <h3 class="footer-section-title">Quick Links</h3>
-        <nav aria-label="Footer navigation">
+        <h3 class="footer-section-title">{quickLinksTitle}</h3>
+        <nav aria-label={footerNavAriaLabel}>
           <ul class="footer-links">
             {i18n.menuItems.map((item: { url: string; label: string }) => (
               <li>
@@ -144,22 +166,23 @@ const esUrl = normalizedBasePath === "/" ? "/es/" : `/es${normalizedBasePath}`;
 
       <!-- Contact Info -->
       <div class="footer-section">
-        <h3 class="footer-section-title">Contact</h3>
+        <h3 class="footer-section-title">{contactTitle}</h3>
         <div class="contact-info">
           <div class="contact-item">
-            <p class="contact-label">Phone</p>
-            <a href="tel:+14807646689">(480) 764-6689</a>
+            <p class="contact-label">{phoneLabel}</p>
+            <a href="tel:+14807646689">Phoenix: (480) 764-6689</a>
+            <a href="tel:+19712263820">Portland: (971) 226-3820</a>
           </div>
           <div class="contact-item">
-            <p class="contact-label">Email</p>
+            <p class="contact-label">{emailLabel}</p>
             <a href="mailto:contact@arizonafamilyconnections.com">
               contact@arizonafamilyconnections.com
             </a>
           </div>
           <div class="contact-item">
-            <p class="contact-label">Office Hours</p>
-            <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
-            <p>Sat - Sun: By Appointment</p>
+            <p class="contact-label">{officeHoursLabel}</p>
+            <p>{weekdayHours}</p>
+            <p>{weekendHours}</p>
           </div>
         </div>
       </div>
@@ -181,13 +204,12 @@ const esUrl = normalizedBasePath === "/" ? "/es/" : `/es${normalizedBasePath}`;
     <div class="footer-bottom">
       <div class="footer-bottom-content">
         <p class="copyright">
-          &copy; {currentYear} Arizona Family Connections. All rights
-          reserved.
+          &copy; {currentYear} {rightsReservedText}
         </p>
-        <nav class="legal-links" aria-label="Legal links">
-          <a href={`${legalBasePath}/accessibility`}>Accessibility</a>
-          <a href={`${legalBasePath}/privacy`}>Privacy Policy</a>
-          <a href={`${legalBasePath}/terms`}>Terms &amp; Conditions</a>
+        <nav class="legal-links" aria-label={legalAriaLabel}>
+          <a href={`${legalBasePath}/accessibility`}>{accessibilityText}</a>
+          <a href={`${legalBasePath}/privacy`}>{privacyText}</a>
+          <a href={`${legalBasePath}/terms`}>{termsText}</a>
         </nav>
       </div>
     </div>
@@ -256,6 +278,39 @@ const esUrl = normalizedBasePath === "/" ? "/es/" : `/es${normalizedBasePath}`;
     flex-direction: row;
     gap: var(--space-3);
     margin-top: var(--space-2);
+  }
+
+  .reviews-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    margin-top: var(--space-2);
+    padding: 10px 14px;
+    background: var(--brand-primary-500);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    color: #fff;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    box-shadow: var(--shadow-elev-1);
+    transition:
+      background-color var(--duration-std) var(--ease-standard),
+      transform var(--duration-std) var(--ease-standard),
+      box-shadow var(--duration-std) var(--ease-standard);
+  }
+
+  .reviews-link:hover {
+    background: var(--brand-secondary-600);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-elev-2);
+  }
+
+  .reviews-link:focus-visible {
+    outline: 0;
+    box-shadow: var(--focus-ring);
   }
 
   .social-link {

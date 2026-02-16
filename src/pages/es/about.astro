@@ -8,6 +8,7 @@ import FAQSection from '../../components/FAQSection.astro';
 import MainCTA from '../../components/MainCTA.astro';
 import Accordion from '../../components/Accordion.astro';
 import AccordionItem from '../../components/AccordionItem.astro';
+import TeamMembersSection from '../../components/TeamMembersSection.astro';
 
 import '../../styles/base.css';
 import '../../styles/theme.root.css';
@@ -79,12 +80,18 @@ import '../../styles/theme.root.css';
     imageAlt="Padre riendo mientras empuja a su hijo pequeño en una canasta de ropa en la sala, los dos disfrutando de un momento de juego."
     title="Un equipo de profesionales apasionados"
     description="Nuestros supervisores son imparciales y transparentes, lo que ayuda a que las familias se sientan apoyadas y respetadas en cada visita. Con más de 14 años de experiencia combinada trabajando con familias, equipos legales y el sistema judicial de Arizona, sabemos cómo guiar cada proceso de reunificación con cuidado y profesionalismo. Ya sea que sus necesidades sean a corto plazo o continuas, nuestro equipo está aquí para asegurar que cada visita sea segura, constante y centrada en la conexión."
-    ctaText="Programar una visita"
-    ctaUrl="/es/schedule"
+    ctaText="Conoce a nuestro equipo"
+    ctaUrl="/es/about#conoce-al-equipo"
     buttonVariant="primary"
     imagePosition="left"
     decorationLeft="/images/pinkDots-watermark.svg"
     decorationRight="/images/puzzleYellow-watermark.svg"
+  />
+  <TeamMembersSection
+    sectionId="conoce-al-equipo"
+    title="Conoce a nuestro equipo"
+    description="Nuestro equipo aporta experiencia, compasión y consistencia para apoyar a cada familia."
+    language="es"
   />
   <FAQSection
     title="Preguntas frecuentes"
@@ -151,13 +158,13 @@ import '../../styles/theme.root.css';
         </p>
       </AccordionItem>
 
-      <AccordionItem title="¿Cómo empiezo o programo una visita?">
+      <AccordionItem title="¿Cómo empiezo?">
         <p>
           Para comenzar, complete nuestro formulario seguro de admisión para que podamos
           revisar los detalles de su caso, las órdenes de la corte y cualquier consideración
           de seguridad. Una vez que recibamos su información, nuestro equipo se pondrá en
           contacto con usted para confirmar elegibilidad, revisar los servicios disponibles
-          y programar su primera visita.
+          y comenzar con su primera visita.
         </p>
         <p>
           Puede iniciar el proceso en cualquier momento desde nuestra
@@ -184,7 +191,7 @@ import '../../styles/theme.root.css';
   <MainCTA
     title="Listos para dar el siguiente paso juntos"
     primaryCta={{
-      text: "Programar una visita",
+      text: "Comenzar",
       url: "/es/schedule",
     }}
     secondaryCta={{

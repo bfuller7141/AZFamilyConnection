@@ -19,7 +19,7 @@ import AccordionItem from '../../components/AccordionItem.astro';
   <SubpageHero
     subtitle="Contacto de Arizona Family Connections"
     title="Estamos aquí para ayudarle en cada paso"
-    description="¿Tiene preguntas o necesita programar una visita? Comuníquese con nuestro equipo para recibir apoyo atento y orientación clara."
+    description="¿Tiene preguntas o necesita Comenzar? Comuníquese con nuestro equipo para recibir apoyo atento y orientación clara."
     ctaText="Envíenos un mensaje"
     ctaUrl="/es/contact#contact-form"
     decorationLeft="/images/email-watermark.svg"
@@ -54,7 +54,7 @@ import AccordionItem from '../../components/AccordionItem.astro';
           >
             contact@azfamilyconnections.com
           </a>
-          <p class="contact-card-response">Respondemos dentro de 1–2 días hábiles</p>
+          <p class="contact-card-response">Nos pondremos en contacto en cuanto nos sea posible.</p>
         </div>
 
         <div class="contact-card">
@@ -242,13 +242,13 @@ import AccordionItem from '../../components/AccordionItem.astro';
         </p>
       </AccordionItem>
 
-      <AccordionItem title="¿Cómo empiezo o programo una visita?">
+      <AccordionItem title="¿Cómo empiezo?">
         <p>
           Para comenzar, complete nuestro formulario seguro de admisión para que podamos
           revisar los detalles de su caso, las órdenes de la corte y cualquier consideración
           de seguridad. Una vez que recibamos su información, nuestro equipo se pondrá en
           contacto con usted para confirmar elegibilidad, revisar los servicios disponibles
-          y programar su primera visita.
+          y comenzar con su primera visita.
         </p>
         <p>
           Puede iniciar el proceso en cualquier momento desde nuestra
@@ -385,6 +385,12 @@ import AccordionItem from '../../components/AccordionItem.astro';
     font-style: italic;
   }
 
+  .submit-success {
+    background: var(--color-success) !important;
+    border-color: var(--color-success) !important;
+    color: var(--color-success-contrast, #fff) !important;
+  }
+
   .contact-form-wrapper {
     background: linear-gradient(
       135deg,
@@ -513,6 +519,12 @@ import AccordionItem from '../../components/AccordionItem.astro';
   }
 
   const form = document.querySelector('.contact-form');
+  const submitButton = form instanceof HTMLFormElement
+    ? form.querySelector('button[type="submit"]')
+    : null;
+  const defaultSubmitText = submitButton instanceof HTMLButtonElement
+    ? submitButton.textContent || 'Enviar mensaje'
+    : 'Enviar mensaje';
 
   if (form instanceof HTMLFormElement) {
     form.addEventListener('submit', (event) => {
@@ -540,6 +552,13 @@ import AccordionItem from '../../components/AccordionItem.astro';
         customSubjectInput.value = customSubject;
       }
 
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.classList.remove('submit-success');
+        submitButton.classList.add('btn-primary');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+      }
+
       fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -547,11 +566,24 @@ import AccordionItem from '../../components/AccordionItem.astro';
       })
         .then(() => {
           console.log('Formulario enviado:', data);
-          alert('¡Gracias por su mensaje! Nos pondremos en contacto pronto.');
+          setTimeout(() => {
+            if (submitButton instanceof HTMLButtonElement) {
+              submitButton.classList.remove('btn-primary');
+              submitButton.classList.add('submit-success');
+              submitButton.textContent = 'Thank you for your inquiry';
+              submitButton.disabled = false;
+            }
+          }, 500);
           form.reset();
         })
         .catch((error) => {
           console.error('Error al enviar el formulario:', error);
+          if (submitButton instanceof HTMLButtonElement) {
+            submitButton.classList.remove('submit-success');
+            submitButton.classList.add('btn-primary');
+            submitButton.textContent = defaultSubmitText;
+            submitButton.disabled = false;
+          }
           alert('Hubo un problema al enviar el formulario. Por favor, inténtelo de nuevo.');
         });
     });

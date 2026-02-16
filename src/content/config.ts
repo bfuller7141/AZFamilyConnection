@@ -34,7 +34,19 @@ const legalCollection = defineCollection({
   }),
 });
 
+const teamCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    name: z.string(),
+    location: z.string(),
+    bio: z.string(),
+    language: z.enum(["en", "es", "both"]).default("en"),
+    order: z.number().int().nonnegative().default(999),
+  }),
+});
+
 export const collections = {
   resources: resourcesCollection,
   legal: legalCollection,
+  team: teamCollection,
 };

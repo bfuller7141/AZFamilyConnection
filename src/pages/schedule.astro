@@ -28,10 +28,10 @@ import '../styles/theme.root.css';
   canonical="https://arizonafamilyconnections.com/schedule"
 >
   <SubpageHero
-    subtitle="Schedule Your Visitation"
+    subtitle="Get Started with Services"
     title="Start Your Visitation Journey"
     description="Fill out the form below to begin the intake process. Our team will review your information and contact you to discuss the next steps."
-    ctaText="Fill Out Intake Form"
+    ctaText="Complete Form"
     ctaUrl="/schedule#intake-form"
     decorationLeft="/images/calendar-watermark.svg"
     decorationRight="/images/checkbox-watermark.svg"
@@ -64,7 +64,7 @@ import '../styles/theme.root.css';
           <legend class="form-legend">Service Information</legend>
 
           <div class="form-group">
-            <label class="form-label">Service Type: *</label>
+            <label class="form-label">Service Type:</label>
             <div class="form-checkboxes">
               <label class="form-checkbox">
                 <input type="checkbox" name="serviceType" value="Supervised Visitation" />
@@ -79,11 +79,6 @@ import '../styles/theme.root.css';
                 Child Transportation
               </label>
             </div>
-          </div>
-
-          <div class="form-group">
-            <label for="caseNumber" class="form-label">Family Law Case Number:</label>
-            <input type="text" id="caseNumber" name="caseNumber" class="form-input" />
           </div>
 
           <div class="form-group">
@@ -187,8 +182,8 @@ import '../styles/theme.root.css';
           <legend class="form-legend">Language Preference</legend>
 
           <div class="form-group">
-            <label for="languagePreference" class="form-label">Preferred Language: *</label>
-            <select id="languagePreference" name="languagePreference" class="form-select" required>
+            <label for="languagePreference" class="form-label">Preferred Language:</label>
+            <select id="languagePreference" name="languagePreference" class="form-select">
               <option value="">-- Select a language --</option>
               <option value="English">English</option>
               <option value="Spanish">Spanish</option>
@@ -207,7 +202,7 @@ import '../styles/theme.root.css';
 
         <!-- Submit -->
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary">Schedule Service</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </form>
     </div>
@@ -341,6 +336,12 @@ import '../styles/theme.root.css';
     font-style: italic;
   }
 
+  .submit-success {
+    background: var(--color-success) !important;
+    border-color: var(--color-success) !important;
+    color: var(--color-success-contrast, #fff) !important;
+  }
+
   .form-actions {
     display: flex;
     flex-direction: column;
@@ -396,6 +397,12 @@ import '../styles/theme.root.css';
   }
 
   const scheduleForm = document.querySelector('.schedule-form');
+  const submitButton = scheduleForm instanceof HTMLFormElement
+    ? scheduleForm.querySelector('button[type="submit"]')
+    : null;
+  const defaultSubmitText = submitButton instanceof HTMLButtonElement
+    ? submitButton.textContent || 'Submit'
+    : 'Submit';
 
   if (scheduleForm instanceof HTMLFormElement) {
     scheduleForm.addEventListener('submit', (event) => {
@@ -406,9 +413,7 @@ import '../styles/theme.root.css';
       const yourName = formData.get('yourName');
       const email = formData.get('email');
       const phone = formData.get('phone');
-      const service = formData.get('service');
-
-      if (!yourName || !email || !phone || !service) {
+      if (!yourName || !email || !phone) {
         alert('Please complete all required fields before submitting.');
         return;
       }
@@ -426,6 +431,13 @@ import '../styles/theme.root.css';
         customSubjectInput.value = customSubject;
       }
 
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.classList.remove('submit-success');
+        submitButton.classList.add('btn-primary');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+      }
+
       fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -433,7 +445,14 @@ import '../styles/theme.root.css';
       })
         .then(() => {
           console.log('Schedule form submitted:', Object.fromEntries(formData.entries()));
-          alert("Thank you for completing the intake form. Our team will contact you soon.");
+          setTimeout(() => {
+            if (submitButton instanceof HTMLButtonElement) {
+              submitButton.classList.remove('btn-primary');
+              submitButton.classList.add('submit-success');
+              submitButton.textContent = 'Thank you for your inquiry';
+              submitButton.disabled = false;
+            }
+          }, 500);
           scheduleForm.reset();
           // Re-apply service preselect from URL after reset (optional)
           const params = new URLSearchParams(window.location.search);
@@ -445,6 +464,12 @@ import '../styles/theme.root.css';
         })
         .catch((error) => {
           console.error('Schedule form submission error:', error);
+          if (submitButton instanceof HTMLButtonElement) {
+            submitButton.classList.remove('submit-success');
+            submitButton.classList.add('btn-primary');
+            submitButton.textContent = defaultSubmitText;
+            submitButton.disabled = false;
+          }
           alert('There was a problem submitting the form. Please try again.');
         });
     });

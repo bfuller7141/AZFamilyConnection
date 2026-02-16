@@ -105,36 +105,6 @@ export const locationPagesEn: LocationPageContent[] = [
       },
     ],
   },
-  {
-    slug: "portland",
-    city: "Portland",
-    subtitle: "Portland Services",
-    title: "Supervised Visitation in Portland",
-    description:
-      "Arizona Family Connections extends supervised visitation support to families in the Portland area.",
-    intro:
-      "Our Portland services are designed to provide neutral supervision, reduce stress, and support child-focused family contact.",
-    highlights: [
-      {
-        icon: "/images/home-icon.svg",
-        title: "Supervised Visits",
-        description:
-          "Supportive, structured visits focused on emotional safety and healthy parent-child engagement.",
-      },
-      {
-        icon: "/images/webcam-icon.svg",
-        title: "Telephone / Video",
-        description:
-          "Flexible remote options for families who need distance-friendly scheduling support.",
-      },
-      {
-        icon: "/images/pen-icon.svg",
-        title: "Reports",
-        description:
-          "Objective session documentation available when reporting is part of your service plan.",
-      },
-    ],
-  },
 ];
 
 export const locationPagesEs: LocationPageContent[] = [
@@ -225,36 +195,6 @@ export const locationPagesEs: LocationPageContent[] = [
         title: "Informes",
         description:
           "Documentacion profesional y neutral para procesos legales y familiares.",
-      },
-    ],
-  },
-  {
-    slug: "portland",
-    city: "Portland",
-    subtitle: "Servicios en Portland",
-    title: "Visitas supervisadas en Portland",
-    description:
-      "Arizona Family Connections brinda apoyo de visitas supervisadas para familias en el area de Portland.",
-    intro:
-      "Nuestros servicios en Portland ofrecen supervision neutral y apoyo centrado en el bienestar del menor.",
-    highlights: [
-      {
-        icon: "/images/home-icon.svg",
-        title: "Visitas supervisadas",
-        description:
-          "Visitas estructuradas para promover seguridad emocional y contacto familiar saludable.",
-      },
-      {
-        icon: "/images/webcam-icon.svg",
-        title: "Telefono / Video",
-        description:
-          "Opciones flexibles para familias que requieren apoyo remoto.",
-      },
-      {
-        icon: "/images/pen-icon.svg",
-        title: "Informes",
-        description:
-          "Documentacion objetiva disponible cuando forma parte del plan de servicios.",
       },
     ],
   },

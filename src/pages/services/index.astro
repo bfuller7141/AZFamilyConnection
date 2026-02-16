@@ -1,98 +1,104 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import AboutHero from '../components/AboutHero.astro';
-import MissionValuesSection from '../components/MissionValuesSection.astro';
-import ColumnSection from '../components/ColumnSection.astro';
-import ColorDivider from '../components/ColorDivider.astro';
-import FAQSection from '../components/FAQSection.astro';
-import MainCTA from '../components/MainCTA.astro';
-import Accordion from '../components/Accordion.astro';
-import AccordionItem from '../components/AccordionItem.astro';
-import TeamMembersSection from '../components/TeamMembersSection.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SubpageHero from '../../components/SubpageHero.astro';
+import ColorDividerShort from '../../components/ColorDividerShort.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import MainCTA from '../../components/MainCTA.astro';
+import PricingSection from '../../components/PricingSection.astro';
+import ServicesGrid from '../../components/ServicesGrid.astro';
+import PageBreakCloud from '../../components/PageBreakCloud.astro';
+import Accordion from '../../components/Accordion.astro';
+import AccordionItem from '../../components/AccordionItem.astro';
 
-import '../styles/base.css';
-import '../styles/theme.root.css';
+import '../../styles/base.css';
+import '../../styles/theme.root.css';
 ---
 
 <BaseLayout
-  title="About Arizona Family Connections | Our Mission & Team"
-  description="Learn about our mission, values, and dedicated team providing safe, supportive supervised visitation services that help families reconnect and strengthen bonds."
+  title="Supervised Visitation Services | AZ Family Connections"
+  description="Explore supervised visitation, safe exchange, and family services with Arizona Family Connections. Get support that protects children and strengthens bonds."
   language="en"
-  canonical="https://arizonafamilyconnections.com/about"
+  canonical="https://arizonafamilyconnections.com/services"
 >
-  <AboutHero
-    subtitle="About Arizona Family Connections"
-    title="Dedicated to Helping Families Reconnect Safely"
-    ctaText="See Our Services"
-    ctaUrl="/services"
-    images={[
+  <SubpageHero
+    subtitle="Arizona Family Connections Services"
+    title="Visitation Services Designed with Family in Mind"
+    description="We provide safe, structured visitation options that support each family’s unique needs. With compassion and experience, our supervisors create environments where parents and children can reconnect, rebuild trust, and grow together."
+    ctaText="Get Started"
+    ctaUrl="/schedule"
+    decorationLeft="/images/cloud-watermark.svg"
+    decorationRight="/images/flower-watermark.svg"
+  />
+
+  <ColorDividerShort />
+
+  <PricingSection
+    title="Types of Services We Offer"
+    decorationLeft="/images/star-watermark-dark.svg"
+    decorationRight="/images/wave-watermark-dark.svg"
+    cards={[
       {
-        src: "/images/child-chalk.webp",
-        alt: "Two young children sitting on the floor choosing colorful sidewalk chalk from an open box.",
-      },
-      {
-        src: "/images/child-blocks.webp",
-        alt: "Young child sitting on the floor and stacking colorful wooden shapes on a peg toy, with wooden blocks scattered nearby",
-      },
-      {
-        src: "/images/child-paints.webp",
-        alt: "Child’s hand covered in bright blue paint during a finger-painting activity.",
+        title: "Available Service Types",
+        features: [
+          "Supervised visitation (on-site, in-home, and community-based)",
+          "Monitored exchange",
+          "Virtual and telephonic visits",
+          "Transportation support for pickups and drop-offs",
+          "Objective reports and court testimony when requested",
+          "Bilingual support in English and Spanish",
+        ],
+        buttonText: "View All Services",
+        buttonUrl: "/services",
       },
     ]}
-    decorationLeft="/images/starPink-watermark.svg"
-    decorationRight="/images/cactus-watermark.svg"
+    disclaimer="Need help choosing the right option for your family? Contact our team at contact@azfamilyconnections.com and we will help guide you."
+    ctaButtons={[
+      { text: "Get Started", variant: "primary", url: "/schedule" },
+      { text: "About Our Services", variant: "text", url: "/services" },
+    ]}
   />
-  <ColorDivider />
-  <MissionValuesSection
-    title="Our Mission & Values"
-    description="At Arizona Family Connections, our mission is to create safe, supportive spaces where families can reconnect, rebuild trust, and grow stronger through compassion and understanding."
-    values={[
+
+  <PageBreakCloud bgColor="#f8faff" flip={true} />
+
+  <ServicesGrid
+    title="Our Visitation Services"
+    description="Every family’s needs are different. We offer a range of supervised visitation options designed to ensure safety, comfort, and meaningful connection during every visit."
+    services={[
       {
-        icon: "/images/heart-icon.svg",
-        iconAlt: "Compassion icon",
-        title: "Compassion",
-        description: "We listen with empathy and treat every family with genuine care.",
+        icon: "/images/home-icon.svg",
+        title: "Supervised Visitation",
+        description: "Safe, structured supervised visitation in a neutral setting to support healthy parent-child connection.",
       },
       {
-        icon: "/images/star-icon.svg",
-        iconAlt: "Integrity icon",
-        title: "Integrity",
-        description: "We stay transparent and fair in every interaction we have.",
+        icon: "/images/cactus-icon.svg",
+        title: "Public and Home Visitation",
+        description: "Monitored visits in approved community locations or home settings when appropriate for the family plan.",
       },
       {
-        icon: "/images/shield-icon.svg",
-        iconAlt: "Safety icon",
-        title: "Safety",
-        description: "We make each visit secure for both children and parents.",
+        icon: "/images/sheild-icon-blue.svg",
+        title: "Safe Exchange",
+        description: "Secure, neutral location exchanges to ensure child safety during transitions.",
       },
       {
-        icon: "/images/puzzle-icon.svg",
-        iconAlt: "Collaboration icon",
-        title: "Collaboration",
-        description: "We work as a team to support families with respect and unity.",
+        icon: "/images/webcam-icon.svg",
+        title: "Telephone / Video",
+        description: "Supervised phone and video visits to help families stay connected when in-person visits are not possible.",
+      },
+      {
+        icon: "/images/pen-icon.svg",
+        title: "Reports",
+        description: "Detailed, objective reports documenting visitation observations and interactions.",
+      },
+      {
+        icon: "/images/az81-icon.svg",
+        title: "Rule 81",
+        description: "Services that meet Arizona Rule 81 standards for court-ordered visitation supervision.",
       },
     ]}
-    decorationLeft="/images/greenHand-watermark.svg"
-    decorationRight=""
+    decorationLeft="/images/sun-watermark.svg"
+    decorationRight="/images/pinkDots-watermark.svg"
   />
-  <ColumnSection
-    image="/images/father-son-basket.webp"
-    imageAlt="Father laughing as he pushes his young child through the living room in a laundry basket, both enjoying a playful moment."
-    title="A Team of Passionate Professionals"
-    description="Our supervisors are unbiased and transparent, helping families feel supported and respected during every visit. With more than 14 years of combined experience working with families, legal teams, and the Arizona court system, we understand how to guide each reunification process with care and professionalism. Whether your needs are short-term or ongoing, our team is here to ensure every visit is safe, consistent, and centered on connection."
-    ctaText="Meet Our Team"
-    ctaUrl="/about#meet-our-team"
-    buttonVariant="primary"
-    imagePosition="left"
-    decorationLeft="/images/pinkDots-watermark.svg"
-    decorationRight="/images/puzzleYellow-watermark.svg"
-  />
-  <TeamMembersSection
-    sectionId="meet-our-team"
-    title="Meet Our Team"
-    description="Our supervisors bring practical experience, compassion, and consistency to every family we support."
-    language="en"
-  />
+
   <FAQSection
     title="Frequently Asked Questions"
     description="Find quick answers about supervised visitation, exchanges, transportation, and getting started with Arizona Family Connections."
@@ -178,6 +184,7 @@ import '../styles/theme.root.css';
       </AccordionItem>
     </Accordion>
   </FAQSection>
+
   <MainCTA
     title="Ready to Take the Next Step Together?"
     primaryCta={{
@@ -185,10 +192,9 @@ import '../styles/theme.root.css';
       url: "/schedule",
     }}
     secondaryCta={{
-      text: "Our Services",
-      url: "/services",
+      text: "About Our Company",
+      url: "/about",
     }}
-    decorationLeft="/images/rainbow-watermark.svg"
     decorationRight="/images/starFilled-watermark.svg"
   />
 </BaseLayout>

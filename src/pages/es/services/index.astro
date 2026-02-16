@@ -1,17 +1,17 @@
-﻿---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import SubpageHero from '../../components/SubpageHero.astro';
-import ColorDividerShort from '../../components/ColorDividerShort.astro';
-import FAQSection from '../../components/FAQSection.astro';
-import MainCTA from '../../components/MainCTA.astro';
-import PricingSection from '../../components/PricingSection.astro';
-import ServicesGrid from '../../components/ServicesGrid.astro';
-import PageBreakCloud from '../../components/PageBreakCloud.astro';
-import Accordion from '../../components/Accordion.astro';
-import AccordionItem from '../../components/AccordionItem.astro';
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SubpageHero from '../../../components/SubpageHero.astro';
+import ColorDividerShort from '../../../components/ColorDividerShort.astro';
+import FAQSection from '../../../components/FAQSection.astro';
+import MainCTA from '../../../components/MainCTA.astro';
+import PricingSection from '../../../components/PricingSection.astro';
+import ServicesGrid from '../../../components/ServicesGrid.astro';
+import PageBreakCloud from '../../../components/PageBreakCloud.astro';
+import Accordion from '../../../components/Accordion.astro';
+import AccordionItem from '../../../components/AccordionItem.astro';
 
-import '../../styles/base.css';
-import '../../styles/theme.root.css';
+import '../../../styles/base.css';
+import '../../../styles/theme.root.css';
 ---
 
 <BaseLayout
@@ -24,7 +24,7 @@ import '../../styles/theme.root.css';
     subtitle="Servicios de Arizona Family Connections"
     title="Servicios de visita pensados para la familia"
     description="Ofrecemos opciones de visitas seguras y estructuradas que apoyan las necesidades Ãºnicas de cada familia. Con compasiÃ³n y experiencia, nuestros supervisores crean entornos donde los padres y los niÃ±os pueden reconectarse, reconstruir la confianza y crecer juntos."
-    ctaText="Programar una visita"
+    ctaText="Comenzar"
     ctaUrl="/es/schedule"
     decorationLeft="/images/cloud-watermark.svg"
     decorationRight="/images/flower-watermark.svg"
@@ -53,7 +53,7 @@ import '../../styles/theme.root.css';
     ]}
     disclaimer="Â¿Necesita ayuda para elegir la mejor opciÃ³n para su familia? ComunÃ­quese con nuestro equipo en contact@azfamilyconnections.com y con gusto le orientamos."
     ctaButtons={[
-      { text: "Programar una Visita", variant: "primary", url: "/schedule" },
+      { text: "Comenzar", variant: "primary", url: "/schedule" },
       { text: "Sobre Nuestros Servicios", variant: "text", url: "/services" },
     ]}
   />
@@ -164,13 +164,13 @@ import '../../styles/theme.root.css';
         </p>
       </AccordionItem>
 
-      <AccordionItem title="Â¿CÃ³mo empiezo o programo una visita?">
+      <AccordionItem title="Â¿CÃ³mo empiezo?">
         <p>
           Para comenzar, complete nuestro formulario seguro de admisiÃ³n para que podamos
           revisar los detalles de su caso, las Ã³rdenes de la corte y cualquier consideraciÃ³n
           de seguridad. Una vez que recibamos su informaciÃ³n, nuestro equipo se pondrÃ¡ en
           contacto con usted para confirmar elegibilidad, revisar los servicios disponibles
-          y programar su primera visita.
+          y comenzar con su primera visita.
         </p>
         <p>
           Puede iniciar el proceso en cualquier momento desde nuestra
@@ -198,7 +198,7 @@ import '../../styles/theme.root.css';
   <MainCTA
     title="Â¿Listos para dar el siguiente paso juntos?"
     primaryCta={{
-      text: "Programar una visita",
+      text: "Comenzar",
       url: "/es/schedule",
     }}
     secondaryCta={{

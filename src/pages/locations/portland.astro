@@ -1,0 +1,150 @@
+﻿---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SubpageHero from '../../components/SubpageHero.astro';
+import Accordion from '../../components/Accordion.astro';
+import AccordionItem from '../../components/AccordionItem.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import ServicesGrid from '../../components/ServicesGrid.astro';
+import MainCTA from '../../components/MainCTA.astro';
+import ColorDividerShort from '../../components/ColorDividerShort.astro';
+import TeamMembersSection from '../../components/TeamMembersSection.astro';
+
+import '../../styles/base.css';
+import '../../styles/theme.root.css';
+---
+
+<BaseLayout
+  title="Portland Supervised Visitation | AFC-Portland"
+  description="AFC-Portland provides safe, structured supervised visitation and exchange services for families throughout Portland."
+  language="en"
+  canonical="/locations/portland"
+>
+  <SubpageHero
+    subtitle="AFC-Portland Services"
+    title="Supervised Visitation Services in Portland"
+    description="AFC-Portland supports families with safe, structured visitation services designed to protect children and strengthen parent-child connection."
+    ctaText="Get Started"
+    ctaUrl="/schedule"
+    decorationLeft="/images/cloud-watermark.svg"
+    decorationRight="/images/flower-watermark.svg"
+  />
+
+  <ColorDividerShort />
+
+  <ServicesGrid
+    title="Services in Portland"
+    description="We provide the same core supervised visitation services offered in Phoenix, adapted for Portland families and case requirements."
+    services={[
+      {
+        icon: "/images/home-icon.svg",
+        title: "Supervised Visitation",
+        description: "Safe, structured supervised visitation in a neutral setting to support healthy parent-child connection.",
+      },
+      {
+        icon: "/images/cactus-icon.svg",
+        title: "Public and Home Visitation",
+        description: "Monitored visits in approved community locations or home settings when appropriate for the family plan.",
+      },
+      {
+        icon: "/images/sheild-icon-blue.svg",
+        title: "Safe Exchange",
+        description: "Secure, neutral location exchanges to ensure child safety during transitions.",
+      },
+      {
+        icon: "/images/webcam-icon.svg",
+        title: "Telephone / Video",
+        description: "Supervised phone and video visits to help families stay connected when in-person visits are not possible.",
+      },
+      {
+        icon: "/images/pen-icon.svg",
+        title: "Reports",
+        description: "Detailed, objective reports documenting visitation observations and interactions.",
+      },
+    ]}
+    decorationLeft="/images/sun-watermark.svg"
+    decorationRight="/images/pinkDots-watermark.svg"
+  />
+  <TeamMembersSection
+    title="Meet Our Portland Team"
+    description="Get to know the local team members who support families in Portland."
+    language="en"
+    locations={["Portland"]}
+  />
+
+  <FAQSection
+    title="Frequently Asked Questions"
+    description="Find quick answers about supervised visitation, exchanges, transportation, and getting started with AFC-Portland."
+  >
+    <Accordion label="Frequently Asked Questions">
+      <AccordionItem title="How much do you charge?">
+        <p>
+          Pricing is based on service type, travel needs, and case requirements. Please
+          <a href="/contact" class="link-inline">contact our team</a> for a clear estimate based on your
+          specific Portland case.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Do you provide transportation for children?">
+        <p>
+          Yes. Transportation support is available for qualifying cases when pickups and drop-offs are part
+          of the approved service plan.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="What types of services do you offer?">
+        <p>
+          We provide supervised visitation, monitored exchanges, virtual/telephonic visits, transportation
+          support, and objective documentation such as session reports when required.
+        </p>
+        <p>
+          You can learn more about each option on our
+          <a href="/services/portland" class="link-inline">Services page</a>.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Where do visits take place?">
+        <p>
+          Visits may take place at approved office, community, or home settings depending on court orders
+          and safety requirements.
+        </p>
+        <p>
+          Final locations are confirmed during intake and scheduling. For a full overview of service options,
+          please visit our <a href="/services/portland" class="link-inline">Services page</a>.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="How do I get started?">
+        <p>
+          To begin, complete our secure intake form so we can review your case details, court orders, and
+          any safety considerations. Once we receive your information, our team will follow up to confirm
+          eligibility and next steps.
+        </p>
+        <p>
+          You can start the process at any time on our
+          <a href="/schedule" class="link-inline">Schedule page</a>.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Do you offer services in Spanish?">
+        <p>
+          Yes. We can provide services and communication in both English and Spanish where needed.
+        </p>
+      </AccordionItem>
+    </Accordion>
+  </FAQSection>
+
+  <MainCTA
+    title="Need Supervised Visitation in Portland?"
+    description="Our team is here to help you choose the right service plan for your case."
+    primaryCta={{
+      text: "Get Started",
+      url: "/schedule",
+    }}
+    secondaryCta={{
+      text: "Contact Us",
+      url: "/contact",
+    }}
+    decorationLeft="/images/rainbow-watermark.svg"
+    decorationRight="/images/starFilled-watermark.svg"
+  />
+</BaseLayout>

@@ -1,0 +1,173 @@
+﻿---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SubpageHero from '../../../components/SubpageHero.astro';
+import ColorDividerShort from '../../../components/ColorDividerShort.astro';
+import FAQSection from '../../../components/FAQSection.astro';
+import MainCTA from '../../../components/MainCTA.astro';
+import PricingSection from '../../../components/PricingSection.astro';
+import ServicesGrid from '../../../components/ServicesGrid.astro';
+import PageBreakCloud from '../../../components/PageBreakCloud.astro';
+import Accordion from '../../../components/Accordion.astro';
+import AccordionItem from '../../../components/AccordionItem.astro';
+
+import '../../../styles/base.css';
+import '../../../styles/theme.root.css';
+---
+
+<BaseLayout
+  title="Servicios de visitas supervisadas en Portland | AFC-Portland"
+  description="Conozca los servicios de visitas supervisadas, intercambio seguro y apoyo familiar con AFC-Portland."
+  language="es"
+  canonical="https://arizonafamilyconnections.com/es/services/portland"
+>
+  <SubpageHero
+    subtitle="Servicios de AFC-Portland"
+    title="Servicios de visita en Portland"
+    description="Ofrecemos opciones de visitas seguras y estructuradas para familias en Portland."
+    ctaText="Comenzar"
+    ctaUrl="/es/schedule"
+    decorationLeft="/images/cloud-watermark.svg"
+    decorationRight="/images/flower-watermark.svg"
+  />
+
+  <ColorDividerShort />
+
+  <PricingSection
+    title="Tipos de servicios que ofrecemos"
+    decorationLeft="/images/star-watermark-dark.svg"
+    decorationRight="/images/wave-watermark-dark.svg"
+    cards={[
+      {
+        title: "Tipos de servicios disponibles",
+        features: [
+          "Visitas supervisadas (en oficina, en casa y en la comunidad)",
+          "Intercambio monitoreado",
+          "Visitas virtuales y telefonicas",
+          "Apoyo de transporte para recoger y dejar a los menores",
+          "Reportes objetivos y testimonio en corte cuando se solicita",
+          "Atencion bilingue en ingles y espanol",
+        ],
+        buttonText: "Ver todos los servicios",
+        buttonUrl: "/es/services/portland",
+      },
+    ]}
+    disclaimer="Necesita ayuda para elegir la mejor opcion para su familia? Comuniquese con nuestro equipo en contact@azfamilyconnections.com y con gusto le orientamos."
+    ctaButtons={[
+      { text: "Comenzar", variant: "primary", url: "/es/schedule" },
+      { text: "Sobre Nuestros Servicios", variant: "text", url: "/es/services/portland" },
+    ]}
+  />
+
+  <PageBreakCloud bgColor="#f8faff" flip={true} />
+
+  <ServicesGrid
+    title="Nuestros servicios de visita en Portland"
+    description="Cada familia en Portland tiene necesidades diferentes. Ofrecemos opciones de visitas supervisadas para asegurar seguridad, comodidad y una conexion significativa."
+    services={[
+      {
+        icon: "/images/home-icon.svg",
+        title: "Visitas supervisadas",
+        description: "Visitas supervisadas seguras y estructuradas en un entorno neutral para apoyar una conexion saludable entre padres e hijos.",
+      },
+      {
+        icon: "/images/cactus-icon.svg",
+        title: "Visitas publicas y en el hogar",
+        description: "Visitas monitoreadas en lugares comunitarios aprobados o en el hogar cuando sea apropiado segun el plan familiar.",
+      },
+      {
+        icon: "/images/sheild-icon-blue.svg",
+        title: "Intercambio seguro",
+        description: "Intercambios en un lugar seguro y neutral para proteger al nino durante las transiciones.",
+      },
+      {
+        icon: "/images/webcam-icon.svg",
+        title: "Telefono / Video",
+        description: "Visitas supervisadas por telefono y video para ayudar a las familias a mantenerse conectadas cuando no es posible reunirse en persona.",
+      },
+      {
+        icon: "/images/pen-icon.svg",
+        title: "Informes",
+        description: "Informes detallados y objetivos que documentan observaciones e interacciones durante las visitas.",
+      },
+    ]}
+    decorationLeft="/images/sun-watermark.svg"
+    decorationRight="/images/pinkDots-watermark.svg"
+  />
+
+  <FAQSection
+    title="Preguntas frecuentes"
+    description="Encuentre respuestas rapidas sobre visitas supervisadas, intercambios, transporte y como comenzar con AFC-Portland."
+  >
+    <Accordion label="Preguntas frecuentes">
+      <AccordionItem title="Cuanto cuestan los servicios?">
+        <p>
+          Los costos varian segun cada caso, de acuerdo con el tipo de servicio,
+          necesidades de traslado y requisitos del caso. Si tiene preguntas sobre su
+          situacion especifica, por favor
+          <a href="/es/contact" class="link-inline">contacte a nuestro equipo</a> y con gusto le orientamos.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Proporcionan transporte para los ninos?">
+        <p>
+          Si. El apoyo de transporte esta disponible para casos que lo requieran,
+          cuando las recogidas y entregas formen parte del plan aprobado.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Que tipo de servicios ofrecen?">
+        <p>
+          Ofrecemos visitas supervisadas, intercambios monitoreados, visitas virtuales o
+          telefonicas, apoyo en transporte y documentacion relacionada.
+        </p>
+        <p>
+          Puede conocer mas sobre cada opcion en nuestra
+          <a href="/es/services/portland" class="link-inline">pagina de Servicios</a>.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Donde se llevan a cabo las visitas?">
+        <p>
+          Las visitas pueden realizarse en oficina, en la comunidad o en el hogar,
+          segun las ordenes judiciales y los requisitos de seguridad.
+        </p>
+        <p>
+          Los lugares se confirman durante la admision y programacion. Para mas detalles,
+          visite nuestra <a href="/es/services/portland" class="link-inline">pagina de Servicios</a>.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Como empiezo?">
+        <p>
+          Para comenzar, complete nuestro formulario seguro de admision para que podamos
+          revisar los detalles de su caso, las ordenes de la corte y cualquier consideracion
+          de seguridad.
+        </p>
+        <p>
+          Puede iniciar el proceso en cualquier momento desde nuestra
+          <a href="/es/schedule" class="link-inline">pagina de Programacion</a>.
+        </p>
+      </AccordionItem>
+
+      <AccordionItem title="Ofrecen servicios en espanol?">
+        <p>
+          Si. Podemos brindar servicios y comunicacion tanto en ingles como en espanol
+          segun sea necesario.
+        </p>
+      </AccordionItem>
+    </Accordion>
+  </FAQSection>
+
+  <MainCTA
+    title="Listos para dar el siguiente paso juntos?"
+    primaryCta={{
+      text: "Comenzar",
+      url: "/es/schedule",
+    }}
+    secondaryCta={{
+      text: "Sobre nuestra organizacion",
+      url: "/es/about",
+    }}
+    decorationRight="/images/starFilled-watermark.svg"
+  />
+</BaseLayout>

@@ -19,7 +19,7 @@ import AccordionItem from '../components/AccordionItem.astro';
   <SubpageHero
     subtitle="Contact Arizona Family Connections"
     title="We’re Here to Help Every Step of the Way"
-    description="Have questions or need to schedule a visit? Reach out to our team for caring support and clear guidance."
+    description="Have questions or need to get started with services? Reach out to our team for caring support and clear guidance."
     ctaText="Send us a Message"
     ctaUrl="/contact#contact-form"
     decorationLeft="/images/email-watermark.svg"
@@ -51,7 +51,7 @@ import AccordionItem from '../components/AccordionItem.astro';
           >
             contact@azfamilyconnections.com
           </a>
-          <p class="contact-card-response">We'll respond within 1-2 business days</p>
+          <p class="contact-card-response">We'll follow up as soon as we're able.</p>
         </div>
 
         <div class="contact-card">
@@ -230,11 +230,11 @@ import AccordionItem from '../components/AccordionItem.astro';
         </p>
       </AccordionItem>
 
-      <AccordionItem title="How do I get started or schedule a visit?">
+      <AccordionItem title="How do I get started?">
         <p>
           To begin, complete our secure intake form so we can review your case details, court orders, and
           any safety considerations. Once we receive your information, our team will follow up to confirm
-          eligibility, discuss available services, and schedule your first visit.
+          eligibility, discuss available services, and get started with your first visit.
         </p>
         <p>
           You can start the process at any time on our
@@ -369,6 +369,12 @@ import AccordionItem from '../components/AccordionItem.astro';
     font-style: italic;
   }
 
+  .submit-success {
+    background: var(--color-success) !important;
+    border-color: var(--color-success) !important;
+    color: var(--color-success-contrast, #fff) !important;
+  }
+
   .contact-form-wrapper {
     background: linear-gradient(
       135deg,
@@ -497,6 +503,12 @@ import AccordionItem from '../components/AccordionItem.astro';
   }
 
   const form = document.querySelector('.contact-form');
+  const submitButton = form instanceof HTMLFormElement
+    ? form.querySelector('button[type="submit"]')
+    : null;
+  const defaultSubmitText = submitButton instanceof HTMLButtonElement
+    ? submitButton.textContent || 'Submit'
+    : 'Submit';
 
   if (form instanceof HTMLFormElement) {
     form.addEventListener('submit', (event) => {
@@ -524,6 +536,13 @@ import AccordionItem from '../components/AccordionItem.astro';
         customSubjectInput.value = customSubject;
       }
 
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.classList.remove('submit-success');
+        submitButton.classList.add('btn-primary');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+      }
+
       fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -531,11 +550,24 @@ import AccordionItem from '../components/AccordionItem.astro';
       })
         .then(() => {
           console.log('Form submitted:', data);
-          alert("Thank you for your message! We'll be in touch soon.");
+          setTimeout(() => {
+            if (submitButton instanceof HTMLButtonElement) {
+              submitButton.classList.remove('btn-primary');
+              submitButton.classList.add('submit-success');
+              submitButton.textContent = 'Thank you for your inquiry';
+              submitButton.disabled = false;
+            }
+          }, 500);
           form.reset();
         })
         .catch((error) => {
           console.error('Form submission error:', error);
+          if (submitButton instanceof HTMLButtonElement) {
+            submitButton.classList.remove('submit-success');
+            submitButton.classList.add('btn-primary');
+            submitButton.textContent = defaultSubmitText;
+            submitButton.disabled = false;
+          }
           alert('There was a problem submitting the form. Please try again.');
         });
     });

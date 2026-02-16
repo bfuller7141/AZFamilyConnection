@@ -28,10 +28,10 @@ import '../../styles/theme.root.css';
   canonical="https://arizonafamilyconnections.com/es/schedule"
 >
   <SubpageHero
-    subtitle="Programe su visita"
+    subtitle="Comience con los servicios"
     title="Comience su proceso de visitas"
     description="Complete el siguiente formulario para comenzar el proceso de admisión. Nuestro equipo revisará su información y lo contactará para hablar sobre los próximos pasos."
-    ctaText="Completar formulario de admisión"
+    ctaText="Completar formulario"
     ctaUrl="/es/schedule#intake-form"
     decorationLeft="/images/calendar-watermark.svg"
     decorationRight="/images/checkbox-watermark.svg"
@@ -64,7 +64,7 @@ import '../../styles/theme.root.css';
           <legend class="form-legend">Información del servicio</legend>
 
           <div class="form-group">
-            <label class="form-label">Tipo de servicio: *</label>
+            <label class="form-label">Tipo de servicio:</label>
             <div class="form-checkboxes">
               <label class="form-checkbox">
                 <input type="checkbox" name="serviceType" value="Visitas Supervisadas" />
@@ -79,11 +79,6 @@ import '../../styles/theme.root.css';
                 Transporte de Niños
               </label>
             </div>
-          </div>
-
-          <div class="form-group">
-            <label for="caseNumber" class="form-label">Número de caso familiar:</label>
-            <input type="text" id="caseNumber" name="caseNumber" class="form-input" />
           </div>
 
           <div class="form-group">
@@ -187,8 +182,8 @@ import '../../styles/theme.root.css';
           <legend class="form-legend">Preferencia de idioma</legend>
 
           <div class="form-group">
-            <label for="languagePreference" class="form-label">Idioma de preferencia: *</label>
-            <select id="languagePreference" name="languagePreference" class="form-select" required>
+            <label for="languagePreference" class="form-label">Idioma de preferencia:</label>
+            <select id="languagePreference" name="languagePreference" class="form-select">
               <option value="">-- Seleccione un idioma --</option>
               <option value="English">Inglés</option>
               <option value="Spanish">Español</option>
@@ -207,7 +202,7 @@ import '../../styles/theme.root.css';
 
         <!-- Submit -->
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary">Programar servicio</button>
+          <button type="submit" class="btn btn-primary">Enviar</button>
         </div>
       </form>
     </div>
@@ -341,6 +336,12 @@ import '../../styles/theme.root.css';
     font-style: italic;
   }
 
+  .submit-success {
+    background: var(--color-success) !important;
+    border-color: var(--color-success) !important;
+    color: var(--color-success-contrast, #fff) !important;
+  }
+
   .form-actions {
     display: flex;
     flex-direction: column;
@@ -396,6 +397,12 @@ import '../../styles/theme.root.css';
   }
 
   const scheduleForm = document.querySelector('.schedule-form');
+  const submitButton = scheduleForm instanceof HTMLFormElement
+    ? scheduleForm.querySelector('button[type="submit"]')
+    : null;
+  const defaultSubmitText = submitButton instanceof HTMLButtonElement
+    ? submitButton.textContent || 'Enviar'
+    : 'Enviar';
 
   if (scheduleForm instanceof HTMLFormElement) {
     scheduleForm.addEventListener('submit', (event) => {
@@ -406,9 +413,7 @@ import '../../styles/theme.root.css';
       const yourName = formData.get('yourName');
       const email = formData.get('email');
       const phone = formData.get('phone');
-      const service = formData.get('service');
-
-      if (!yourName || !email || !phone || !service) {
+      if (!yourName || !email || !phone) {
         alert('Por favor complete todos los campos obligatorios antes de enviar.');
         return;
       }
@@ -426,6 +431,13 @@ import '../../styles/theme.root.css';
         customSubjectInput.value = customSubject;
       }
 
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.classList.remove('submit-success');
+        submitButton.classList.add('btn-primary');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+      }
+
       fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -433,7 +445,14 @@ import '../../styles/theme.root.css';
       })
         .then(() => {
           console.log('Formulario de programación enviado:', Object.fromEntries(formData.entries()));
-          alert('Gracias por completar el formulario de admisión. Nuestro equipo se pondrá en contacto con usted pronto.');
+          setTimeout(() => {
+            if (submitButton instanceof HTMLButtonElement) {
+              submitButton.classList.remove('btn-primary');
+              submitButton.classList.add('submit-success');
+              submitButton.textContent = 'Thank you for your inquiry';
+              submitButton.disabled = false;
+            }
+          }, 500);
           scheduleForm.reset();
 
           // Volver a aplicar la preselección de servicio desde la URL después del reset (opcional)
@@ -446,6 +465,12 @@ import '../../styles/theme.root.css';
         })
         .catch((error) => {
           console.error('Error al enviar el formulario de programación:', error);
+          if (submitButton instanceof HTMLButtonElement) {
+            submitButton.classList.remove('submit-success');
+            submitButton.classList.add('btn-primary');
+            submitButton.textContent = defaultSubmitText;
+            submitButton.disabled = false;
+          }
           alert('Hubo un problema al enviar el formulario. Por favor, inténtelo de nuevo.');
         });
     });

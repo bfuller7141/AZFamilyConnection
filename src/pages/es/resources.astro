@@ -22,7 +22,7 @@ import '../../styles/theme.root.css';
     subtitle="Documentos y recursos"
     title="Documentos y recursos para apoyar su proceso"
     description="Encuentre todos los formularios, políticas y recursos necesarios para asegurar una experiencia fluida con Arizona Family Connections. Estamos aquí para acompañarle en cada paso del camino."
-    ctaText="Programar una visita"
+    ctaText="Comenzar"
     ctaUrl="/es/schedule"
     decorationLeft="/images/waveGreen-watermark.svg"
     decorationRight="/images/puzzleYellow-watermark.svg"
@@ -31,7 +31,12 @@ import '../../styles/theme.root.css';
   <ColorDividerShort />
 
   <ResourceSection
-    title="Documentos y recursos"
+    title="Documentos"
+    filter="documents"
+  />
+  <ResourceSection
+    title="Formularios"
+    filter="forms"
   />
 
   <FAQSection
@@ -99,13 +104,13 @@ import '../../styles/theme.root.css';
         </p>
       </AccordionItem>
 
-      <AccordionItem title="¿Cómo empiezo o programo una visita?">
+      <AccordionItem title="¿Cómo empiezo?">
         <p>
           Para comenzar, complete nuestro formulario seguro de admisión para que podamos
           revisar los detalles de su caso, las órdenes de la corte y cualquier consideración
           de seguridad. Una vez que recibamos su información, nuestro equipo se pondrá en
           contacto con usted para confirmar elegibilidad, revisar los servicios disponibles
-          y programar su primera visita.
+          y comenzar con su primera visita.
         </p>
         <p>
           Puede iniciar el proceso en cualquier momento desde nuestra
@@ -133,7 +138,7 @@ import '../../styles/theme.root.css';
   <MainCTA
     title="¿Listos para dar el siguiente paso juntos?"
     primaryCta={{
-      text: "Programar una visita",
+      text: "Comenzar",
       url: "/es/schedule",
     }}
     secondaryCta={{

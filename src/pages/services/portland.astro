@@ -1,30 +1,30 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SubpageHero from '../components/SubpageHero.astro';
-import ColorDividerShort from '../components/ColorDividerShort.astro';
-import FAQSection from '../components/FAQSection.astro';
-import MainCTA from '../components/MainCTA.astro';
-import PricingSection from '../components/PricingSection.astro';
-import ServicesGrid from '../components/ServicesGrid.astro';
-import PageBreakCloud from '../components/PageBreakCloud.astro';
-import Accordion from '../components/Accordion.astro';
-import AccordionItem from '../components/AccordionItem.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SubpageHero from '../../components/SubpageHero.astro';
+import ColorDividerShort from '../../components/ColorDividerShort.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import MainCTA from '../../components/MainCTA.astro';
+import PricingSection from '../../components/PricingSection.astro';
+import ServicesGrid from '../../components/ServicesGrid.astro';
+import PageBreakCloud from '../../components/PageBreakCloud.astro';
+import Accordion from '../../components/Accordion.astro';
+import AccordionItem from '../../components/AccordionItem.astro';
 
-import '../styles/base.css';
-import '../styles/theme.root.css';
+import '../../styles/base.css';
+import '../../styles/theme.root.css';
 ---
 
 <BaseLayout
-  title="Supervised Visitation Services | AZ Family Connections"
-  description="Explore supervised visitation, safe exchange, and family services with Arizona Family Connections. Get support that protects children and strengthens bonds."
+  title="Portland Supervised Visitation Services | AFC-Portland"
+  description="Explore supervised visitation, safe exchange, and family services with AFC-Portland. Get support that protects children and strengthens bonds in Portland."
   language="en"
-  canonical="https://arizonafamilyconnections.com/services"
+  canonical="https://arizonafamilyconnections.com/services/portland"
 >
   <SubpageHero
-    subtitle="Arizona Family Connections Services"
-    title="Visitation Services Designed with Family in Mind"
-    description="We provide safe, structured visitation options that support each family’s unique needs. With compassion and experience, our supervisors create environments where parents and children can reconnect, rebuild trust, and grow together."
-    ctaText="Schedule a Visit"
+    subtitle="AFC-Portland Services"
+    title="Portland Services Designed with Family in Mind"
+    description="We provide safe, structured visitation options for Portland families. With compassion and experience, our supervisors create environments where parents and children can reconnect, rebuild trust, and grow together."
+    ctaText="Get Started"
     ctaUrl="/schedule"
     decorationLeft="/images/cloud-watermark.svg"
     decorationRight="/images/flower-watermark.svg"
@@ -53,7 +53,7 @@ import '../styles/theme.root.css';
     ]}
     disclaimer="Need help choosing the right option for your family? Contact our team at contact@azfamilyconnections.com and we will help guide you."
     ctaButtons={[
-      { text: "Schedule a Visit", variant: "primary", url: "/schedule" },
+      { text: "Get Started", variant: "primary", url: "/schedule" },
       { text: "About Our Services", variant: "text", url: "/services" },
     ]}
   />
@@ -61,8 +61,8 @@ import '../styles/theme.root.css';
   <PageBreakCloud bgColor="#f8faff" flip={true} />
 
   <ServicesGrid
-    title="Our Visitation Services"
-    description="Every family’s needs are different. We offer a range of supervised visitation options designed to ensure safety, comfort, and meaningful connection during every visit."
+    title="Our Portland Visitation Services"
+    description="Every Portland family has different needs. We offer supervised visitation options designed to ensure safety, comfort, and meaningful connection during each visit."
     services={[
       {
         icon: "/images/home-icon.svg",
@@ -88,27 +88,21 @@ import '../styles/theme.root.css';
         icon: "/images/pen-icon.svg",
         title: "Reports",
         description: "Detailed, objective reports documenting visitation observations and interactions.",
-      },
-      {
-        icon: "/images/az81-icon.svg",
-        title: "Rule 81",
-        description: "Services that meet Arizona Rule 81 standards for court-ordered visitation supervision.",
-      },
-    ]}
+      },]}
     decorationLeft="/images/sun-watermark.svg"
     decorationRight="/images/pinkDots-watermark.svg"
   />
 
   <FAQSection
     title="Frequently Asked Questions"
-    description="Find quick answers about supervised visitation, exchanges, transportation, and getting started with Arizona Family Connections."
+    description="Find quick answers about supervised visitation, exchanges, transportation, and getting started with AFC-Portland."
   >
     <Accordion label="Frequently Asked Questions">
       <AccordionItem title="Are you a member of any professional organizations?">
         <p>
-          Yes. Arizona Family Connections is listed with SV Directory and the Supervised Visitation Network.
+          Yes. AFC-Portland is listed with SV Directory and the Supervised Visitation Network.
           We are also included in the RSAT and Second Chance Resource databases, and we are an active
-          member of the Peoria Chamber of Commerce.
+          member of the the Portland-area family services community.
         </p>
       </AccordionItem>
 
@@ -158,11 +152,11 @@ import '../styles/theme.root.css';
         </p>
       </AccordionItem>
 
-      <AccordionItem title="How do I get started or schedule a visit?">
+      <AccordionItem title="How do I get started?">
         <p>
           To begin, complete our secure intake form so we can review your case details, court orders, and
           any safety considerations. Once we receive your information, our team will follow up to confirm
-          eligibility, discuss available services, and schedule your first visit.
+          eligibility, discuss available services, and get started with your first visit.
         </p>
         <p>
           You can start the process at any time on our
@@ -188,7 +182,7 @@ import '../styles/theme.root.css';
   <MainCTA
     title="Ready to Take the Next Step Together?"
     primaryCta={{
-      text: "Schedule a Visit",
+      text: "Get Started",
       url: "/schedule",
     }}
     secondaryCta={{

@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://arizonafamilyconnections.com',
+  site: 'https://azfamilyconnections.com',
   integrations: [sitemap()],
   i18n: {
     defaultLocale: 'en',
@@ -13,3 +13,4 @@ export default defineConfig({
     },
   },
 });
+

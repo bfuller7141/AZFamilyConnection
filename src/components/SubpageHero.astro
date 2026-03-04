@@ -7,6 +7,7 @@ interface Props {
   ctaUrl?: string;
   decorationLeft?: string;
   decorationRight?: string;
+  mobileSpacing?: "default" | "location";
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   ctaUrl = "#",
   decorationLeft,
   decorationRight,
+  mobileSpacing = "default",
 } = Astro.props;
 
 const headingId = `subpage-hero-title-${Math.random().toString(36).slice(2, 10)}`;
@@ -26,7 +28,7 @@ const descriptionId = description
 ---
 
 <section
-  class="page-hero"
+  class={`page-hero ${mobileSpacing === "location" ? "page-hero--location" : ""}`}
   aria-labelledby={headingId}
   aria-describedby={descriptionId}
 >
@@ -147,6 +149,10 @@ const descriptionId = description
   @media (max-width: 767px) {
     .page-hero {
       padding: var(--space-7) var(--pad-component);
+    }
+
+    .page-hero--location {
+      padding-top: calc(var(--space-10) + 4.5rem);
     }
   }
 </style>

@@ -11,6 +11,29 @@ import TeamMembersSection from '../../components/TeamMembersSection.astro';
 
 import '../../styles/base.css';
 import '../../styles/theme.root.css';
+
+const servicesForPage = [
+  {
+    icon: "/images/cactus-icon.svg",
+    title: "Public and Home Visitation",
+    description: "Monitored visits in approved community locations or home settings when appropriate for the family plan.",
+  },
+  {
+    icon: "/images/sheild-icon-blue.svg",
+    title: "Safe Exchange",
+    description: "Secure, neutral location exchanges to ensure child safety during transitions.",
+  },
+  {
+    icon: "/images/webcam-icon.svg",
+    title: "Telephone / Video",
+    description: "Supervised phone and video visits to help families stay connected when in-person visits are not possible.",
+  },
+  {
+    icon: "/images/pen-icon.svg",
+    title: "Reports",
+    description: "Detailed, objective reports documenting visitation observations and interactions.",
+  },
+];
 ---
 
 <BaseLayout
@@ -34,33 +57,7 @@ import '../../styles/theme.root.css';
   <ServicesGrid
     title="Services in Portland"
     description="We provide the same core supervised visitation services offered in Phoenix, adapted for Portland families and case requirements."
-    services={[
-      {
-        icon: "/images/home-icon.svg",
-        title: "Supervised Visitation",
-        description: "Safe, structured supervised visitation in a neutral setting to support healthy parent-child connection.",
-      },
-      {
-        icon: "/images/cactus-icon.svg",
-        title: "Public and Home Visitation",
-        description: "Monitored visits in approved community locations or home settings when appropriate for the family plan.",
-      },
-      {
-        icon: "/images/sheild-icon-blue.svg",
-        title: "Safe Exchange",
-        description: "Secure, neutral location exchanges to ensure child safety during transitions.",
-      },
-      {
-        icon: "/images/webcam-icon.svg",
-        title: "Telephone / Video",
-        description: "Supervised phone and video visits to help families stay connected when in-person visits are not possible.",
-      },
-      {
-        icon: "/images/pen-icon.svg",
-        title: "Reports",
-        description: "Detailed, objective reports documenting visitation observations and interactions.",
-      },
-    ]}
+    services={servicesForPage}
     decorationLeft="/images/sun-watermark.svg"
     decorationRight="/images/pinkDots-watermark.svg"
   />

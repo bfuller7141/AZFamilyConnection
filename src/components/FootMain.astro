@@ -161,9 +161,9 @@ const esUrl = normalizedBasePath === "/" ? "/es/" : `/es${normalizedBasePath}/`;
         <h3 class="footer-section-title">{quickLinksTitle}</h3>
         <nav aria-label={footerNavAriaLabel}>
           <ul class="footer-links">
-            {i18n.menuItems.map((item: { url: string; label: string }) => (
+            {i18n.menuItems.filter((item) => item.url).map((item) => (
               <li>
-                <a href={item.url}>{item.label}</a>
+                <a href={item.url!}>{item.label}</a>
               </li>
             ))}
           </ul>

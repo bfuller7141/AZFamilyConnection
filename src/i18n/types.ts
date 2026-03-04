@@ -2,7 +2,8 @@ export type Language = 'en' | 'es';
 
 export interface MenuItem {
   label: string;
-  url: string;
+  url?: string;
+  children?: MenuItem[];
 }
 
 export interface I18nStrings {

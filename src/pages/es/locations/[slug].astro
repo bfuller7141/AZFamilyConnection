@@ -27,6 +27,42 @@ const teamLocationsBySlug: Record<string, string[]> = {
   prescott: ["Prescott"],
 };
 const teamLocations = teamLocationsBySlug[page.slug] ?? [page.city];
+const locationServices = [
+  {
+    icon: "/images/home-icon.svg",
+    title: "Visitas supervisadas",
+    description: "Visitas supervisadas seguras y estructuradas en un entorno neutral para apoyar una conexion saludable entre padres e hijos.",
+  },
+  {
+    icon: "/images/cactus-icon.svg",
+    title: "Visitas publicas y en el hogar",
+    description: "Visitas monitoreadas en lugares comunitarios aprobados o en el hogar cuando sea apropiado segun el plan familiar.",
+  },
+  {
+    icon: "/images/sheild-icon-blue.svg",
+    title: "Intercambio seguro",
+    description: "Intercambios en un lugar seguro y neutral para proteger al nino durante las transiciones.",
+  },
+  {
+    icon: "/images/webcam-icon.svg",
+    title: "Telefono / Video",
+    description: "Visitas supervisadas por telefono y video para ayudar a las familias a mantenerse conectadas cuando no es posible reunirse en persona.",
+  },
+  {
+    icon: "/images/pen-icon.svg",
+    title: "Informes",
+    description: "Informes detallados y objetivos que documentan observaciones e interacciones durante las visitas.",
+  },
+  {
+    icon: "/images/az81-icon.svg",
+    title: "Regla 81",
+    description: "Servicios que cumplen con los estandares de la Regla 81 de Arizona para la supervision de visitas ordenadas por la corte.",
+  },
+];
+const servicesForPage =
+  page.slug === "phoenix"
+    ? locationServices
+    : locationServices.filter((service) => service.title !== "Visitas supervisadas");
 ---
 
 <BaseLayout
@@ -50,38 +86,7 @@ const teamLocations = teamLocationsBySlug[page.slug] ?? [page.city];
   <ServicesGrid
     title={`Apoyo familiar en ${page.city}`}
     description={page.intro}
-    services={[
-      {
-        icon: "/images/home-icon.svg",
-        title: "Visitas supervisadas",
-        description: "Visitas supervisadas seguras y estructuradas en un entorno neutral para apoyar una conexion saludable entre padres e hijos.",
-      },
-      {
-        icon: "/images/cactus-icon.svg",
-        title: "Visitas publicas y en el hogar",
-        description: "Visitas monitoreadas en lugares comunitarios aprobados o en el hogar cuando sea apropiado segun el plan familiar.",
-      },
-      {
-        icon: "/images/sheild-icon-blue.svg",
-        title: "Intercambio seguro",
-        description: "Intercambios en un lugar seguro y neutral para proteger al nino durante las transiciones.",
-      },
-      {
-        icon: "/images/webcam-icon.svg",
-        title: "Telefono / Video",
-        description: "Visitas supervisadas por telefono y video para ayudar a las familias a mantenerse conectadas cuando no es posible reunirse en persona.",
-      },
-      {
-        icon: "/images/pen-icon.svg",
-        title: "Informes",
-        description: "Informes detallados y objetivos que documentan observaciones e interacciones durante las visitas.",
-      },
-      {
-        icon: "/images/az81-icon.svg",
-        title: "Regla 81",
-        description: "Servicios que cumplen con los estandares de la Regla 81 de Arizona para la supervision de visitas ordenadas por la corte.",
-      },
-    ]}
+    services={servicesForPage}
     decorationLeft="/images/sun-watermark.svg"
     decorationRight="/images/pinkDots-watermark.svg"
   />

@@ -14,9 +14,8 @@
 </style>
 
 <script is:inline type="module">
-  document.addEventListener("click", (e) => {
-    const button = e.target?.closest(".accordion-trigger");
-    if (!button) return;
+  function handleAccordionToggle(button) {
+    if (!(button instanceof HTMLElement)) return;
 
     const accordion = button.closest(".accordion");
     if (!accordion) return;
@@ -27,7 +26,7 @@
       const itemButton = el.querySelector(".accordion-trigger");
       const isClicked = itemButton === button;
 
-      if (!itemButton) return;
+      if (!(itemButton instanceof HTMLElement)) return;
 
       if (isClicked) {
         el.classList.toggle("open");
@@ -40,53 +39,70 @@
         itemButton.setAttribute("aria-expanded", "false");
       }
     });
-  });
+  }
 
-  document.addEventListener("keydown", (e) => {
-    const button = e.target;
-    if (!(button instanceof HTMLElement)) return;
-    if (!button.classList.contains("accordion-trigger")) return;
+  function setupAccordionDelegation() {
+    if (window.__afcAccordionBound) return;
+    window.__afcAccordionBound = true;
 
-    const accordion = button.closest(".accordion");
-    if (!accordion) return;
+    document.addEventListener("click", (e) => {
+      const target = e.target instanceof Element ? e.target : null;
+      const button = target?.closest(".accordion-trigger");
+      if (!button) return;
 
-    const allItems = Array.from(
-      accordion.querySelectorAll(".accordion-item")
-    );
-    const currentItem = button.closest(".accordion-item");
-    const currentIndex = currentItem ? allItems.indexOf(currentItem) : -1;
+      handleAccordionToggle(button);
+    });
 
-    if (currentIndex === -1) return;
+    document.addEventListener("keydown", (e) => {
+      const button = e.target instanceof HTMLElement ? e.target : null;
+      if (!button?.classList.contains("accordion-trigger")) return;
 
-    switch (e.key) {
-      case "Enter":
-      case " ":
-        e.preventDefault();
-        button.click();
-        break;
-      case "ArrowDown": {
-        e.preventDefault();
-        const nextIndex = (currentIndex + 1) % allItems.length;
-        const nextButton = allItems[nextIndex]?.querySelector(
-          ".accordion-trigger"
-        );
-        if (nextButton instanceof HTMLElement) {
-          nextButton.focus();
+      const accordion = button.closest(".accordion");
+      if (!accordion) return;
+
+      const allItems = Array.from(
+        accordion.querySelectorAll(".accordion-item")
+      );
+      const currentItem = button.closest(".accordion-item");
+      const currentIndex = currentItem ? allItems.indexOf(currentItem) : -1;
+
+      if (currentIndex === -1) return;
+
+      switch (e.key) {
+        case "Enter":
+        case " ": {
+          e.preventDefault();
+          handleAccordionToggle(button);
+          break;
         }
-        break;
-      }
-      case "ArrowUp": {
-        e.preventDefault();
-        const prevIndex =
-          (currentIndex - 1 + allItems.length) % allItems.length;
-        const prevButton = allItems[prevIndex]?.querySelector(
-          ".accordion-trigger"
-        );
-        if (prevButton instanceof HTMLElement) {
-          prevButton.focus();
+        case "ArrowDown": {
+          e.preventDefault();
+          const nextIndex = (currentIndex + 1) % allItems.length;
+          const nextButton = allItems[nextIndex]?.querySelector(
+            ".accordion-trigger"
+          );
+          if (nextButton instanceof HTMLElement) {
+            nextButton.focus();
+          }
+          break;
         }
-        break;
+        case "ArrowUp": {
+          e.preventDefault();
+          const prevIndex =
+            (currentIndex - 1 + allItems.length) % allItems.length;
+          const prevButton = allItems[prevIndex]?.querySelector(
+            ".accordion-trigger"
+          );
+          if (prevButton instanceof HTMLElement) {
+            prevButton.focus();
+          }
+          break;
+        }
       }
-    }
-  });
+    });
+  }
+
+  setupAccordionDelegation();
+
+  document.addEventListener("astro:after-swap", setupAccordionDelegation);
 </script>

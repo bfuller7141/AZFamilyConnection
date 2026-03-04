@@ -24,29 +24,24 @@ const hasSlotContent = Boolean(Astro.slots.default);
     <span class="accordion-icon">
       <svg
         class="icon-plus"
-        viewBox="0 0 85 85"
+        viewBox="0 0 16 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
         focusable="false"
       >
-        <path
-          d="M82.45,52.06h-29.61v30.39h-20.68v-30.39H2.55v-19.11h29.61V2.55h20.68v30.39h29.61v19.11Z"
-          fill="currentColor"
-        />
+        <path d="M8 3v10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
+        <path d="M3 8h10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
       </svg>
       <svg
         class="icon-minus"
-        viewBox="0 0 85 85"
+        viewBox="0 0 16 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
         focusable="false"
       >
-        <path
-          d="M82.45,33.26v18.48H2.55v-18.48h79.89Z"
-          fill="currentColor"
-        />
+        <path d="M3 8h10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
       </svg>
     </span>
   </button>
@@ -68,11 +63,17 @@ const hasSlotContent = Boolean(Astro.slots.default);
     border: 2px solid var(--color-border);
     border-radius: var(--radius-md);
     overflow: hidden;
-    transition: border-color var(--duration-std) var(--ease-standard);
+    background: var(--color-surface);
+    transition:
+      border-color var(--duration-std) var(--ease-standard),
+      box-shadow var(--duration-slow) var(--ease-standard),
+      transform var(--duration-slow) var(--ease-standard);
   }
 
   .accordion-item.open {
     border-color: var(--color-primary);
+    box-shadow: 0 14px 32px rgba(5, 158, 216, 0.08);
+    transform: translateY(-2px);
   }
 
   .accordion-trigger {
@@ -91,7 +92,8 @@ const hasSlotContent = Boolean(Astro.slots.default);
     cursor: pointer;
     transition:
       background-color var(--duration-std) var(--ease-standard),
-      color var(--duration-std) var(--ease-standard);
+      color var(--duration-std) var(--ease-standard),
+      transform var(--duration-bounce) var(--ease-bounce-soft);
   }
 
   .accordion-trigger:hover {
@@ -101,6 +103,7 @@ const hasSlotContent = Boolean(Astro.slots.default);
   .accordion-item.open .accordion-trigger {
     background: var(--color-primary-subtle);
     color: var(--color-primary);
+    transform: translateY(-1px);
   }
 
   .accordion-trigger:focus-visible {
@@ -114,50 +117,84 @@ const hasSlotContent = Boolean(Astro.slots.default);
 
   .accordion-icon {
     flex-shrink: 0;
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform var(--duration-std) var(--ease-standard);
+    position: relative;
+    transition: transform var(--duration-bounce) var(--ease-bounce-soft);
+  }
+
+  .accordion-icon svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transition:
+      opacity var(--duration-std) var(--ease-standard),
+      transform var(--duration-bounce) var(--ease-bounce-soft);
   }
 
   .icon-minus {
-    display: none;
+    opacity: 0;
+    transform: scale(0.7) rotate(-90deg);
   }
 
   .accordion-item.open .icon-plus {
-    display: none;
+    opacity: 0;
+    transform: scale(0.7) rotate(90deg);
   }
 
   .accordion-item.open .icon-minus {
-    display: block;
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
   }
 
   .accordion-content {
-    max-height: 0;
+    display: grid;
+    grid-template-rows: 0fr;
     background-color: var(--color-surface);
     overflow: hidden;
-    transition: max-height var(--duration-std) var(--ease-standard);
+    transition:
+      grid-template-rows var(--duration-bounce) var(--ease-bounce-soft),
+      opacity var(--duration-fast) linear;
+    opacity: 0;
   }
 
   .accordion-item.open .accordion-content {
-    max-height: 500px;
+    grid-template-rows: 1fr;
+    opacity: 1;
   }
 
   .accordion-body {
-    margin-top: var(--space-3);
-    padding: var(--space-4);
-    padding-top: 0;
+    overflow: hidden;
+    min-height: 0;
+    padding: 0 var(--space-4);
     color: var(--color-text-secondary);
     line-height: var(--line-normal);
+    transform: translateY(-0.4rem) scale(0.985);
+    transform-origin: top center;
+    transition:
+      transform var(--duration-bounce) var(--ease-bounce-soft),
+      opacity var(--duration-fast) linear;
+    opacity: 0;
+  }
+
+  .accordion-item.open .accordion-body {
+    margin-top: var(--space-3);
+    padding-bottom: var(--space-4);
+    transform: translateY(0) scale(1);
+    opacity: 1;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .accordion-trigger,
     .accordion-content,
     .accordion-icon,
-    .accordion-item {
+    .accordion-icon svg,
+    .accordion-item,
+    .accordion-body {
       transition: none;
     }
   }

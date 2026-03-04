@@ -62,9 +62,34 @@ if (locations && locations.length > 0) {
         <div class="team-members__list">
           {membersByLocation.get(location)?.map((member) => (
             <details class="team-accordion-item">
-              <summary class="team-accordion-trigger">{member.data.name}</summary>
+              <summary class="team-accordion-trigger">
+                <span class="team-accordion-title">{member.data.name}</span>
+                <span class="team-accordion-icon" aria-hidden="true">
+                  <svg
+                    class="icon-plus"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    focusable="false"
+                  >
+                    <path d="M8 3v10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
+                    <path d="M3 8h10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
+                  </svg>
+                  <svg
+                    class="icon-minus"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    focusable="false"
+                  >
+                    <path d="M3 8h10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
+                  </svg>
+                </span>
+              </summary>
               <div class="team-accordion-content">
-                <p class="team-card__bio">{member.data.bio}</p>
+                <div class="team-accordion-body">
+                  <p class="team-card__bio">{member.data.bio}</p>
+                </div>
               </div>
             </details>
           ))}
@@ -128,42 +153,117 @@ if (locations && locations.length > 0) {
     background: color-mix(in srgb, var(--team-accent, var(--color-accent)) 8%, var(--color-surface));
     overflow: hidden;
     align-self: start;
+    transition:
+      border-color var(--duration-std) var(--ease-standard),
+      box-shadow var(--duration-slow) var(--ease-standard),
+      transform var(--duration-slow) var(--ease-standard);
   }
 
   .team-accordion-item[open] {
     border-color: var(--team-accent, var(--color-accent));
+    box-shadow: 0 14px 32px color-mix(in srgb, var(--team-accent, var(--color-accent)) 16%, transparent);
+    transform: translateY(-2px);
   }
 
   .team-accordion-trigger {
     list-style: none;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
     padding: var(--space-3) var(--space-4);
     font-size: var(--text-base);
     font-weight: var(--weight-bold);
     color: var(--team-accent, var(--color-primary));
     background: transparent;
+    transition:
+      background-color var(--duration-std) var(--ease-standard),
+      color var(--duration-std) var(--ease-standard),
+      transform var(--duration-bounce) var(--ease-bounce-soft);
   }
 
   .team-accordion-trigger::-webkit-details-marker {
     display: none;
   }
 
-  .team-accordion-trigger::after {
-    content: "+";
-    float: right;
-    font-weight: var(--weight-bold);
+  .team-accordion-title {
+    text-align: left;
   }
 
-  .team-accordion-item[open] .team-accordion-trigger::after {
-    content: "-";
+  .team-accordion-icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    transition: transform var(--duration-bounce) var(--ease-bounce-soft);
+  }
+
+  .team-accordion-icon svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transition:
+      opacity var(--duration-std) var(--ease-standard),
+      transform var(--duration-bounce) var(--ease-bounce-soft);
+  }
+
+  .team-accordion-icon .icon-minus {
+    opacity: 0;
+    transform: scale(0.7) rotate(-90deg);
   }
 
   .team-accordion-trigger:hover {
     background: color-mix(in srgb, var(--team-accent, var(--color-accent)) 12%, var(--color-surface));
   }
 
+  .team-accordion-item[open] .team-accordion-trigger {
+    background: color-mix(in srgb, var(--team-accent, var(--color-accent)) 12%, var(--color-surface));
+    transform: translateY(-1px);
+  }
+
+  .team-accordion-item[open] .team-accordion-icon .icon-plus {
+    opacity: 0;
+    transform: scale(0.7) rotate(90deg);
+  }
+
+  .team-accordion-item[open] .team-accordion-icon .icon-minus {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
   .team-accordion-content {
-    padding: 0 var(--space-4) var(--space-4);
+    display: grid;
+    grid-template-rows: 0fr;
+    transition:
+      grid-template-rows var(--duration-bounce) var(--ease-bounce-soft),
+      opacity var(--duration-fast) linear;
+    opacity: 0;
+  }
+
+  .team-accordion-item[open] .team-accordion-content {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .team-accordion-body {
+    overflow: hidden;
+    min-height: 0;
+    padding: 0 var(--space-4);
+    transform: translateY(-0.35rem) scale(0.985);
+    transform-origin: top center;
+    transition:
+      transform var(--duration-bounce) var(--ease-bounce-soft),
+      opacity var(--duration-fast) linear;
+    opacity: 0;
+  }
+
+  .team-accordion-item[open] .team-accordion-body {
+    padding-top: var(--space-3);
+    padding-bottom: var(--space-4);
+    transform: translateY(0) scale(1);
+    opacity: 1;
   }
 
   .team-location--phoenix {
@@ -189,6 +289,17 @@ if (locations && locations.length > 0) {
   @media (min-width: 1024px) {
     .team-members__list {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .team-accordion-item,
+    .team-accordion-trigger,
+    .team-accordion-icon,
+    .team-accordion-icon svg,
+    .team-accordion-content,
+    .team-accordion-body {
+      transition: none;
     }
   }
 </style>

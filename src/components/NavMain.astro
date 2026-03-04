@@ -357,7 +357,7 @@ const hasActiveChildren = (item: MenuItem) =>
     border-right: 2px solid currentColor;
     border-bottom: 2px solid currentColor;
     transform: rotate(45deg) translateY(-1px);
-    transition: transform var(--duration-std) var(--ease-standard);
+    transition: transform var(--duration-bounce) var(--ease-bounce-soft);
     flex-shrink: 0;
   }
 
@@ -394,10 +394,10 @@ const hasActiveChildren = (item: MenuItem) =>
     box-shadow: 0 18px 45px rgba(17, 55, 75, 0.14);
     opacity: 0;
     pointer-events: none;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -0.45rem) scale(0.985);
     transition:
       opacity var(--duration-std) var(--ease-standard),
-      transform var(--duration-std) var(--ease-standard);
+      transform var(--duration-bounce) var(--ease-bounce-soft);
     backdrop-filter: blur(14px);
   }
 
@@ -405,7 +405,7 @@ const hasActiveChildren = (item: MenuItem) =>
   .has-dropdown:focus-within .navbar-dropdown-menu {
     opacity: 1;
     pointer-events: auto;
-    transform: translate(-50%, 0.15rem);
+    transform: translate(-50%, 0.12rem) scale(1);
   }
 
   .has-dropdown:hover .dropdown-caret,
@@ -449,7 +449,7 @@ const hasActiveChildren = (item: MenuItem) =>
     margin: 0;
     padding: 0;
     gap: 0;
-    animation: slideDown var(--duration-std) var(--ease-decelerate);
+    animation: slideDown var(--duration-bounce) var(--ease-bounce-soft);
     max-height: calc(100vh - 80px);
     overflow-y: auto;
   }
@@ -461,11 +461,11 @@ const hasActiveChildren = (item: MenuItem) =>
   @keyframes slideDown {
     from {
       opacity: 0;
-      transform: translateY(-10px);
+      transform: translateY(-14px) scale(0.985);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
   }
 
@@ -518,15 +518,21 @@ const hasActiveChildren = (item: MenuItem) =>
   }
 
   .mobile-submenu {
-    display: none;
     list-style: none;
     margin: 0;
     padding: 0 0 var(--space-2);
     background: rgba(11, 82, 145, 0.03);
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition:
+      max-height var(--duration-bounce) var(--ease-bounce-soft),
+      opacity var(--duration-fast) linear;
   }
 
   .mobile-submenu.active {
-    display: block;
+    max-height: 20rem;
+    opacity: 1;
   }
 
   .mobile-submenu li {
@@ -536,6 +542,16 @@ const hasActiveChildren = (item: MenuItem) =>
   .mobile-submenu-link {
     padding: 0.85rem var(--pad-component) 0.85rem calc(var(--pad-component) + 1rem);
     font-size: var(--text-body-md);
+    transform: translateY(-0.25rem);
+    opacity: 0;
+    transition:
+      transform var(--duration-bounce) var(--ease-bounce-soft),
+      opacity var(--duration-fast) linear;
+  }
+
+  .mobile-submenu.active .mobile-submenu-link {
+    transform: translateY(0);
+    opacity: 1;
   }
 
   .mobile-menu-footer {

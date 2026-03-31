@@ -1,4 +1,4 @@
-export type LocationSlug = "phoenix" | "kingman" | "prescott" | "portland";
+export type LocationSlug = "phoenix" | "kingman" | "prescott" | "buckeye" | "portland";
 
 export interface LocationPageContent {
   slug: LocationSlug;
@@ -105,6 +105,36 @@ export const locationPagesEn: LocationPageContent[] = [
       },
     ],
   },
+  {
+    slug: "buckeye",
+    city: "Buckeye",
+    subtitle: "Buckeye Services",
+    title: "Supervised Visitation in Buckeye",
+    description:
+      "Arizona Family Connections supports families in Buckeye with safe, structured supervised visitation and exchange services.",
+    intro:
+      "Our Buckeye team provides child-centered supervision and dependable service options tailored to each family plan.",
+    highlights: [
+      {
+        icon: "/images/home-icon.svg",
+        title: "Supervised Visits",
+        description:
+          "Structured visits focused on child safety, stability, and positive parent-child connection.",
+      },
+      {
+        icon: "/images/sheild-icon-blue.svg",
+        title: "Safe Exchanges",
+        description:
+          "Neutral exchange support to reduce conflict and protect children during transitions.",
+      },
+      {
+        icon: "/images/pen-icon.svg",
+        title: "Objective Reports",
+        description:
+          "Clear, professional documentation to support legal and case planning needs.",
+      },
+    ],
+  },
 ];
 
 export const locationPagesEs: LocationPageContent[] = [
@@ -195,6 +225,36 @@ export const locationPagesEs: LocationPageContent[] = [
         title: "Informes",
         description:
           "Documentacion profesional y neutral para procesos legales y familiares.",
+      },
+    ],
+  },
+  {
+    slug: "buckeye",
+    city: "Buckeye",
+    subtitle: "Servicios en Buckeye",
+    title: "Visitas supervisadas en Buckeye",
+    description:
+      "Arizona Family Connections apoya a familias en Buckeye con servicios de visita e intercambio seguros y estructurados.",
+    intro:
+      "Nuestro equipo en Buckeye brinda supervision centrada en el bienestar infantil y opciones de servicio adaptadas a cada plan familiar.",
+    highlights: [
+      {
+        icon: "/images/home-icon.svg",
+        title: "Visitas supervisadas",
+        description:
+          "Visitas estructuradas enfocadas en la seguridad del menor, la estabilidad y una conexion positiva.",
+      },
+      {
+        icon: "/images/sheild-icon-blue.svg",
+        title: "Intercambio seguro",
+        description:
+          "Apoyo en entregas neutrales para reducir conflicto y proteger al menor durante las transiciones.",
+      },
+      {
+        icon: "/images/pen-icon.svg",
+        title: "Informes objetivos",
+        description:
+          "Documentacion clara y profesional para necesidades legales y de seguimiento del caso.",
       },
     ],
   },

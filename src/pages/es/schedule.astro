@@ -363,7 +363,7 @@ import '../../styles/theme.root.css';
   }
 </style>
 
-<script is:inline type="module">`r`n
+<script is:inline type="module">
   function encodeFormData(data) {
     const pairs = [];
     for (const [key, value] of data.entries()) {
@@ -429,7 +429,8 @@ import '../../styles/theme.root.css';
               submitButton.disabled = false;
             }
           }, 500);
-          scheduleForm.reset();`r`n        })
+          scheduleForm.reset();
+        })
         .catch((error) => {
           console.error('Error al enviar el formulario de programación:', error);
           if (submitButton instanceof HTMLButtonElement) {

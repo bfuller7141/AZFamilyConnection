@@ -33,6 +33,7 @@ import '../styles/theme.root.css';
       >
         <input type="hidden" name="form-name" value="afc-reports" />
         <input type="hidden" name="custom-subject" value="" />
+        <input type="hidden" name="subject" value="" />
 
         <p class="honeypot-field" aria-hidden="true">
           <label for="bot-field">Do not fill this field if you are human</label>
@@ -277,6 +278,7 @@ import '../styles/theme.root.css';
 
       formData.set('form-name', reportForm.getAttribute('name') || 'afc-reports');
       formData.set('custom-subject', `New Visitation Report from ${preparedBy}`);
+      formData.set('subject', `New Visitation Report from ${preparedBy}`);
 
       if (submitButton instanceof HTMLButtonElement) {
         submitButton.classList.remove('submit-success');

@@ -89,8 +89,9 @@ import AccordionItem from '../../components/AccordionItem.astro';
           <!-- Campo oculto requerido para Netlify -->
           <input type="hidden" name="form-name" value="afc-contact-es" />
 
-          <!-- Campo oculto para asunto personalizado {Nombre} -- {Asunto} -->
+          <!-- Campo oculto para asunto personalizado {Nombre} -- {Asunto seleccionado} -->
           <input type="hidden" name="custom-subject" value="" />
+          <input type="hidden" name="subject" value="" />
 
           <!-- Honeypot para bots de spam -->
           <p class="honeypot-field" aria-hidden="true">
@@ -138,10 +139,10 @@ import AccordionItem from '../../components/AccordionItem.astro';
               />
             </div>
             <div class="form-group">
-              <label for="subject" class="form-label">Asunto: *</label>
+              <label for="inquirySubject" class="form-label">Asunto: *</label>
               <select
-                id="subject"
-                name="subject"
+                id="inquirySubject"
+                name="inquirySubject"
                 class="form-select"
                 required
               >
@@ -534,7 +535,7 @@ import AccordionItem from '../../components/AccordionItem.astro';
       const data = Object.fromEntries(formData.entries());
 
       // Validación básica de campos obligatorios
-      if (!data.name || !data.email || !data.message || !data.subject) {
+      if (!data.name || !data.email || !data.message || !data.inquirySubject) {
         alert('Por favor complete todos los campos obligatorios.');
         return;
       }
@@ -543,13 +544,18 @@ import AccordionItem from '../../components/AccordionItem.astro';
       data['form-name'] = form.getAttribute('name') || 'afc-contact-es';
 
       // Construir asunto personalizado: {Nombre} -- {Asunto}
-      const customSubject = `${data.name} -- ${data.subject}`;
+      const customSubject = `${data.name} -- ${data.inquirySubject}`;
       data['custom-subject'] = customSubject;
+      data.subject = customSubject;
 
       // Mantener el campo oculto sincronizado (opcional)
       const customSubjectInput = form.querySelector('input[name="custom-subject"]');
       if (customSubjectInput) {
         customSubjectInput.value = customSubject;
+      }
+      const subjectInput = form.querySelector('input[name="subject"]');
+      if (subjectInput) {
+        subjectInput.value = customSubject;
       }
 
       if (submitButton instanceof HTMLButtonElement) {

@@ -38,6 +38,7 @@ import '../../styles/theme.root.css';
 
         <!-- Campo oculto para asunto personalizado: New Intake from {Name} -->
         <input type="hidden" name="custom-subject" value="" />
+        <input type="hidden" name="subject" value="" />
 
         <!-- Honeypot para bots de spam -->
         <p class="honeypot-field" aria-hidden="true">
@@ -400,11 +401,16 @@ import '../../styles/theme.root.css';
       // Asunto personalizado: "New Intake from {Name}" (igual que en inglés)
       const customSubject = `New Intake from ${yourName}`;
       formData.set('custom-subject', customSubject);
+      formData.set('subject', customSubject);
 
       // Mantener input oculto sincronizado (opcional)
       const customSubjectInput = scheduleForm.querySelector('input[name="custom-subject"]');
       if (customSubjectInput) {
         customSubjectInput.value = customSubject;
+      }
+      const subjectInput = scheduleForm.querySelector('input[name="subject"]');
+      if (subjectInput) {
+        subjectInput.value = customSubject;
       }
 
       if (submitButton instanceof HTMLButtonElement) {

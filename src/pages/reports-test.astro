@@ -1,0 +1,333 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SubpageHero from '../components/SubpageHero.astro';
+
+import '../styles/base.css';
+import '../styles/theme.root.css';
+---
+
+<BaseLayout
+  title="Visitation Report Test | AZ Family Connections"
+  description="Test visitation report submission form powered by Zoho Forms."
+  language="en"
+  canonical="/reports-test/"
+>
+  <SubpageHero
+    subtitle="Visitation Reporting"
+    title="Visitation Report Test Form"
+    ctaText="Open Form"
+    ctaUrl="/reports-test/#zoho-report-form"
+    decorationLeft="/images/calendar-watermark.svg"
+    decorationRight="/images/checkbox-watermark.svg"
+  />
+
+  <section class="report-section" id="zoho-report-form">
+    <div class="report-container">
+      <form
+        class="report-form"
+        id="zoho-reports-form"
+        action="https://forms.zohopublic.com/tripassdesign1/form/TestForm/formperma/6VY3g5Z59nwA7A9sfYLn4DedAJuSNxCjUX9vacgE9WQ/htmlRecords/submit"
+        method="POST"
+        accept-charset="UTF-8"
+        enctype="multipart/form-data"
+      >
+        <input type="hidden" name="zf_referrer_name" value="" />
+        <input type="hidden" name="zf_redirect_url" value="" />
+        <input type="hidden" name="zc_gad" value="" />
+
+        <input type="hidden" name="Date" id="zohoDate" />
+        <input type="hidden" name="Time_hours" id="startHours" />
+        <input type="hidden" name="Time_minutes" id="startMinutes" />
+        <input type="hidden" name="Time_meridiem" id="startMeridiem" />
+        <input type="hidden" name="Time1_hours" id="endHours" />
+        <input type="hidden" name="Time1_minutes" id="endMinutes" />
+        <input type="hidden" name="Time1_meridiem" id="endMeridiem" />
+
+        <fieldset class="form-fieldset">
+          <legend class="form-legend">Report Details</legend>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reportDateInput" class="form-label">Date:</label>
+              <input type="date" id="reportDateInput" class="form-input" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="visitStartTime" class="form-label">Visitation Start Time:</label>
+              <input type="time" id="visitStartTime" class="form-input" required />
+            </div>
+            <div class="form-group">
+              <label for="visitEndTime" class="form-label">Visitation End Time:</label>
+              <input type="time" id="visitEndTime" class="form-input" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fssFirst" class="form-label">Family Support Specialist First Name:</label>
+              <input type="text" id="fssFirst" name="Name_First" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label for="fssLast" class="form-label">Family Support Specialist Last Name:</label>
+              <input type="text" id="fssLast" name="Name_Last" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="visitingFirst" class="form-label">Visiting Parent/Guardian First Name:</label>
+              <input type="text" id="visitingFirst" name="Name1_First" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label for="visitingLast" class="form-label">Visiting Parent/Guardian Last Name:</label>
+              <input type="text" id="visitingLast" name="Name1_Last" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="custodialFirst" class="form-label">Custodial Parent/Guardian First Name:</label>
+              <input type="text" id="custodialFirst" name="Name2_First" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label for="custodialLast" class="form-label">Custodial Parent/Guardian Last Name:</label>
+              <input type="text" id="custodialLast" name="Name2_Last" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="childrenFirst" class="form-label">Child(ren) First Name:</label>
+              <input type="text" id="childrenFirst" name="Name3_First" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label for="childrenLast" class="form-label">Child(ren) Last Name:</label>
+              <input type="text" id="childrenLast" name="Name3_Last" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="location" class="form-label">Location:</label>
+            <input type="text" id="location" name="SingleLine" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label for="visitationSummary" class="form-label">Visitation Summary:</label>
+            <textarea id="visitationSummary" name="MultiLine" class="form-textarea"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="pickUpInformation" class="form-label">Pick Up Information:</label>
+            <textarea id="pickUpInformation" name="MultiLine1" class="form-textarea"></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="preparedByFirst" class="form-label">Prepared By First Name:</label>
+              <input type="text" id="preparedByFirst" name="Name4_First" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label for="preparedByLast" class="form-label">Prepared By Last Name:</label>
+              <input type="text" id="preparedByLast" name="Name4_Last" class="form-input" />
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Submit Report</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .report-section {
+    padding: 0 0 var(--space-8) 0;
+  }
+
+  .report-container {
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: 0 var(--pad-component-lg);
+  }
+
+  .report-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .form-fieldset {
+    border: 2px solid var(--brand-primary-200);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin: 0;
+  }
+
+  .form-legend {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    color: var(--brand-primary-500);
+    padding: 0 var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .form-label {
+    font-weight: var(--weight-bold);
+    font-size: var(--text-base);
+    color: var(--color-text);
+  }
+
+  .form-input,
+  .form-textarea {
+    padding: var(--space-3);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--color-text);
+    background: var(--color-surface);
+    transition: all var(--duration-std) var(--ease-standard);
+  }
+
+  .form-input:hover,
+  .form-textarea:hover {
+    border-color: var(--brand-primary-500);
+  }
+
+  .form-input:focus,
+  .form-textarea:focus {
+    border-color: var(--brand-primary-500);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 110px;
+  }
+
+  .form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
+
+  @media (max-width: 767px) {
+    .report-container {
+      padding: 0 var(--pad-component);
+    }
+
+    .form-fieldset {
+      padding: var(--space-4);
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .form-input,
+    .form-textarea {
+      font-size: 16px;
+    }
+  }
+</style>
+
+<script is:inline type="module">
+  function getLocalISODate() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  function toZohoDate(isoDate) {
+    const [year, month, day] = isoDate.split('-');
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return `${day}-${monthNames[Number(month) - 1]}-${year}`;
+  }
+
+  function toZohoTimeParts(timeValue) {
+    const [hoursRaw, minutes] = timeValue.split(':').map(Number);
+    const meridiem = hoursRaw >= 12 ? 'PM' : 'AM';
+    const hours12 = hoursRaw % 12 === 0 ? 12 : hoursRaw % 12;
+    return {
+      hours: String(hours12).padStart(2, '0'),
+      minutes: String(minutes).padStart(2, '0'),
+      meridiem,
+    };
+  }
+
+  const form = document.getElementById('zoho-reports-form');
+  const reportDateInput = document.getElementById('reportDateInput');
+
+  if (reportDateInput instanceof HTMLInputElement) {
+    reportDateInput.value = getLocalISODate();
+  }
+
+  if (form instanceof HTMLFormElement) {
+    form.addEventListener('submit', (event) => {
+      const dateInput = document.getElementById('reportDateInput');
+      const startTimeInput = document.getElementById('visitStartTime');
+      const endTimeInput = document.getElementById('visitEndTime');
+
+      if (!(dateInput instanceof HTMLInputElement) || !(startTimeInput instanceof HTMLInputElement) || !(endTimeInput instanceof HTMLInputElement)) {
+        event.preventDefault();
+        return;
+      }
+
+      const zohoDate = document.getElementById('zohoDate');
+      const startHours = document.getElementById('startHours');
+      const startMinutes = document.getElementById('startMinutes');
+      const startMeridiem = document.getElementById('startMeridiem');
+      const endHours = document.getElementById('endHours');
+      const endMinutes = document.getElementById('endMinutes');
+      const endMeridiem = document.getElementById('endMeridiem');
+
+      if (
+        !(zohoDate instanceof HTMLInputElement) ||
+        !(startHours instanceof HTMLInputElement) ||
+        !(startMinutes instanceof HTMLInputElement) ||
+        !(startMeridiem instanceof HTMLInputElement) ||
+        !(endHours instanceof HTMLInputElement) ||
+        !(endMinutes instanceof HTMLInputElement) ||
+        !(endMeridiem instanceof HTMLInputElement)
+      ) {
+        event.preventDefault();
+        return;
+      }
+
+      zohoDate.value = toZohoDate(dateInput.value);
+      const startParts = toZohoTimeParts(startTimeInput.value);
+      const endParts = toZohoTimeParts(endTimeInput.value);
+
+      startHours.value = startParts.hours;
+      startMinutes.value = startParts.minutes;
+      startMeridiem.value = startParts.meridiem;
+      endHours.value = endParts.hours;
+      endMinutes.value = endParts.minutes;
+      endMeridiem.value = endParts.meridiem;
+
+      document.charset = 'UTF-8';
+    });
+  }
+</script>

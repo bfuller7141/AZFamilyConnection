@@ -7,105 +7,131 @@ import '../styles/theme.root.css';
 ---
 
 <BaseLayout
-  title="Visitation Report | AZ Family Connections"
-  description="Submit visitation report details to Arizona Family Connections, including timing, participants, visit summary, and pick-up information."
+  title="Visitation Report Test | AZ Family Connections"
+  description="Test visitation report submission form powered by Zoho Forms."
   language="en"
-  canonical="/reports/"
+  canonical="/reports-test/"
 >
   <SubpageHero
     subtitle="Visitation Reporting"
-    title="Visitation Report Form"
-    ctaText="Complete Report"
-    ctaUrl="/reports/#reports-form"
+    title="Visitation Report Test Form"
+    ctaText="Open Form"
+    ctaUrl="/reports-test/#zoho-report-form"
     decorationLeft="/images/calendar-watermark.svg"
     decorationRight="/images/checkbox-watermark.svg"
   />
 
-  <section class="report-section">
+  <section class="report-section" id="zoho-report-form">
     <div class="report-container">
       <form
         class="report-form"
+        id="zoho-reports-form"
+        action="https://forms.zohopublic.com/tripassdesign1/form/TestForm/formperma/6VY3g5Z59nwA7A9sfYLn4DedAJuSNxCjUX9vacgE9WQ/htmlRecords/submit"
         method="POST"
-        name="afc-reports"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        id="reports-form"
+        accept-charset="UTF-8"
+        enctype="multipart/form-data"
       >
-        <input type="hidden" name="form-name" value="afc-reports" />
-        <input type="hidden" name="custom-subject" value="" />
-        <input type="hidden" name="subject" value="" />
+        <input type="hidden" name="zf_referrer_name" value="" />
+        <input type="hidden" name="zf_redirect_url" value="" />
+        <input type="hidden" name="zc_gad" value="" />
 
-        <p class="honeypot-field" aria-hidden="true">
-          <label for="bot-field">Do not fill this field if you are human</label>
-          <input id="bot-field" name="bot-field" type="text" />
-        </p>
+        <input type="hidden" name="Date" id="zohoDate" />
+        <input type="hidden" name="Time_hours" id="startHours" />
+        <input type="hidden" name="Time_minutes" id="startMinutes" />
+        <input type="hidden" name="Time_meridiem" id="startMeridiem" />
+        <input type="hidden" name="Time1_hours" id="endHours" />
+        <input type="hidden" name="Time1_minutes" id="endMinutes" />
+        <input type="hidden" name="Time1_meridiem" id="endMeridiem" />
 
         <fieldset class="form-fieldset">
           <legend class="form-legend">Report Details</legend>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="reportDate" class="form-label">Date:</label>
-              <input type="date" id="reportDate" name="reportDate" class="form-input" readonly required />
+              <label for="reportDateInput" class="form-label">Date:</label>
+              <input type="date" id="reportDateInput" class="form-input" required />
             </div>
-          </div> 
+          </div>
 
           <div class="form-row">
             <div class="form-group">
               <label for="visitStartTime" class="form-label">Visitation Start Time:</label>
-              <input type="time" id="visitStartTime" name="visitStartTime" class="form-input" />
+              <input type="time" id="visitStartTime" class="form-input" required />
             </div>
             <div class="form-group">
               <label for="visitEndTime" class="form-label">Visitation End Time:</label>
-              <input type="time" id="visitEndTime" name="visitEndTime" class="form-input" />
+              <input type="time" id="visitEndTime" class="form-input" required />
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="familySupportSpecialist" class="form-label">Family Support Specialist:</label>
-              <input
-                type="text"
-                id="familySupportSpecialist"
-                name="familySupportSpecialist"
-                class="form-input"
-              />
+              <label for="fssFirst" class="form-label">Family Support Specialist First Name:</label>
+              <input type="text" id="fssFirst" name="Name_First" class="form-input" />
             </div>
             <div class="form-group">
-              <label for="visitingParentGuardian" class="form-label">Visiting Parent/Guardian:</label>
-              <input type="text" id="visitingParentGuardian" name="visitingParentGuardian" class="form-input" />
+              <label for="fssLast" class="form-label">Family Support Specialist Last Name:</label>
+              <input type="text" id="fssLast" name="Name_Last" class="form-input" />
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="custodialParentGuardian" class="form-label">Custodial Parent/Guardian:</label>
-              <input type="text" id="custodialParentGuardian" name="custodialParentGuardian" class="form-input" />
+              <label for="visitingFirst" class="form-label">Visiting Parent/Guardian First Name:</label>
+              <input type="text" id="visitingFirst" name="Name1_First" class="form-input" />
             </div>
             <div class="form-group">
-              <label for="children" class="form-label">Child (ren):</label>
-              <input type="text" id="children" name="children" class="form-input" />
+              <label for="visitingLast" class="form-label">Visiting Parent/Guardian Last Name:</label>
+              <input type="text" id="visitingLast" name="Name1_Last" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="custodialFirst" class="form-label">Custodial Parent/Guardian First Name:</label>
+              <input type="text" id="custodialFirst" name="Name2_First" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label for="custodialLast" class="form-label">Custodial Parent/Guardian Last Name:</label>
+              <input type="text" id="custodialLast" name="Name2_Last" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="childrenFirst" class="form-label">Child(ren) First Name:</label>
+              <input type="text" id="childrenFirst" name="Name3_First" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label for="childrenLast" class="form-label">Child(ren) Last Name:</label>
+              <input type="text" id="childrenLast" name="Name3_Last" class="form-input" />
             </div>
           </div>
 
           <div class="form-group">
             <label for="location" class="form-label">Location:</label>
-            <input type="text" id="location" name="location" class="form-input" />
+            <input type="text" id="location" name="SingleLine" class="form-input" />
           </div>
 
           <div class="form-group">
             <label for="visitationSummary" class="form-label">Visitation Summary:</label>
-            <textarea id="visitationSummary" name="visitationSummary" class="form-textarea"></textarea>
+            <textarea id="visitationSummary" name="MultiLine" class="form-textarea"></textarea>
           </div>
 
           <div class="form-group">
             <label for="pickUpInformation" class="form-label">Pick Up Information:</label>
-            <textarea id="pickUpInformation" name="pickUpInformation" class="form-textarea"></textarea>
+            <textarea id="pickUpInformation" name="MultiLine1" class="form-textarea"></textarea>
           </div>
 
-          <div class="form-group">
-            <label for="preparedBy" class="form-label">Prepared By:</label>
-            <input type="text" id="preparedBy" name="preparedBy" class="form-input" />
+          <div class="form-row">
+            <div class="form-group">
+              <label for="preparedByFirst" class="form-label">Prepared By First Name:</label>
+              <input type="text" id="preparedByFirst" name="Name4_First" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label for="preparedByLast" class="form-label">Prepared By Last Name:</label>
+              <input type="text" id="preparedByLast" name="Name4_Last" class="form-input" />
+            </div>
           </div>
         </fieldset>
 
@@ -169,7 +195,6 @@ import '../styles/theme.root.css';
   }
 
   .form-input,
-  .form-select,
   .form-textarea {
     padding: var(--space-3);
     border: 2px solid var(--color-border);
@@ -182,13 +207,11 @@ import '../styles/theme.root.css';
   }
 
   .form-input:hover,
-  .form-select:hover,
   .form-textarea:hover {
     border-color: var(--brand-primary-500);
   }
 
   .form-input:focus,
-  .form-select:focus,
   .form-textarea:focus {
     border-color: var(--brand-primary-500);
   }
@@ -196,12 +219,6 @@ import '../styles/theme.root.css';
   .form-textarea {
     resize: vertical;
     min-height: 110px;
-  }
-
-  .submit-success {
-    background: var(--color-success) !important;
-    border-color: var(--color-success) !important;
-    color: var(--color-success-contrast, #fff) !important;
   }
 
   .form-actions {
@@ -212,10 +229,6 @@ import '../styles/theme.root.css';
     margin-top: var(--space-6);
     padding-top: var(--space-6);
     border-top: 1px solid var(--color-border);
-  }
-
-  .honeypot-field {
-    display: none;
   }
 
   @media (max-width: 767px) {
@@ -232,7 +245,6 @@ import '../styles/theme.root.css';
     }
 
     .form-input,
-    .form-select,
     .form-textarea {
       font-size: 16px;
     }
@@ -240,14 +252,6 @@ import '../styles/theme.root.css';
 </style>
 
 <script is:inline type="module">
-  function encodeFormData(data) {
-    const pairs = [];
-    for (const [key, value] of data.entries()) {
-      pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
-    }
-    return pairs.join('&');
-  }
-
   function getLocalISODate() {
     const now = new Date();
     const year = now.getFullYear();
@@ -256,67 +260,74 @@ import '../styles/theme.root.css';
     return `${year}-${month}-${day}`;
   }
 
-  const reportForm = document.querySelector('.report-form');
-  const reportDateInput = document.getElementById('reportDate');
-  const submitButton = reportForm instanceof HTMLFormElement
-    ? reportForm.querySelector('button[type="submit"]')
-    : null;
-  const defaultSubmitText = submitButton instanceof HTMLButtonElement
-    ? submitButton.textContent || 'Submit Report'
-    : 'Submit Report';
+  function toZohoDate(isoDate) {
+    const [year, month, day] = isoDate.split('-');
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return `${day}-${monthNames[Number(month) - 1]}-${year}`;
+  }
+
+  function toZohoTimeParts(timeValue) {
+    const [hoursRaw, minutes] = timeValue.split(':').map(Number);
+    const meridiem = hoursRaw >= 12 ? 'PM' : 'AM';
+    const hours12 = hoursRaw % 12 === 0 ? 12 : hoursRaw % 12;
+    return {
+      hours: String(hours12).padStart(2, '0'),
+      minutes: String(minutes).padStart(2, '0'),
+      meridiem,
+    };
+  }
+
+  const form = document.getElementById('zoho-reports-form');
+  const reportDateInput = document.getElementById('reportDateInput');
 
   if (reportDateInput instanceof HTMLInputElement) {
     reportDateInput.value = getLocalISODate();
   }
 
-  if (reportForm instanceof HTMLFormElement) {
-    reportForm.addEventListener('submit', (event) => {
-      event.preventDefault();
+  if (form instanceof HTMLFormElement) {
+    form.addEventListener('submit', (event) => {
+      const dateInput = document.getElementById('reportDateInput');
+      const startTimeInput = document.getElementById('visitStartTime');
+      const endTimeInput = document.getElementById('visitEndTime');
 
-      const formData = new FormData(reportForm);
-      const preparedBy = formData.get('preparedBy') || 'Team Member';
-
-      formData.set('form-name', reportForm.getAttribute('name') || 'afc-reports');
-      formData.set('custom-subject', `New Visitation Report from ${preparedBy}`);
-      formData.set('subject', `New Visitation Report from ${preparedBy}`);
-
-      if (submitButton instanceof HTMLButtonElement) {
-        submitButton.classList.remove('submit-success');
-        submitButton.classList.add('btn-primary');
-        submitButton.disabled = true;
-        submitButton.textContent = 'Submitting...';
+      if (!(dateInput instanceof HTMLInputElement) || !(startTimeInput instanceof HTMLInputElement) || !(endTimeInput instanceof HTMLInputElement)) {
+        event.preventDefault();
+        return;
       }
 
-      fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encodeFormData(formData),
-      })
-        .then(() => {
-          setTimeout(() => {
-            if (submitButton instanceof HTMLButtonElement) {
-              submitButton.classList.remove('btn-primary');
-              submitButton.classList.add('submit-success');
-              submitButton.textContent = 'Report submitted successfully';
-              submitButton.disabled = false;
-            }
-          }, 500);
+      const zohoDate = document.getElementById('zohoDate');
+      const startHours = document.getElementById('startHours');
+      const startMinutes = document.getElementById('startMinutes');
+      const startMeridiem = document.getElementById('startMeridiem');
+      const endHours = document.getElementById('endHours');
+      const endMinutes = document.getElementById('endMinutes');
+      const endMeridiem = document.getElementById('endMeridiem');
 
-          reportForm.reset();
-          if (reportDateInput instanceof HTMLInputElement) {
-            reportDateInput.value = getLocalISODate();
-          }
-        })
-        .catch((error) => {
-          console.error('Report form submission error:', error);
-          if (submitButton instanceof HTMLButtonElement) {
-            submitButton.classList.remove('submit-success');
-            submitButton.classList.add('btn-primary');
-            submitButton.textContent = defaultSubmitText;
-            submitButton.disabled = false;
-          }
-          alert('There was a problem submitting the form. Please try again.');
-        });
+      if (
+        !(zohoDate instanceof HTMLInputElement) ||
+        !(startHours instanceof HTMLInputElement) ||
+        !(startMinutes instanceof HTMLInputElement) ||
+        !(startMeridiem instanceof HTMLInputElement) ||
+        !(endHours instanceof HTMLInputElement) ||
+        !(endMinutes instanceof HTMLInputElement) ||
+        !(endMeridiem instanceof HTMLInputElement)
+      ) {
+        event.preventDefault();
+        return;
+      }
+
+      zohoDate.value = toZohoDate(dateInput.value);
+      const startParts = toZohoTimeParts(startTimeInput.value);
+      const endParts = toZohoTimeParts(endTimeInput.value);
+
+      startHours.value = startParts.hours;
+      startMinutes.value = startParts.minutes;
+      startMeridiem.value = startParts.meridiem;
+      endHours.value = endParts.hours;
+      endMinutes.value = endParts.minutes;
+      endMeridiem.value = endParts.meridiem;
+
+      document.charset = 'UTF-8';
     });
   }
 </script>
